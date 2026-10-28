@@ -29,7 +29,15 @@ const BUILTINS={
  "raspberry-f":{path:"raspberry-f.json",zh:"覆盆子时光 · F",ko:"라즈베리 타임 F",author:"간쇼아",count:136,series:"覆盆子时光",part:"F",index:6,total:6,translation:"ko-only"},
  "cross-gang-1":{path:"cross-gang-1.json",zh:"Cross Gang · 第1章",ko:"c25th, Cross Gang 01",author:"간쇼아",count:356,series:"Cross Gang",part:"1",index:1,total:3,translation:"ko-only"},
  "cross-gang-2":{path:"cross-gang-2.json",zh:"Cross Gang · 第2章",ko:"c25th, Cross Gang 02",author:"간쇼아",count:539,series:"Cross Gang",part:"2",index:2,total:3,translation:"ko-only"},
- "cross-gang-3":{path:"cross-gang-3.json",zh:"Cross Gang · 第3章",ko:"c25th, Cross Gang 03",author:"간쇼아",count:415,series:"Cross Gang",part:"3",index:3,total:3,translation:"ko-only"}
+ "cross-gang-3":{path:"cross-gang-3.json",zh:"Cross Gang · 第3章",ko:"c25th, Cross Gang 03",author:"간쇼아",count:415,series:"Cross Gang",part:"3",index:3,total:3,translation:"ko-only"},
+ "cgrade-1":{path:"cgrade-1.json", zh:"C级人生 · 第1章", ko:"씨끕인생 (1/5)", author:"us", count:157, translation:"complete", series:"C级人生", part:"1", index:1, total:7},
+ "cgrade-2":{path:"cgrade-2.json", zh:"C级人生 · 第2章", ko:"씨끕인생 (2/5)", author:"us", count:116, translation:"complete", series:"C级人生", part:"2", index:2, total:7},
+ "cgrade-3":{path:"cgrade-3.json", zh:"C级人生 · 第3章", ko:"씨끕인생 (3/5)", author:"us", count:109, translation:"complete", series:"C级人生", part:"3", index:3, total:7},
+ "cgrade-4":{path:"cgrade-4.json", zh:"C级人生 · 第4章", ko:"씨끕인생 (4/5)", author:"us", count:90, translation:"complete", series:"C级人生", part:"4", index:4, total:7},
+ "cgrade-5":{path:"cgrade-5.json", zh:"C级人生 · 第5章（完）", ko:"씨끕인생 (5/5) 완", author:"us", count:171, translation:"complete", series:"C级人生", part:"5", index:5, total:7},
+ "cgrade-extra1":{path:"cgrade-extra1.json", zh:"C级人生 · 番外 +1", ko:"씨끕인생 +1", author:"us", count:152, translation:"complete", series:"C级人生", part:"+1", index:6, total:7},
+ "cgrade-extra2":{path:"cgrade-extra2.json", zh:"C级人生 · 番外 +2", ko:"씨끕인생 +2", author:"us", count:234, translation:"complete", series:"C级人生", part:"+2", index:7, total:7},
+ "first-person-pov":{path:"first-person-pov.json", zh:"第一人称主角视角", ko:"1인칭 주인공 시점", author:"us", count:261, translation:"complete"},
 };
 let story=null, currentId=DEFAULT_ID, font=1, query='', vocabFilter='all';
 let mode='zh', lookupEnabled=false, activeView='reader', scrollSaveTimer=null, restoringScroll=false, lastReaderY=0;
@@ -140,7 +148,7 @@ function renderStorySelect(){
   }
   const item=document.createElement('button');item.type='button';item.className='book-entry'+(id===currentId?' is-reading':'');
   const left=document.createElement('span');left.className='book-info';
-  const title=document.createElement('strong');title.textContent=b.series?'第'+(b.index??'ABCDE'.indexOf(b.part)+1)+'章 · '+b.part:b.zh;
+  const title=document.createElement('strong');title.textContent=b.series?(String(b.part||'').startsWith('+')?'番外 '+b.part:'第'+(b.index??'ABCDE'.indexOf(b.part)+1)+'章 · '+b.part):b.zh;
   const sub=document.createElement('span');sub.className='book-original';sub.textContent=b.series?b.ko:b.ko;
   const meta=document.createElement('span');meta.className='book-meta';
   meta.textContent=b.author+' · '+b.count+' 段 · '+(b.translation==='ko-only'?'韩文原文（中英文未译）':b.translation==='complete'||b.series==='183 68 25'||id==='existence-weight'||id==='hanip'||id==='cover-eyes'?'三语已译':'按原文阅读');
