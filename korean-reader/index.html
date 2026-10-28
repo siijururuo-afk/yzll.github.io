@@ -3,49 +3,58 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
-<meta name="theme-color" content="#ffffff">
-<meta name="description" content="韩语小说中英韩逐段对照阅读，点词查释义、朗读和收藏生词。">
-<title>문장 사이 · 韩英中对照阅读</title>
+<meta name="theme-color" content="#fff">
+<meta name="description" content="读小说，必要时才打开韩中英对照。">
+<title>문장 사이 · 阅读</title>
 <link rel="stylesheet" href="./style.css">
 </head>
 <body>
 <header class="site-header">
   <div class="header-inner">
-    <a class="brand" href="./" aria-label="回到阅读首页">문장 사이 <small>BETWEEN THE LINES</small></a>
-    <nav aria-label="主导航">
-      <button class="nav-link active" data-tab="reader">阅读</button>
-      <button class="nav-link" data-tab="vocab">生词本 <span id="vocab-count">0</span></button>
-      <button class="nav-link" data-tab="import">导入文章</button>
-      <button class="nav-link" data-tab="settings" aria-label="翻译设置">设置</button>
-    </nav>
+    <button class="brand" type="button" data-tab="reader" aria-label="返回文章">문장 사이</button>
+    <div class="site-actions">
+      <button type="button" class="top-link" data-tab="import">书架</button>
+      <button type="button" class="top-link" id="more-trigger" aria-controls="more-panel" aria-expanded="false">更多 <span aria-hidden="true">⌄</span></button>
+      <div id="more-panel" class="small-pop hidden">
+        <button data-tab="vocab" type="button">生词本 <span id="vocab-count">0</span></button>
+        <button data-tab="settings" type="button">翻译设置</button>
+        <button id="search-trigger" type="button">在文章中查找</button>
+      </div>
+    </div>
   </div>
 </header>
 <main id="main">
-  <section id="reader-view" class="view content-container">
+  <section id="reader-view" class="view article-shell">
     <div class="article-head">
-      <div class="eyebrow">KOREAN · ENGLISH · CHINESE</div>
-      <h1 id="article-title">한입만</h1>
-      <div class="article-sub" id="article-sub">就一口 <span class="sep">/</span> Just One Bite</div>
-      <div class="byline"><span id="article-author">삐삐</span><span aria-hidden="true">·</span><span id="article-count">142 段</span><span aria-hidden="true">·</span>对照阅读</div>
+      <h1 id="article-title">就一口</h1>
+      <div class="byline"><span id="article-author">삐삐</span> <span class="byline-sep">·</span> <span id="article-sub">한입만</span></div>
     </div>
-    <div class="reader-toolbar" aria-label="阅读设置">
-      <div class="lang-controls" role="group" aria-label="显示语言">
-        <label><input checked type="checkbox" value="ko" id="show-ko"><span>한국어 <small>原文</small></span></label>
-        <label><input checked type="checkbox" value="zh" id="show-zh"><span>中文 <small>翻译</small></span></label>
-        <label><input checked type="checkbox" value="en" id="show-en"><span>English <small>Translation</small></span></label>
-      </div>
-      <div class="reader-actions">
-        <label class="search-wrap"><svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="11" cy="11" r="7"/><path d="m16.5 16.5 5 5"/></svg><input id="search-input" type="search" placeholder="搜索文章" aria-label="搜索文章"></label>
-        <button id="font-minus" class="text-btn" title="缩小字号">A−</button><button id="font-plus" class="text-btn" title="放大字号">A+</button>
+    <div class="article-controls">
+      <button type="button" id="compare-trigger" class="control-link" aria-expanded="false" aria-controls="compare-panel">对照阅读 <span aria-hidden="true">⌄</span></button>
+      <button type="button" id="type-trigger" class="control-link type-btn" aria-expanded="false" aria-controls="type-panel">Aa</button>
+    </div>
+    <div id="compare-panel" class="compare-panel hidden" aria-label="对照显示选项">
+      <span class="panel-intro">阅读方式</span>
+      <div class="mode-choices" role="group" aria-label="选择阅读语言">
+        <button type="button" data-mode="zh" class="selected">只看中文</button>
+        <button type="button" data-mode="ko">只看韩文</button>
+        <button type="button" data-mode="en">只看英文</button>
+        <button type="button" data-mode="ko-zh">韩中对照</button>
+        <button type="button" data-mode="en-zh">英中对照</button>
+        <button type="button" data-mode="all">三语对照</button>
       </div>
     </div>
-    <div class="reading-note" id="reading-note">点击韩语或英语单词，查看注释与朗读。点击段落旁的 <span aria-hidden="true">◁</span> 可听整段发音。</div>
-    <div class="page-top"><span id="page-summary">第 1—20 段</span><span id="reading-progress"></span></div>
-    <div id="paragraphs" class="paragraphs" aria-live="polite"></div>
-    <nav class="pagination" aria-label="文章翻页"><button id="prev-page" class="border-btn">← 上一页</button><span id="page-number"></span><button id="next-page" class="border-btn">下一页 →</button></nav>
-    <div class="article-footer">END OF PAGE <span class="dot">·</span> 阅读记录保存在此浏览器</div>
+    <div id="type-panel" class="type-panel hidden" aria-label="阅读偏好">
+      <span class="panel-intro">文字大小</span>
+      <button id="font-minus" type="button" aria-label="缩小字体">A−</button>
+      <button id="font-plus" type="button" aria-label="放大字体">A＋</button>
+      <label for="lookup-toggle" class="lookup-label"><input type="checkbox" id="lookup-toggle"> 开启点词注释</label>
+    </div>
+    <div id="search-panel" class="search-panel hidden"><input id="search-input" type="search" placeholder="搜索当前文章…" aria-label="搜索当前文章"><button id="search-clear" type="button">关闭</button></div>
+    <article id="paragraphs" class="story-body" aria-label="文章正文"></article>
+    <div class="article-end">全文完</div>
+    <footer class="reading-footer"><span>문장 사이</span><span id="article-count" class="visually-hidden"></span></footer>
   </section>
-
   <section id="vocab-view" class="view content-container hidden">
     <div class="section-heading"><div class="eyebrow">MY VOCABULARY</div><h1>生词本</h1><p>阅读时点击词语，选择「收藏」，这里就会自动记录原句。</p></div>
     <div class="vocab-toolbar"><button id="vocab-all" class="pill-btn selected">全部</button><button id="vocab-korean" class="pill-btn">韩语</button><button id="vocab-english" class="pill-btn">英语</button><button id="export-vocab" class="border-btn">导出生词 TXT</button></div>
