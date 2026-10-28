@@ -43,6 +43,7 @@
         <button type="button" data-mode="en-zh">英中对照</button>
         <button type="button" data-mode="all">三语对照</button>
       </div>
+      <p id="translation-availability" class="translation-hint hidden"></p>
     </div>
     <div id="type-panel" class="type-panel hidden" aria-label="阅读偏好">
       <span class="panel-intro">文字大小</span>
@@ -53,6 +54,7 @@
     <div id="search-panel" class="search-panel hidden"><input id="search-input" type="search" placeholder="搜索当前文章…" aria-label="搜索当前文章"><button id="search-clear" type="button">关闭</button></div>
     <article id="paragraphs" class="story-body" aria-label="文章正文"></article>
     <div class="article-end">本篇结束</div>
+    <nav id="chapter-nav" class="chapter-nav hidden" aria-label="章节导航"></nav>
     <footer class="reading-footer"><span>문장 사이</span><span id="article-count" class="visually-hidden"></span></footer>
   </section>
   <section id="vocab-view" class="view content-container hidden">
@@ -79,13 +81,13 @@
   </section>
 
   <section id="settings-view" class="view content-container hidden">
-    <div class="section-heading"><div class="eyebrow">TRANSLATION ENGINE</div><h1>翻译设置</h1><p>书架中的作品已内置韩中英正文，直接阅读不需要 API。自行导入的新文章可选择配置翻译接口。</p></div>
+    <div class="section-heading"><div class="eyebrow">TRANSLATION ENGINE</div><h1>翻译设置</h1><p>已有译文的文章可以直接阅读。新加入的《183 68 25》五章目前保留韩文原文，尚未翻译；如需中英译文，可为当前章节配置翻译接口，译文只保存在本机浏览器。</p></div>
     <div class="import-card">
       <label class="field-label" for="api-endpoint">API 地址</label><input id="api-endpoint" type="url" value="https://api.deepseek.com/chat/completions" spellcheck="false">
       <label class="field-label" for="api-model">模型名称</label><input id="api-model" type="text" value="deepseek-chat" spellcheck="false">
       <label class="field-label" for="api-key">API Key（仅本次页面会话使用）</label><input id="api-key" type="password" placeholder="sk-..." autocomplete="off" spellcheck="false">
       <p class="field-hint">密钥只用于你浏览器直接向所选 API 发送翻译请求，不上传到 GitHub，也不会写入本地存储。请仅使用自己信任的服务商；公共网站使用时，不要输入第三方的密钥。</p>
-      <div class="form-row"><button id="translate-story" class="primary-btn">翻译当前文章的缺失段落</button><span id="translation-status" class="status-text" role="status"></span></div>
+      <div class="form-row"><button id="translate-story" class="primary-btn">翻译本章缺失的中英文</button><span id="translation-status" class="status-text" role="status"></span></div>
       <div class="hairline"></div><p class="field-hint">韩语词典：常见词有内置释义；其他词会尝试公开在线释义，并提供 NAVER 词典检索链接。英语词典接入免费开放词典。网络中断时可能无法查到未收录的词。</p>
     </div>
   </section>
