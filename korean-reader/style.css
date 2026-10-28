@@ -44,3 +44,5 @@
 @media(max-width:560px){.book-entry.series-chapter{padding-left:12px}.chapter-nav{padding-bottom:48px}.chapter-links{gap:12px}}
 
 .mode-choices button:disabled{color:#c2c2c2;border-color:#eee;cursor:not-allowed;background:#fff}.translation-hint{font-size:12px;color:#999;line-height:1.8;margin:15px 0 0}
+
+.story-media{max-width:720px;width:100%;margin:25px auto 42px}.story-media iframe{display:block;width:100%;aspect-ratio:16/9;height:auto;border:0;background:#f5f5f5}.story-inner-heading{font-size:22px;font-weight:600;line-height:1.5;margin:66px 0 25px}.story-body .story-inner-heading+section{margin-top:0}@media(max-width:650px){.story-media{margin:22px 0 34px}.story-inner-heading{font-size:21px;margin-top:55px}}
