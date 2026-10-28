@@ -129,7 +129,7 @@ async function loadStory(id,go=true){try{
   if(BUILTINS[id]){const response=await fetch('./stories/'+BUILTINS[id].path);if(!response.ok)throw Error('网络加载失败（HTTP '+response.status+'）');data=await response.json()}
   else data=readStorage(storyKey(id),null);
  if(!data||!Array.isArray(data.blocks))throw Error('文章数据不存在');
- if(BUILTINS[id]){const overlay=readStorage('translations:'+id,{});for(const [n,trans] of Object.entries(overlay)){const b=data.blocks[Number(n)];if(b&&trans){if(trans.zh)b.zh=trans.zh;if(trans.en)b.en=trans.en}}}
+ if(BUILTINS[id]){const overlay=readStorage('translations:'+id,{});for(const [n,trans] of Object.entries(overlay)){const b=data.blocks[Number(n)];if(b&&trans){if(!b.zh&&trans.zh)b.zh=trans.zh;if(!b.en&&trans.en)b.en=trans.en}}}
  restoringScroll=true;story=data;currentId=id;mode=data.blocks.filter(b=>b.ko&&!b.spacer&&b.ko!=='＊').every(b=>b.zh)?'zh':'ko';query='';$('#search-input').value='';
  lastReaderY=Number(readStorage('scroll:'+id,0))||0;renderStory();renderStorySelect();
   if(go){history.replaceState(null,'',location.pathname+'?story='+encodeURIComponent(id));showView('reader');}
