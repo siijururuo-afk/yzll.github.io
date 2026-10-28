@@ -5,6 +5,10 @@ const $=s=>document.querySelector(s);
 const $$=s=>Array.from(document.querySelectorAll(s));
 const STORAGE='between-lines-v2';
 const DEFAULT_ID='hanip';
+const BUILTINS={
+ 'hanip':{path:'hanip.json',zh:'就一口',ko:'한입만',author:'삐삐',count:142},
+ 'cover-eyes':{path:'cover-eyes.json',zh:'用手掌遮不住天空，但总能遮住你的眼睛吧',ko:'손바닥으로하늘을가리진못해도네눈을가릴순있겠지',author:'作者未注明',count:32}
+};
 let story=null, currentId=DEFAULT_ID, font=1, query='', vocabFilter='all';
 let mode='zh', lookupEnabled=false, activeView='reader', scrollSaveTimer=null, restoringScroll=false, lastReaderY=0;
 let currentPopup=null, toastTimer=null, activeToken=null;
@@ -45,6 +49,7 @@ function renderStory(preserveScroll=false){
  const anchor=preserveScroll?captureAnchor():null;
  $('#article-title').textContent=story.title.zh||story.title.ko||story.title.en||'未命名';
  $('#article-sub').textContent=story.title.ko||'';
+ $('.byline').classList.toggle('long-title',(story.title.ko||'').length>30);
  $('#article-author').textContent=story.author||'我的文章';
  $('#article-count').textContent=`${story.blocks.length} 段`;
  const langs=displayedLangs(),compared=langs.length>1;
@@ -71,12 +76,38 @@ function showView(which){
 }
 const storyKey=id=>'story-'+id;
 function customStories(){return readStorage('custom-ids',[])}
-function renderStorySelect(){const select=$('#story-select');select.replaceChildren();const option=(id,title)=>{const o=document.createElement('option');o.value=id;o.textContent=title;select.appendChild(o)};option(DEFAULT_ID,'한입만 · 就一口');for(const x of customStories())option(x.id,x.title);select.value=currentId}
+function renderStorySelect(){
+ const select=$('#story-select');select.replaceChildren();
+ const option=(id,title)=>{const o=document.createElement('option');o.value=id;o.textContent=title;select.appendChild(o)};
+ Object.entries(BUILTINS).forEach(([id,b])=>option(id,b.zh));
+ for(const x of customStories())option(x.id,x.title);
+ select.value=currentId;
+ const shelf=$('#book-list');shelf.replaceChildren();
+ for(const [id,b] of Object.entries(BUILTINS)){
+  const item=document.createElement('button');item.type='button';item.className='book-entry'+(id===currentId?' is-reading':'');
+  const left=document.createElement('span');left.className='book-info';
+  const title=document.createElement('strong');title.textContent=b.zh;
+  const sub=document.createElement('span');sub.className='book-original';sub.textContent=b.ko;
+  const meta=document.createElement('span');meta.className='book-meta';meta.textContent=b.author+' · '+b.count+' 段';
+  left.append(title,sub,meta);
+  const right=document.createElement('span');right.className='book-action';right.textContent=id===currentId?'继续阅读':'开始阅读';
+  item.append(left,right);item.addEventListener('click',()=>loadStory(id));shelf.appendChild(item);
+ }
+ for(const item of customStories()){
+  const el=document.createElement('button');el.type='button';el.className='book-entry'+(item.id===currentId?' is-reading':'');
+  const title=document.createElement('strong');title.textContent=item.title;
+  const right=document.createElement('span');right.className='book-action';right.textContent=item.id===currentId?'继续阅读':'开始阅读';
+  el.append(title,right);el.addEventListener('click',()=>loadStory(item.id));shelf.appendChild(el)
+ }
+}
 async function loadStory(id,go=true){try{
- let data=id===DEFAULT_ID?await (await fetch('./stories/hanip.json')).json():readStorage(storyKey(id),null);
+ let data;
+  if(BUILTINS[id]){const response=await fetch('./stories/'+BUILTINS[id].path);if(!response.ok)throw Error('网络加载失败（HTTP '+response.status+'）');data=await response.json()}
+  else data=readStorage(storyKey(id),null);
  if(!data||!Array.isArray(data.blocks))throw Error('文章数据不存在');
- restoringScroll=true;story=data;currentId=id;mode=(id===DEFAULT_ID||data.blocks.some(b=>b.zh))?'zh':'ko';query='';$('#search-input').value='';
- lastReaderY=Number(readStorage('scroll:'+id,0))||0;renderStory();if(go)showView('reader');
+ restoringScroll=true;story=data;currentId=id;mode=data.blocks.some(b=>b.zh)?'zh':'ko';query='';$('#search-input').value='';
+ lastReaderY=Number(readStorage('scroll:'+id,0))||0;renderStory();renderStorySelect();
+  if(go){history.replaceState(null,'',location.pathname+'?story='+encodeURIComponent(id));showView('reader');}
  requestAnimationFrame(()=>{try{window.scrollTo(0,lastReaderY)}catch{};setTimeout(()=>{restoringScroll=false},160)});
  }catch(e){toast('无法打开文章：'+e.message)}}
 function extractParas(s,fileName){if(/\.html?$/i.test(fileName)){const doc=new DOMParser().parseFromString(s,'text/html');const main=doc.querySelector('article')||doc.querySelector('main')||doc.body;main.querySelectorAll('script,style,nav,header,footer,aside').forEach(el=>el.remove());const p=Array.from(main.querySelectorAll('p')).map(el=>el.textContent.trim()).filter(Boolean);if(p.length)return p;return main.textContent.split(/\n\s*\n/).map(x=>x.trim()).filter(Boolean)}return s.trim().split(/\n\s*\n/).map(x=>x.replace(/\s*\n\s*/g,' ').trim()).filter(Boolean)}
@@ -96,7 +127,7 @@ if(lang==='ko'&&!findKo(word)){try{const response=await fetch('https://api.mymem
 if(lang==='en'){try{const response=await fetch('https://api.dictionaryapi.dev/api/v2/entries/en/'+encodeURIComponent(word.toLowerCase()));if(!response.ok)throw Error();const json=await response.json();const item=json?.[0];if(item){p.pron=item.phonetic||item.phonetics?.find(v=>v.text)?.text||'';const defs=(item.meanings||[]).slice(0,2).map(m=>m.partOfSpeech+': '+(m.definitions?.[0]?.definition||'')).filter(Boolean);p.grammar=defs.join(' · ');if(!p.meaning)p.meaning='英语词典定义如下（可点击词典查看更多）'}}catch{if(!p.meaning)p.meaning='暂未收录中文释义；请点击「词典」查询'}if(currentPopup===p){displayPopup();positionPopup(btn)}}
 }
 function extractJSON(s){let text=s.trim().replace(/^```(?:json)?\s*/i,'').replace(/```\s*$/,'').trim();try{return JSON.parse(text)}catch{const a=text.indexOf('{'),b=text.lastIndexOf('}');if(a>=0&&b>a)return JSON.parse(text.slice(a,b+1));throw Error('模型没有返回有效 JSON')}}
-async function doTranslate(){if(!story){toast('先导入一篇文章');return}const key=$('#api-key').value.trim(),endpoint=$('#api-endpoint').value.trim(),model=$('#api-model').value.trim();if(!key||!endpoint||!model){toast('请先填入 API 地址、模型名称与密钥');return}if(!/^https:\/\//.test(endpoint)){toast('API 地址必须是 HTTPS');return}const pending=story.blocks.map((b,i)=>({b,i})).filter(x=>x.b.ko!=='＊'&&(!x.b.en||!x.b.zh));if(!pending.length){toast('这篇文章已经有完整的中英译文');return}const button=$('#translate-story'),status=$('#translation-status');button.disabled=true;let done=0;try{for(let offset=0;offset<pending.length;offset+=6){const chunk=pending.slice(offset,offset+6);status.textContent=`翻译中 ${done} / ${pending.length} 段…`;const body={model,temperature:0.2,messages:[{role:'system',content:'You are a professional Korean fiction translator. Translate Korean prose faithfully into natural Chinese (zh) and English (en), retaining character names as 曹承衍/金宇硕 in Chinese and Cho Seungyeon/Kim Wooseok in English; maintain dialogue, profanity, style and content. Do not censor, summarize, omit or change paragraphs. Reply ONLY in JSON of the shape {"translations":[{"zh":"...","en":"..."}]}, same number and order as inputs.'},{role:'user',content:JSON.stringify(chunk.map(x=>x.b.ko))}],stream:false};const resp=await fetch(endpoint,{method:'POST',headers:{'Content-Type':'application/json',Authorization:'Bearer '+key},body:JSON.stringify(body)});if(!resp.ok){const detail=await resp.text();throw Error('API HTTP '+resp.status+': '+detail.slice(0,120))}const result=await resp.json();const raw=result?.choices?.[0]?.message?.content||'';const parsed=extractJSON(raw),out=parsed.translations;if(!Array.isArray(out)||out.length!==chunk.length)throw Error('译文段落数量与原文不一致，翻译已暂停');for(let j=0;j<chunk.length;j++){const z=out[j];if(!z||typeof z.zh!=='string'||typeof z.en!=='string')throw Error('译文格式不符合预期');chunk[j].b.zh=chunk[j].b.zh||z.zh;chunk[j].b.en=chunk[j].b.en||z.en}done+=chunk.length;if(currentId!==DEFAULT_ID)saveStorage(storyKey(currentId),story);renderStory()}status.textContent=`完成 ${done} 段的中英翻译`;toast('翻译完成，已保存到浏览器')}catch(e){status.textContent='已保存进度：'+done+' 段；失败原因：'+e.message;toast('翻译中断，可重新点击继续')}finally{button.disabled=false}}
+async function doTranslate(){if(!story){toast('先导入一篇文章');return}const key=$('#api-key').value.trim(),endpoint=$('#api-endpoint').value.trim(),model=$('#api-model').value.trim();if(!key||!endpoint||!model){toast('请先填入 API 地址、模型名称与密钥');return}if(!/^https:\/\//.test(endpoint)){toast('API 地址必须是 HTTPS');return}const pending=story.blocks.map((b,i)=>({b,i})).filter(x=>x.b.ko!=='＊'&&(!x.b.en||!x.b.zh));if(!pending.length){toast('这篇文章已经有完整的中英译文');return}const button=$('#translate-story'),status=$('#translation-status');button.disabled=true;let done=0;try{for(let offset=0;offset<pending.length;offset+=6){const chunk=pending.slice(offset,offset+6);status.textContent=`翻译中 ${done} / ${pending.length} 段…`;const body={model,temperature:0.2,messages:[{role:'system',content:'You are a professional Korean fiction translator. Translate Korean prose faithfully into natural Chinese (zh) and English (en), retaining character names as 曹承衍/金宇硕 in Chinese and Cho Seungyeon/Kim Wooseok in English; maintain dialogue, profanity, style and content. Do not censor, summarize, omit or change paragraphs. Reply ONLY in JSON of the shape {"translations":[{"zh":"...","en":"..."}]}, same number and order as inputs.'},{role:'user',content:JSON.stringify(chunk.map(x=>x.b.ko))}],stream:false};const resp=await fetch(endpoint,{method:'POST',headers:{'Content-Type':'application/json',Authorization:'Bearer '+key},body:JSON.stringify(body)});if(!resp.ok){const detail=await resp.text();throw Error('API HTTP '+resp.status+': '+detail.slice(0,120))}const result=await resp.json();const raw=result?.choices?.[0]?.message?.content||'';const parsed=extractJSON(raw),out=parsed.translations;if(!Array.isArray(out)||out.length!==chunk.length)throw Error('译文段落数量与原文不一致，翻译已暂停');for(let j=0;j<chunk.length;j++){const z=out[j];if(!z||typeof z.zh!=='string'||typeof z.en!=='string')throw Error('译文格式不符合预期');chunk[j].b.zh=chunk[j].b.zh||z.zh;chunk[j].b.en=chunk[j].b.en||z.en}done+=chunk.length;if(!BUILTINS[currentId])saveStorage(storyKey(currentId),story);renderStory()}status.textContent=`完成 ${done} 段的中英翻译`;toast('翻译完成，已保存到浏览器')}catch(e){status.textContent='已保存进度：'+done+' 段；失败原因：'+e.message;toast('翻译中断，可重新点击继续')}finally{button.disabled=false}}
 function initListeners(){
  $$('[data-tab]').forEach(x=>x.addEventListener('click',()=>showView(x.dataset.tab)));
  $('#more-trigger').addEventListener('click',()=>togglePanel('more-panel','more-trigger'));
@@ -119,11 +150,11 @@ function initListeners(){
  window.addEventListener('scroll',()=>{if(activeView!=='reader'||query||restoringScroll)return;clearTimeout(scrollSaveTimer);scrollSaveTimer=setTimeout(()=>saveStorage('scroll:'+currentId,Math.round(window.scrollY)),200)},{passive:true});
  window.addEventListener('pagehide',()=>{if(activeView==='reader'&&!query)saveStorage('scroll:'+currentId,Math.round(window.scrollY))});
  $('#save-import').addEventListener('click',saveImport);$('#open-story').addEventListener('click',()=>loadStory($('#story-select').value));
- $('#delete-story').addEventListener('click',()=>{const id=$('#story-select').value;if(id===DEFAULT_ID){toast('内置原文不可删除');return}if(!confirm('确定删除这篇导入文章及其本地译文吗？'))return;localStorage.removeItem(STORAGE+':'+storyKey(id));saveStorage('custom-ids',customStories().filter(x=>x.id!==id));loadStory(DEFAULT_ID)});
+ $('#delete-story').addEventListener('click',()=>{const id=$('#story-select').value;if(BUILTINS[id]){toast('书架作品不可删除');return}if(!confirm('确定删除这篇导入文章及其本地译文吗？'))return;localStorage.removeItem(STORAGE+':'+storyKey(id));saveStorage('custom-ids',customStories().filter(x=>x.id!==id));loadStory(DEFAULT_ID)});
  $('#translate-story').addEventListener('click',doTranslate);
  $$('.pill-btn').forEach(b=>b.addEventListener('click',()=>{vocabFilter=b.id==='vocab-korean'?'ko':b.id==='vocab-english'?'en':'all';$$('.pill-btn').forEach(x=>x.classList.toggle('selected',x===b));renderVocab()}));
  $('#export-vocab').addEventListener('click',()=>saveFile('生词本.txt',savedVocab.map(x=>`${x.lang.toUpperCase()} · ${x.word}\n释义：${x.meaning}\n原句：${x.example}\n`).join('\n')));
 }
-async function init(){font=readStorage('font',1);document.documentElement.style.setProperty('--scale',font);updateVocabCount();initListeners();await loadStory(DEFAULT_ID,false);renderStorySelect()}
+async function init(){font=readStorage('font',1);document.documentElement.style.setProperty('--scale',font);updateVocabCount();initListeners();await loadStory(BUILTINS[new URLSearchParams(location.search).get('story')]?new URLSearchParams(location.search).get('story'):DEFAULT_ID,false);renderStorySelect()}
 init();
 })();
