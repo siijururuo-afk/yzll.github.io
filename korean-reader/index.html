@@ -52,7 +52,7 @@
     </div>
     <div id="search-panel" class="search-panel hidden"><input id="search-input" type="search" placeholder="搜索当前文章…" aria-label="搜索当前文章"><button id="search-clear" type="button">关闭</button></div>
     <article id="paragraphs" class="story-body" aria-label="文章正文"></article>
-    <div class="article-end">全文完</div>
+    <div class="article-end">本篇结束</div>
     <footer class="reading-footer"><span>문장 사이</span><span id="article-count" class="visually-hidden"></span></footer>
   </section>
   <section id="vocab-view" class="view content-container hidden">
@@ -62,7 +62,9 @@
   </section>
 
   <section id="import-view" class="view content-container hidden">
-    <div class="section-heading"><div class="eyebrow">YOUR OWN TEXTS</div><h1>导入文章</h1><p>支持 POSTYPE 导出的 HTML 或纯文本 TXT。读取只发生在当前浏览器内，导入不会上传原文。</p></div>
+    <div class="section-heading"><div class="eyebrow">READING LIBRARY</div><h1>书架</h1><p>挑一篇想看的小说，继续阅读。</p></div>
+    <div id="book-list" class="book-list" aria-label="书架中的作品"></div>
+    <details class="upload-details"><summary>导入本地文章</summary><p class="field-hint">支持 POSTYPE 导出的 HTML 或 TXT。文件只在当前浏览器中处理，不会自动发布到 GitHub。</p>
     <div class="import-card">
       <label class="field-label" for="story-select">正在阅读的文章</label>
       <div class="form-row"><select id="story-select"></select><button id="open-story" class="border-btn">打开阅读</button><button id="delete-story" class="text-btn danger">删除导入</button></div>
@@ -73,10 +75,11 @@
       <label class="field-label" for="paste-text">韩语原文</label><textarea id="paste-text" rows="7" placeholder="在这里粘贴原文。段落之间留空行。"></textarea>
       <div class="form-row"><button id="save-import" class="primary-btn">保存并打开</button><span id="import-feedback" class="status-text" role="status"></span></div>
     </div>
+    </details>
   </section>
 
   <section id="settings-view" class="view content-container hidden">
-    <div class="section-heading"><div class="eyebrow">TRANSLATION ENGINE</div><h1>翻译设置</h1><p>《한입만》已内置完整的韩语、中文和英文译文，不需要 API。新增文章如需自动翻译，可以使用自己的兼容 OpenAI 接口的模型。</p></div>
+    <div class="section-heading"><div class="eyebrow">TRANSLATION ENGINE</div><h1>翻译设置</h1><p>书架中的作品已内置韩中英正文，直接阅读不需要 API。自行导入的新文章可选择配置翻译接口。</p></div>
     <div class="import-card">
       <label class="field-label" for="api-endpoint">API 地址</label><input id="api-endpoint" type="url" value="https://api.deepseek.com/chat/completions" spellcheck="false">
       <label class="field-label" for="api-model">模型名称</label><input id="api-model" type="text" value="deepseek-chat" spellcheck="false">
