@@ -8,3 +8,23 @@
 .word-pop{position:fixed;z-index:100;background:white;border:1px solid #e2e2e2;box-shadow:0 10px 42px #00000018;width:min(355px,calc(100vw - 24px));padding:19px 20px 18px;border-radius:4px;max-height:min(600px,85vh);overflow:auto}.pop-top{display:flex;justify-content:space-between;align-items:center}.icon-btn{border:0;background:none;color:#888;font-size:25px;line-height:1;padding:0 0 5px 10px}.word-pop h2{font-family:Georgia,serif;margin:8px 0 5px;font-size:27px;font-weight:600;overflow-wrap:anywhere}.pron{font-size:12px;color:#888;min-height:10px;margin:0 0 12px}.meaning{font-size:16px;line-height:1.6;margin:8px 0}.grammar{font-size:11px;color:#999;line-height:1.5}.example{border-top:1px solid #eee;margin-top:16px;padding-top:13px;line-height:1.65;font-size:12px;max-height:152px;overflow:auto;overflow-wrap:anywhere}.example .eyebrow{display:block;margin-bottom:6px}.context-zh{color:#858585;margin-top:6px}.pop-actions{display:flex;gap:9px;align-items:center;margin-top:15px;flex-wrap:wrap}.pop-actions .border-btn,.pop-actions .primary-btn{padding:8px 10px}.pop-actions a{color:#777;font-size:11px;margin-left:auto;text-decoration:none}.toast{position:fixed;bottom:25px;left:50%;transform:translateX(-50%);z-index:120;border-radius:3px;background:#222;color:#fff;font-size:12px;padding:12px 18px;max-width:calc(100vw - 30px)}
 @media(max-width:750px){.article-shell{padding:0 25px;max-width:710px}.story-body{font-size:calc(17px * var(--scale))}.story-par.compared{column-gap:20px}}
 @media(max-width:560px){.site-header{height:54px}.header-inner{padding:0 20px}.brand{font-size:16px}.site-actions{gap:20px}.article-shell{padding:0 21px}.article-head{padding:61px 0 40px}.article-head h1{font-size:33px;margin-bottom:16px}.article-controls{height:55px;margin-bottom:34px}.story-body{font-size:calc(17px * var(--scale));line-height:1.95}.story-body p{margin-bottom:1.35em}.story-par.compared{display:block;margin-bottom:1.9em}.story-par.compared .text-column + .text-column{margin-top:14px}.story-par.compared .translation{font-size:1em}.story-par.triple .translation:last-child{border:0;padding-top:0}.lang-caption{font-size:10px;margin-bottom:5px}.compare-panel,.type-panel{margin-top:-12px;margin-bottom:24px;padding-bottom:19px}.type-panel .lookup-label{margin-left:0;flex-basis:100%;padding-top:4px}.article-end{padding:59px 0 42px}.word-pop{width:calc(100vw - 22px);left:11px!important;bottom:11px!important;top:auto!important;max-height:70vh;padding:17px}.section-heading{padding-top:50px}}
+
+/* Book shelf: editorial, not a learning dashboard */
+.book-list{margin:-2px 0 44px;border-top:1px solid #ededed}
+.book-entry{display:flex;gap:18px;justify-content:space-between;align-items:center;text-align:left;width:100%;padding:25px 1px 25px 0;border:0;border-bottom:1px solid #ededed;background:#fff;color:#252525;cursor:pointer}
+.book-entry:hover .book-action,.book-entry:focus-visible .book-action{color:#111;text-decoration:underline}
+.book-info{display:flex;flex-direction:column;gap:8px;min-width:0}
+.book-entry strong{font-family:'Songti SC','Noto Serif CJK SC',Georgia,serif;font-size:19px;font-weight:550;line-height:1.5;overflow-wrap:anywhere}
+.book-original{font-size:12px;color:#888;line-height:1.6;overflow-wrap:anywhere}
+.book-meta{font-size:11px;color:#aaa}
+.book-action{font-size:12px;white-space:nowrap;flex-shrink:0;color:#858585}
+.book-entry.is-reading .book-action{color:#272727}
+.upload-details{padding-bottom:70px}
+.upload-details summary{cursor:pointer;color:#777;font-size:13px;padding:14px 0;border-bottom:1px solid #eee;list-style:none}
+.upload-details summary::after{content:'+';float:right;font-size:16px;color:#888}
+.upload-details[open] summary::after{content:'−'}
+.upload-details .import-card{padding-top:18px}
+.article-head h1{overflow-wrap:anywhere}
+@media(max-width:560px){.book-entry{padding:21px 0;gap:11px}.book-entry strong{font-size:17px}.book-original{font-size:11px}.book-action{font-size:11px}}
+
+.byline.long-title{display:block}.byline.long-title .byline-sep{display:none}.byline.long-title #article-sub{display:block;margin-top:9px;max-width:100%;overflow-wrap:anywhere;line-height:1.7}
