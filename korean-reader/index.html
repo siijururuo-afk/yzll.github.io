@@ -1,0 +1,90 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="theme-color" content="#ffffff">
+<meta name="description" content="韩语小说中英韩逐段对照阅读，点词查释义、朗读和收藏生词。">
+<title>문장 사이 · 韩英中对照阅读</title>
+<link rel="stylesheet" href="./style.css">
+</head>
+<body>
+<header class="site-header">
+  <div class="header-inner">
+    <a class="brand" href="./" aria-label="回到阅读首页">문장 사이 <small>BETWEEN THE LINES</small></a>
+    <nav aria-label="主导航">
+      <button class="nav-link active" data-tab="reader">阅读</button>
+      <button class="nav-link" data-tab="vocab">生词本 <span id="vocab-count">0</span></button>
+      <button class="nav-link" data-tab="import">导入文章</button>
+      <button class="nav-link" data-tab="settings" aria-label="翻译设置">设置</button>
+    </nav>
+  </div>
+</header>
+<main id="main">
+  <section id="reader-view" class="view content-container">
+    <div class="article-head">
+      <div class="eyebrow">KOREAN · ENGLISH · CHINESE</div>
+      <h1 id="article-title">한입만</h1>
+      <div class="article-sub" id="article-sub">就一口 <span class="sep">/</span> Just One Bite</div>
+      <div class="byline"><span id="article-author">삐삐</span><span aria-hidden="true">·</span><span id="article-count">142 段</span><span aria-hidden="true">·</span>对照阅读</div>
+    </div>
+    <div class="reader-toolbar" aria-label="阅读设置">
+      <div class="lang-controls" role="group" aria-label="显示语言">
+        <label><input checked type="checkbox" value="ko" id="show-ko"><span>한국어 <small>原文</small></span></label>
+        <label><input checked type="checkbox" value="zh" id="show-zh"><span>中文 <small>翻译</small></span></label>
+        <label><input checked type="checkbox" value="en" id="show-en"><span>English <small>Translation</small></span></label>
+      </div>
+      <div class="reader-actions">
+        <label class="search-wrap"><svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="11" cy="11" r="7"/><path d="m16.5 16.5 5 5"/></svg><input id="search-input" type="search" placeholder="搜索文章" aria-label="搜索文章"></label>
+        <button id="font-minus" class="text-btn" title="缩小字号">A−</button><button id="font-plus" class="text-btn" title="放大字号">A+</button>
+      </div>
+    </div>
+    <div class="reading-note" id="reading-note">点击韩语或英语单词，查看注释与朗读。点击段落旁的 <span aria-hidden="true">◁</span> 可听整段发音。</div>
+    <div class="page-top"><span id="page-summary">第 1—20 段</span><span id="reading-progress"></span></div>
+    <div id="paragraphs" class="paragraphs" aria-live="polite"></div>
+    <nav class="pagination" aria-label="文章翻页"><button id="prev-page" class="border-btn">← 上一页</button><span id="page-number"></span><button id="next-page" class="border-btn">下一页 →</button></nav>
+    <div class="article-footer">END OF PAGE <span class="dot">·</span> 阅读记录保存在此浏览器</div>
+  </section>
+
+  <section id="vocab-view" class="view content-container hidden">
+    <div class="section-heading"><div class="eyebrow">MY VOCABULARY</div><h1>生词本</h1><p>阅读时点击词语，选择「收藏」，这里就会自动记录原句。</p></div>
+    <div class="vocab-toolbar"><button id="vocab-all" class="pill-btn selected">全部</button><button id="vocab-korean" class="pill-btn">韩语</button><button id="vocab-english" class="pill-btn">英语</button><button id="export-vocab" class="border-btn">导出生词 TXT</button></div>
+    <div id="vocab-list" class="vocab-list"></div>
+  </section>
+
+  <section id="import-view" class="view content-container hidden">
+    <div class="section-heading"><div class="eyebrow">YOUR OWN TEXTS</div><h1>导入文章</h1><p>支持 POSTYPE 导出的 HTML 或纯文本 TXT。读取只发生在当前浏览器内，导入不会上传原文。</p></div>
+    <div class="import-card">
+      <label class="field-label" for="story-select">正在阅读的文章</label>
+      <div class="form-row"><select id="story-select"></select><button id="open-story" class="border-btn">打开阅读</button><button id="delete-story" class="text-btn danger">删除导入</button></div>
+      <div class="hairline"></div>
+      <label class="field-label" for="upload-file">导入 HTML / TXT</label><input type="file" id="upload-file" accept=".html,.htm,.txt,text/html,text/plain">
+      <div class="field-hint">自动提取文章正文段落；原文排版不含图片。也可以粘贴内容：</div>
+      <label class="field-label" for="new-title">文章标题</label><input id="new-title" type="text" placeholder="例如：한입만 2">
+      <label class="field-label" for="paste-text">韩语原文</label><textarea id="paste-text" rows="7" placeholder="在这里粘贴原文。段落之间留空行。"></textarea>
+      <div class="form-row"><button id="save-import" class="primary-btn">保存并打开</button><span id="import-feedback" class="status-text" role="status"></span></div>
+    </div>
+  </section>
+
+  <section id="settings-view" class="view content-container hidden">
+    <div class="section-heading"><div class="eyebrow">TRANSLATION ENGINE</div><h1>翻译设置</h1><p>《한입만》已内置完整的韩语、中文和英文译文，不需要 API。新增文章如需自动翻译，可以使用自己的兼容 OpenAI 接口的模型。</p></div>
+    <div class="import-card">
+      <label class="field-label" for="api-endpoint">API 地址</label><input id="api-endpoint" type="url" value="https://api.deepseek.com/chat/completions" spellcheck="false">
+      <label class="field-label" for="api-model">模型名称</label><input id="api-model" type="text" value="deepseek-chat" spellcheck="false">
+      <label class="field-label" for="api-key">API Key（仅本次页面会话使用）</label><input id="api-key" type="password" placeholder="sk-..." autocomplete="off" spellcheck="false">
+      <p class="field-hint">密钥只用于你浏览器直接向所选 API 发送翻译请求，不上传到 GitHub，也不会写入本地存储。请仅使用自己信任的服务商；公共网站使用时，不要输入第三方的密钥。</p>
+      <div class="form-row"><button id="translate-story" class="primary-btn">翻译当前文章的缺失段落</button><span id="translation-status" class="status-text" role="status"></span></div>
+      <div class="hairline"></div><p class="field-hint">韩语词典：常见词有内置释义；其他词会尝试公开在线释义，并提供 NAVER 词典检索链接。英语词典接入免费开放词典。网络中断时可能无法查到未收录的词。</p>
+    </div>
+  </section>
+</main>
+<div id="word-pop" class="word-pop hidden" role="dialog" aria-label="词汇注释" aria-modal="false">
+  <div class="pop-top"><span id="pop-lang" class="eyebrow">VOCABULARY</span><button id="pop-close" class="icon-btn" aria-label="关闭词汇注释">×</button></div>
+  <h2 id="pop-word"></h2><p id="pop-pron" class="pron"></p><p id="pop-meaning" class="meaning"></p><p id="pop-grammar" class="grammar"></p>
+  <div class="example"><span class="eyebrow">IN CONTEXT</span><div id="pop-example"></div><div id="pop-context-zh" class="context-zh"></div></div>
+  <div class="pop-actions"><button id="pop-speak" class="border-btn">▷ 朗读</button><button id="pop-save" class="primary-btn">＋ 收藏生词</button><a id="pop-dict" href="#" target="_blank" rel="noopener noreferrer">词典 ↗</a></div>
+</div>
+<div id="toast" class="toast hidden" role="status"></div>
+<script src="./app.js" defer></script>
+</body>
+</html>
