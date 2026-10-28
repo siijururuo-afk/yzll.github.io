@@ -13,7 +13,23 @@ const BUILTINS={
  '1836825-b':{path:'1836825-b.json',zh:'183 68 25 · 第2章',ko:'183 68 25 B',author:'켈룩',count:146,series:'183 68 25',part:'B'},
  '1836825-c':{path:'1836825-c.json',zh:'183 68 25 · 第3章',ko:'183 68 25 C',author:'켈룩',count:155,series:'183 68 25',part:'C'},
  '1836825-d':{path:'1836825-d.json',zh:'183 68 25 · 第4章',ko:'183 68 25 D',author:'켈룩',count:131,series:'183 68 25',part:'D'},
- '1836825-e':{path:'1836825-e.json',zh:'183 68 25 · 第5章',ko:'183 68 25 E',author:'켈룩',count:186,series:'183 68 25',part:'E'}
+ '1836825-e':{path:'1836825-e.json',zh:'183 68 25 · 第5章',ko:'183 68 25 E',author:'켈룩',count:186,series:'183 68 25',part:'E'},
+ "sea-1":{path:"sea-1.json",zh:"你好，我的海 · 第1章",ko:"안녕, 나의 바다. 1",author:"장마",count:210,series:"你好，我的海",part:"1",index:1,total:7,translation:"complete"},
+ "sea-2":{path:"sea-2.json",zh:"你好，我的海 · 第2章",ko:"안녕, 나의 바다. 2",author:"장마",count:168,series:"你好，我的海",part:"2",index:2,total:7,translation:"ko-only"},
+ "sea-3":{path:"sea-3.json",zh:"你好，我的海 · 第3章",ko:"안녕, 나의 바다. 3",author:"장마",count:111,series:"你好，我的海",part:"3",index:3,total:7,translation:"ko-only"},
+ "sea-4":{path:"sea-4.json",zh:"你好，我的海 · 第4章",ko:"안녕, 나의 바다. 4",author:"장마",count:183,series:"你好，我的海",part:"4",index:4,total:7,translation:"ko-only"},
+ "sea-5":{path:"sea-5.json",zh:"你好，我的海 · 第5章",ko:"안녕, 나의 바다. 5",author:"장마",count:205,series:"你好，我的海",part:"5",index:5,total:7,translation:"ko-only"},
+ "sea-6":{path:"sea-6.json",zh:"你好，我的海 · 第6章",ko:"안녕, 나의 바다. 6",author:"장마",count:159,series:"你好，我的海",part:"6",index:6,total:7,translation:"ko-only"},
+ "sea-7":{path:"sea-7.json",zh:"你好，我的海 · 第7章（完结）",ko:"안녕, 나의 바다. 7",author:"장마",count:289,series:"你好，我的海",part:"7",index:7,total:7,translation:"ko-only"},
+ "raspberry-a":{path:"raspberry-a.json",zh:"覆盆子时光 · A",ko:"라즈베리 타임 A",author:"간쇼아",count:190,series:"覆盆子时光",part:"A",index:1,total:6,translation:"ko-only"},
+ "raspberry-b":{path:"raspberry-b.json",zh:"覆盆子时光 · B",ko:"라즈베리 타임 B",author:"간쇼아",count:185,series:"覆盆子时光",part:"B",index:2,total:6,translation:"ko-only"},
+ "raspberry-c":{path:"raspberry-c.json",zh:"覆盆子时光 · C",ko:"라즈베리 타임 C",author:"간쇼아",count:172,series:"覆盆子时光",part:"C",index:3,total:6,translation:"ko-only"},
+ "raspberry-d":{path:"raspberry-d.json",zh:"覆盆子时光 · D",ko:"라즈베리 타임 D",author:"간쇼아",count:124,series:"覆盆子时光",part:"D",index:4,total:6,translation:"ko-only"},
+ "raspberry-e":{path:"raspberry-e.json",zh:"覆盆子时光 · E",ko:"라즈베리 타임 E",author:"간쇼아",count:139,series:"覆盆子时光",part:"E",index:5,total:6,translation:"ko-only"},
+ "raspberry-f":{path:"raspberry-f.json",zh:"覆盆子时光 · F",ko:"라즈베리 타임 F",author:"간쇼아",count:136,series:"覆盆子时光",part:"F",index:6,total:6,translation:"ko-only"},
+ "cross-gang-1":{path:"cross-gang-1.json",zh:"Cross Gang · 第1章",ko:"c25th, Cross Gang 01",author:"간쇼아",count:356,series:"Cross Gang",part:"1",index:1,total:3,translation:"ko-only"},
+ "cross-gang-2":{path:"cross-gang-2.json",zh:"Cross Gang · 第2章",ko:"c25th, Cross Gang 02",author:"간쇼아",count:539,series:"Cross Gang",part:"2",index:2,total:3,translation:"ko-only"},
+ "cross-gang-3":{path:"cross-gang-3.json",zh:"Cross Gang · 第3章",ko:"c25th, Cross Gang 03",author:"간쇼아",count:415,series:"Cross Gang",part:"3",index:3,total:3,translation:"ko-only"}
 };
 let story=null, currentId=DEFAULT_ID, font=1, query='', vocabFilter='all';
 let mode='zh', lookupEnabled=false, activeView='reader', scrollSaveTimer=null, restoringScroll=false, lastReaderY=0;
@@ -63,6 +79,10 @@ function renderStory(preserveScroll=false){
  const box=$('#paragraphs');const frag=document.createDocumentFragment();
  if(!matches.length){const el=document.createElement('div');el.className='empty';el.textContent='没有找到包含搜索词的段落';frag.appendChild(el)}
  for(const {b,i} of matches){
+  if(b.image&&/^data:image\/(png|jpeg|webp|gif);base64,/.test(b.image)){
+   const figure=document.createElement('figure');figure.className='story-media';figure.dataset.index=i;
+   const img=document.createElement('img');img.src=b.image;img.alt='原文插图';img.loading='lazy';img.style.maxWidth='100%';figure.appendChild(img);frag.appendChild(figure);continue;
+  }
   if(b.embed){
     const figure=document.createElement('figure');figure.className='story-media';figure.dataset.index=i;
     const iframe=document.createElement('iframe');iframe.title='原文附带的视频';iframe.loading='lazy';iframe.referrerPolicy='strict-origin-when-cross-origin';iframe.sandbox='allow-scripts allow-same-origin allow-presentation';iframe.allow='fullscreen; picture-in-picture';iframe.allowFullscreen=true;
@@ -89,13 +109,11 @@ function renderChapterNav(){
  const nav=$('#chapter-nav');if(!nav)return;nav.replaceChildren();
  const b=BUILTINS[currentId];if(!b?.series){nav.classList.add('hidden');return}
  nav.classList.remove('hidden');
- const idx='ABCDE'.indexOf(b.part);const text=document.createElement('span');text.className='chapter-position';text.textContent=`${b.series} · ${idx+1} / 5`;nav.appendChild(text);
+ const chapters=Object.entries(BUILTINS).filter(([,v])=>v.series===b.series).sort((a,z)=>(a[1].index??'ABCDE'.indexOf(a[1].part)+1)-(z[1].index??'ABCDE'.indexOf(z[1].part)+1));
+ const idx=chapters.findIndex(([id])=>id===currentId);
+ const pos=document.createElement('span');pos.className='chapter-position';pos.textContent=`${b.series} · ${idx+1} / ${chapters.length}`;nav.appendChild(pos);
  const controls=document.createElement('div');controls.className='chapter-links';
- for(const [offset,label] of [[-1,'上一章'],[1,'下一章']]){
-   const next=idx+offset;if(next<0||next>4)continue;
-   const a=document.createElement('button');a.type='button';a.textContent=label+' · '+ 'ABCDE'[next];
-   a.addEventListener('click',()=>loadStory('1836825-'+'ABCDE'[next].toLowerCase()));controls.appendChild(a)
- }
+ for(const [offset,label] of [[-1,'上一章'],[1,'下一章']]){const next=idx+offset;if(next<0||next>=chapters.length)continue;const a=document.createElement('button');a.type='button';a.textContent=label+' · '+chapters[next][1].part;a.addEventListener('click',()=>loadStory(chapters[next][0]));controls.appendChild(a)}
  nav.appendChild(controls)
 }
 function closeMenus(){for(const id of ['compare-panel','type-panel','more-panel'])$('#'+id).classList.add('hidden');$('#compare-trigger').setAttribute('aria-expanded','false');$('#type-trigger').setAttribute('aria-expanded','false');$('#more-trigger').setAttribute('aria-expanded','false')}
@@ -114,15 +132,19 @@ function renderStorySelect(){
  for(const x of customStories())option(x.id,x.title);
  select.value=currentId;
  const shelf=$('#book-list');shelf.replaceChildren();
+ const started=new Set();
  for(const [id,b] of Object.entries(BUILTINS)){
-  if(b.series){if(b.part==='A'){const group=document.createElement('div');group.className='book-series-heading';group.textContent='183 68 25 · 连载 · 5章';shelf.appendChild(group)};}
+  if(b.series&&!started.has(b.series)){
+   started.add(b.series);const group=document.createElement('div');group.className='book-series-heading';
+   group.textContent=b.series+' · '+Object.values(BUILTINS).filter(x=>x.series===b.series).length+'章';shelf.appendChild(group)
+  }
   const item=document.createElement('button');item.type='button';item.className='book-entry'+(id===currentId?' is-reading':'');
   const left=document.createElement('span');left.className='book-info';
-  const title=document.createElement('strong');title.textContent=b.series?'第'+('ABCDE'.indexOf(b.part)+1)+'章 · '+b.part:b.zh;
-  const sub=document.createElement('span');sub.className='book-original';sub.textContent=b.series?'183 68 25 · '+b.part:b.ko;
-  const meta=document.createElement('span');meta.className='book-meta';meta.textContent=b.author+' · '+b.count+' 段'+(b.series||id==='existence-weight'?' · 三语已译':'');
-  left.append(title,sub,meta);
-  const right=document.createElement('span');right.className='book-action';right.textContent=id===currentId?'继续阅读':'开始阅读';
+  const title=document.createElement('strong');title.textContent=b.series?'第'+(b.index??'ABCDE'.indexOf(b.part)+1)+'章 · '+b.part:b.zh;
+  const sub=document.createElement('span');sub.className='book-original';sub.textContent=b.series?b.ko:b.ko;
+  const meta=document.createElement('span');meta.className='book-meta';
+  meta.textContent=b.author+' · '+b.count+' 段 · '+(b.translation==='ko-only'?'韩文原文（中英文未译）':b.translation==='complete'||b.series==='183 68 25'||id==='existence-weight'||id==='hanip'||id==='cover-eyes'?'三语已译':'按原文阅读');
+  left.append(title,sub,meta);const right=document.createElement('span');right.className='book-action';right.textContent=id===currentId?'继续阅读':'开始阅读';
   item.append(left,right);if(b.series)item.classList.add('series-chapter');item.addEventListener('click',()=>loadStory(id));shelf.appendChild(item);
  }
  for(const item of customStories()){
@@ -138,7 +160,7 @@ async function loadStory(id,go=true){try{
   else data=readStorage(storyKey(id),null);
  if(!data||!Array.isArray(data.blocks))throw Error('文章数据不存在');
  if(BUILTINS[id]){const overlay=readStorage('translations:'+id,{});for(const [n,trans] of Object.entries(overlay)){const b=data.blocks[Number(n)];if(b&&trans){if(!b.zh&&trans.zh)b.zh=trans.zh;if(!b.en&&trans.en)b.en=trans.en}}}
- restoringScroll=true;story=data;currentId=id;mode=data.blocks.filter(b=>b.ko&&!b.spacer&&b.ko!=='＊').every(b=>b.zh)?'zh':'ko';query='';$('#search-input').value='';
+ restoringScroll=true;story=data;currentId=id;mode=data.blocks.filter(b=>b.ko&&!b.spacer&&b.ko!=='＊'&&b.ko!=='*').every(b=>b.zh)?'zh':'ko';query='';$('#search-input').value='';
  lastReaderY=Number(readStorage('scroll:'+id,0))||0;renderStory();renderStorySelect();
   if(go){history.replaceState(null,'',location.pathname+'?story='+encodeURIComponent(id));showView('reader');}
  requestAnimationFrame(()=>{try{window.scrollTo(0,lastReaderY)}catch{};setTimeout(()=>{restoringScroll=false},160)});
@@ -160,7 +182,7 @@ if(lang==='ko'&&!findKo(word)){try{const response=await fetch('https://api.mymem
 if(lang==='en'){try{const response=await fetch('https://api.dictionaryapi.dev/api/v2/entries/en/'+encodeURIComponent(word.toLowerCase()));if(!response.ok)throw Error();const json=await response.json();const item=json?.[0];if(item){p.pron=item.phonetic||item.phonetics?.find(v=>v.text)?.text||'';const defs=(item.meanings||[]).slice(0,2).map(m=>m.partOfSpeech+': '+(m.definitions?.[0]?.definition||'')).filter(Boolean);p.grammar=defs.join(' · ');if(!p.meaning)p.meaning='英语词典定义如下（可点击词典查看更多）'}}catch{if(!p.meaning)p.meaning='暂未收录中文释义；请点击「词典」查询'}if(currentPopup===p){displayPopup();positionPopup(btn)}}
 }
 function extractJSON(s){let text=s.trim().replace(/^```(?:json)?\s*/i,'').replace(/```\s*$/,'').trim();try{return JSON.parse(text)}catch{const a=text.indexOf('{'),b=text.lastIndexOf('}');if(a>=0&&b>a)return JSON.parse(text.slice(a,b+1));throw Error('模型没有返回有效 JSON')}}
-async function doTranslate(){if(!story){toast('先导入一篇文章');return}const key=$('#api-key').value.trim(),endpoint=$('#api-endpoint').value.trim(),model=$('#api-model').value.trim();if(!key||!endpoint||!model){toast('请先填入 API 地址、模型名称与密钥');return}if(!/^https:\/\//.test(endpoint)){toast('API 地址必须是 HTTPS');return}const pending=story.blocks.map((b,i)=>({b,i})).filter(x=>x.b.ko&&x.b.ko!=='＊'&&!x.b.spacer&&(!x.b.en||!x.b.zh));if(!pending.length){toast('这篇文章已经有完整的中英译文');return}const button=$('#translate-story'),status=$('#translation-status');button.disabled=true;let done=0;try{for(let offset=0;offset<pending.length;offset+=6){const chunk=pending.slice(offset,offset+6);status.textContent=`翻译中 ${done} / ${pending.length} 段…`;const body={model,temperature:0.2,messages:[{role:'system',content:'You are a professional Korean fiction translator. Translate Korean prose faithfully into natural Chinese (zh) and English (en), retaining character names as 曹承衍/金宇硕 in Chinese and Cho Seungyeon/Kim Wooseok in English; maintain dialogue, profanity, style and content. Do not censor, summarize, omit or change paragraphs. Reply ONLY in JSON of the shape {"translations":[{"zh":"...","en":"..."}]}, same number and order as inputs.'},{role:'user',content:JSON.stringify(chunk.map(x=>x.b.ko))}],stream:false};const resp=await fetch(endpoint,{method:'POST',headers:{'Content-Type':'application/json',Authorization:'Bearer '+key},body:JSON.stringify(body)});if(!resp.ok){const detail=await resp.text();throw Error('API HTTP '+resp.status+': '+detail.slice(0,120))}const result=await resp.json();const raw=result?.choices?.[0]?.message?.content||'';const parsed=extractJSON(raw),out=parsed.translations;if(!Array.isArray(out)||out.length!==chunk.length)throw Error('译文段落数量与原文不一致，翻译已暂停');for(let j=0;j<chunk.length;j++){const z=out[j];if(!z||typeof z.zh!=='string'||typeof z.en!=='string')throw Error('译文格式不符合预期');chunk[j].b.zh=chunk[j].b.zh||z.zh;chunk[j].b.en=chunk[j].b.en||z.en}done+=chunk.length;if(BUILTINS[currentId]){const overlay=readStorage('translations:'+currentId,{});for(const entry of chunk)overlay[entry.i]={zh:entry.b.zh,en:entry.b.en};saveStorage('translations:'+currentId,overlay)}else saveStorage(storyKey(currentId),story);renderStory()}status.textContent=`完成 ${done} 段的中英翻译`;if(story.blocks.filter(b=>b.ko&&!b.spacer&&b.ko!=='＊').every(b=>b.zh)){mode='zh';renderStory(true)}toast('翻译完成，译文已保存到本机浏览器')}catch(e){status.textContent='已保存进度：'+done+' 段；失败原因：'+e.message;toast('翻译中断，可重新点击继续')}finally{button.disabled=false}}
+async function doTranslate(){if(!story){toast('先导入一篇文章');return}const key=$('#api-key').value.trim(),endpoint=$('#api-endpoint').value.trim(),model=$('#api-model').value.trim();if(!key||!endpoint||!model){toast('请先填入 API 地址、模型名称与密钥');return}if(!/^https:\/\//.test(endpoint)){toast('API 地址必须是 HTTPS');return}const pending=story.blocks.map((b,i)=>({b,i})).filter(x=>x.b.ko&&x.b.ko!=='＊'&&!x.b.spacer&&(!x.b.en||!x.b.zh));if(!pending.length){toast('这篇文章已经有完整的中英译文');return}const button=$('#translate-story'),status=$('#translation-status');button.disabled=true;let done=0;try{for(let offset=0;offset<pending.length;offset+=6){const chunk=pending.slice(offset,offset+6);status.textContent=`翻译中 ${done} / ${pending.length} 段…`;const body={model,temperature:0.2,messages:[{role:'system',content:'You are a professional Korean fiction translator. Translate Korean prose faithfully into natural Chinese (zh) and English (en), retaining character names as 曹承衍/金宇硕 in Chinese and Cho Seungyeon/Kim Wooseok in English; maintain dialogue, profanity, style and content. Do not censor, summarize, omit or change paragraphs. Reply ONLY in JSON of the shape {"translations":[{"zh":"...","en":"..."}]}, same number and order as inputs.'},{role:'user',content:JSON.stringify(chunk.map(x=>x.b.ko))}],stream:false};const resp=await fetch(endpoint,{method:'POST',headers:{'Content-Type':'application/json',Authorization:'Bearer '+key},body:JSON.stringify(body)});if(!resp.ok){const detail=await resp.text();throw Error('API HTTP '+resp.status+': '+detail.slice(0,120))}const result=await resp.json();const raw=result?.choices?.[0]?.message?.content||'';const parsed=extractJSON(raw),out=parsed.translations;if(!Array.isArray(out)||out.length!==chunk.length)throw Error('译文段落数量与原文不一致，翻译已暂停');for(let j=0;j<chunk.length;j++){const z=out[j];if(!z||typeof z.zh!=='string'||typeof z.en!=='string')throw Error('译文格式不符合预期');chunk[j].b.zh=chunk[j].b.zh||z.zh;chunk[j].b.en=chunk[j].b.en||z.en}done+=chunk.length;if(BUILTINS[currentId]){const overlay=readStorage('translations:'+currentId,{});for(const entry of chunk)overlay[entry.i]={zh:entry.b.zh,en:entry.b.en};saveStorage('translations:'+currentId,overlay)}else saveStorage(storyKey(currentId),story);renderStory()}status.textContent=`完成 ${done} 段的中英翻译`;if(story.blocks.filter(b=>b.ko&&!b.spacer&&b.ko!=='＊'&&b.ko!=='*').every(b=>b.zh)){mode='zh';renderStory(true)}toast('翻译完成，译文已保存到本机浏览器')}catch(e){status.textContent='已保存进度：'+done+' 段；失败原因：'+e.message;toast('翻译中断，可重新点击继续')}finally{button.disabled=false}}
 function initListeners(){
  $$('[data-tab]').forEach(x=>x.addEventListener('click',()=>showView(x.dataset.tab)));
  $('#more-trigger').addEventListener('click',()=>togglePanel('more-panel','more-trigger'));
