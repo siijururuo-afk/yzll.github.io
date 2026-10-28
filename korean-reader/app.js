@@ -8,6 +8,7 @@ const DEFAULT_ID='hanip';
 const BUILTINS={
  'hanip':{path:'hanip.json',zh:'就一口',ko:'한입만',author:'삐삐',count:142},
  'cover-eyes':{path:'cover-eyes.json',zh:'用手掌遮不住天空，但总能遮住你的眼睛吧',ko:'손바닥으로하늘을가리진못해도네눈을가릴순있겠지',author:'作者未注明',count:32},
+ 'existence-weight':{path:'existence-weight.json',zh:'存在的重量',ko:'존재의 무게',author:'넘버',count:361},
  '1836825-a':{path:'1836825-a.json',zh:'183 68 25 · 第1章',ko:'183 68 25 A',author:'켈룩',count:128,series:'183 68 25',part:'A'},
  '1836825-b':{path:'1836825-b.json',zh:'183 68 25 · 第2章',ko:'183 68 25 B',author:'켈룩',count:146,series:'183 68 25',part:'B'},
  '1836825-c':{path:'1836825-c.json',zh:'183 68 25 · 第3章',ko:'183 68 25 C',author:'켈룩',count:155,series:'183 68 25',part:'C'},
@@ -62,6 +63,13 @@ function renderStory(preserveScroll=false){
  const box=$('#paragraphs');const frag=document.createDocumentFragment();
  if(!matches.length){const el=document.createElement('div');el.className='empty';el.textContent='没有找到包含搜索词的段落';frag.appendChild(el)}
  for(const {b,i} of matches){
+  if(b.embed){
+    const figure=document.createElement('figure');figure.className='story-media';figure.dataset.index=i;
+    const iframe=document.createElement('iframe');iframe.title='原文附带的视频';iframe.loading='lazy';iframe.referrerPolicy='strict-origin-when-cross-origin';iframe.sandbox='allow-scripts allow-same-origin allow-presentation';iframe.allow='fullscreen; picture-in-picture';iframe.allowFullscreen=true;
+    if(/^[a-zA-Z0-9_-]{11}$/.test(b.embed)){iframe.src='https://www.youtube-nocookie.com/embed/'+b.embed;figure.appendChild(iframe)}
+    frag.appendChild(figure);continue;
+  }
+  if(b.heading){const el=document.createElement('h2');el.className='story-inner-heading';el.dataset.index=i;el.textContent=mode==='ko'?b.ko:b.zh||b.ko;frag.appendChild(el);continue}
   if(b.spacer){const el=document.createElement('div');el.className='scene-space';el.dataset.index=i;el.style.height=Math.min(100,14*b.spacer)+'px';frag.appendChild(el);continue}
   if(b.ko==='＊'||b.ko==='*'){const el=document.createElement('div');el.className='scene-break';el.textContent='＊';el.dataset.index=i;frag.appendChild(el);continue}
   const section=document.createElement('section');section.className='story-par '+(compared?'compared':'single')+(langs.length===3?' triple':'')+(query?' search-result':'');section.dataset.index=i;
@@ -112,7 +120,7 @@ function renderStorySelect(){
   const left=document.createElement('span');left.className='book-info';
   const title=document.createElement('strong');title.textContent=b.series?'第'+('ABCDE'.indexOf(b.part)+1)+'章 · '+b.part:b.zh;
   const sub=document.createElement('span');sub.className='book-original';sub.textContent=b.series?'183 68 25 · '+b.part:b.ko;
-  const meta=document.createElement('span');meta.className='book-meta';meta.textContent=b.author+' · '+b.count+' 段'+(b.series?' · 中文已译':'');
+  const meta=document.createElement('span');meta.className='book-meta';meta.textContent=b.author+' · '+b.count+' 段'+(b.series||id==='existence-weight'?' · 中文已译':'');
   left.append(title,sub,meta);
   const right=document.createElement('span');right.className='book-action';right.textContent=id===currentId?'继续阅读':'开始阅读';
   item.append(left,right);if(b.series)item.classList.add('series-chapter');item.addEventListener('click',()=>loadStory(id));shelf.appendChild(item);
