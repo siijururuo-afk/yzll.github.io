@@ -112,7 +112,7 @@ function renderStorySelect(){
   const left=document.createElement('span');left.className='book-info';
   const title=document.createElement('strong');title.textContent=b.series?'第'+('ABCDE'.indexOf(b.part)+1)+'章 · '+b.part:b.zh;
   const sub=document.createElement('span');sub.className='book-original';sub.textContent=b.series?'183 68 25 · '+b.part:b.ko;
-  const meta=document.createElement('span');meta.className='book-meta';meta.textContent=b.author+' · '+b.count+' 段'+(b.series?' · 韩文原文':'');
+  const meta=document.createElement('span');meta.className='book-meta';meta.textContent=b.author+' · '+b.count+' 段'+(b.series?' · 中文已译':'');
   left.append(title,sub,meta);
   const right=document.createElement('span');right.className='book-action';right.textContent=id===currentId?'继续阅读':'开始阅读';
   item.append(left,right);if(b.series)item.classList.add('series-chapter');item.addEventListener('click',()=>loadStory(id));shelf.appendChild(item);
