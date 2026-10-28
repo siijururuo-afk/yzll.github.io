@@ -5,10 +5,9 @@ const $=s=>document.querySelector(s);
 const $$=s=>Array.from(document.querySelectorAll(s));
 const STORAGE='between-lines-v2';
 const DEFAULT_ID='hanip';
-const PAGE_SIZE=20;
-let story=null, currentId=DEFAULT_ID, page=0, font=1, query='', vocabFilter='all';
+let story=null, currentId=DEFAULT_ID, font=1, query='', vocabFilter='all';
+let mode='zh', lookupEnabled=false, activeView='reader', scrollSaveTimer=null, restoringScroll=false, lastReaderY=0;
 let currentPopup=null, toastTimer=null, activeToken=null;
-let visible={ko:true,zh:true,en:true};
 const readStorage=(key,fallback)=>{try{return JSON.parse(localStorage.getItem(STORAGE+':'+key))??fallback}catch{return fallback}};
 const saveStorage=(key,val)=>{try{localStorage.setItem(STORAGE+':'+key,JSON.stringify(val))}catch{toast('本机存储空间不足，无法保存')}};
 let savedVocab=readStorage('vocab',[]);
@@ -29,14 +28,57 @@ function findKo(raw){const word=normalizeWord(raw),direct=koGloss[word];if(direc
 function findEn(raw){const w=normalizeWord(raw).toLowerCase(),variations=[w,w.replace(/'(s|re|ve|d|ll)$/,''),w.replace(/ies$/,'y'),w.replace(/ing$/,''),w.replace(/ing$/,'e'),w.replace(/ed$/,''),w.replace(/ed$/,'e'),w.replace(/s$/,'')];for(const a of variations){if(enGloss[a])return {lemma:a,mean:enGloss[a]}}return null}
 function speech(t,lang){if(!('speechSynthesis'in window)){toast('当前浏览器不支持语音朗读');return}try{speechSynthesis.cancel();const u=new SpeechSynthesisUtterance(t);u.lang=lang==='ko'?'ko-KR':'en-US';u.rate=lang==='ko'?.78:.85;u.pitch=1;speechSynthesis.speak(u)}catch{toast('当前设备无法朗读此语言')}}
 function tokenize(container,text,lang,idx){const re=lang==='ko'?/[가-힣]+/g:/[A-Za-z]+(?:['’][A-Za-z]+)*/g;let last=0,m;while((m=re.exec(text))){if(m.index>last)container.appendChild(document.createTextNode(text.slice(last,m.index)));const btn=document.createElement('button');btn.className='word';btn.type='button';btn.textContent=m[0];btn.dataset.lang=lang;btn.dataset.idx=idx;btn.dataset.word=m[0];btn.setAttribute('aria-label','查询 '+m[0]);container.appendChild(btn);last=re.lastIndex}if(last<text.length)container.appendChild(document.createTextNode(text.slice(last)))}
-function makeBlock(text,lang,idx){const div=document.createElement('div');div.className=`lang-block ${lang}-block${lang==='ko'?' source-block':''}`;const tag=document.createElement('div');tag.className='lang-tag';tag.textContent=lang==='ko'?'한국어 · ORIGINAL':lang==='zh'?'中文 · TRANSLATION':'ENGLISH · TRANSLATION';div.appendChild(tag);const content=document.createElement('div');content.className='content';if(text){if(lang==='zh')content.textContent=text;else tokenize(content,text,lang,idx)}else{content.className='empty-lang';content.textContent='尚未翻译 · 前往「设置」翻译本篇'}div.appendChild(content);if(lang!=='zh'&&text){const speakBtn=document.createElement('button');speakBtn.type='button';speakBtn.className='speak-par';speakBtn.setAttribute('aria-label','朗读本段'+(lang==='ko'?'韩语':'英语'));speakBtn.textContent='▷';speakBtn.addEventListener('click',()=>speech(text,lang));div.appendChild(speakBtn)}return div}
-function renderStory(){if(!story)return;$('#article-title').textContent=story.title.ko||story.title.zh||'未命名';$('#article-sub').textContent=[story.title.zh,story.title.en].filter(Boolean).join(' / ');$('#article-author').textContent=story.author||'我的文章';$('#article-count').textContent=`${story.blocks.length} 段`;const matches=query?story.blocks.map((b,i)=>({b,i})).filter(({b})=>['ko','zh','en'].some(k=>(b[k]||'').toLocaleLowerCase().includes(query))):story.blocks.map((b,i)=>({b,i}));const total=Math.max(1,Math.ceil(matches.length/PAGE_SIZE));page=Math.max(0,Math.min(page,total-1));let slice=matches.slice(page*PAGE_SIZE,(page+1)*PAGE_SIZE);const box=$('#paragraphs');box.replaceChildren();if(!slice.length){box.innerHTML='<div class="empty">没有找到包含搜索词的段落</div>'}for(const {b,i} of slice){if(b.ko==='＊' || b.ko==='*'){const div=document.createElement('div');div.className='para-divider';div.textContent='＊';box.appendChild(div);continue}const section=document.createElement('section');section.className='para'+(!visible.ko?' has-no-ko':' has-ko')+(!visible.ko&&visible.zh&&visible.en?' dual-target':'');section.dataset.index=i;let count=0;const num=document.createElement('div');num.className='para-num';num.textContent=String(i+1).padStart(3,'0');section.appendChild(num);if(visible.ko){section.appendChild(makeBlock(b.ko||'', 'ko',i));count++}const right=document.createElement('div');right.className='target-block';if(visible.zh){right.appendChild(makeBlock(b.zh||'', 'zh',i));count++}if(visible.en){right.appendChild(makeBlock(b.en||'', 'en',i));count++}section.appendChild(right);if(count===1)section.classList.add('single');box.appendChild(section)}const from=matches.length?page*PAGE_SIZE+1:0,to=Math.min(matches.length,(page+1)*PAGE_SIZE);$('#page-summary').textContent=`第 ${from}—${to} 段 / 共 ${matches.length} 段`;$('#reading-progress').textContent=total>1?`阅读进度 ${Math.round(100*(page+1)/total)}%`:'';$('#page-number').textContent=`${page+1} / ${total}`;$('#prev-page').disabled=page===0;$('#next-page').disabled=page>=total-1;saveStorage('position',{id:currentId,page});}
-function setPage(n){page=n;renderStory();window.scrollTo({top:0,behavior:'smooth'})}
-function showView(which){$$('.view').forEach(v=>v.classList.add('hidden'));$('#'+which+'-view').classList.remove('hidden');$$('[data-tab]').forEach(b=>b.classList.toggle('active',b.dataset.tab===which));hidePopup();if(which==='vocab')renderVocab();if(which==='import')renderStorySelect();window.scrollTo({top:0,behavior:'smooth'})}
+function makeColumn(text,lang,idx,showCaption){
+ const el=document.createElement('div');el.className='text-column translation';el.dataset.lang=lang;el.lang=lang==='zh'?'zh-CN':lang==='ko'?'ko':'en';
+ if(showCaption){const caption=document.createElement('div');caption.className='lang-caption';caption.textContent=lang==='ko'?'한국어 · 原文':lang==='en'?'English':'中文';el.appendChild(caption)}
+ const p=document.createElement('p');
+ if(!text){p.className='empty-lang';p.textContent='尚无译文，可到「更多 → 翻译设置」翻译';}
+ else if(lookupEnabled&&(lang==='ko'||lang==='en'))tokenize(p,text,lang,idx);
+ else p.textContent=text;
+ el.appendChild(p);return el;
+}
+function displayedLangs(){return mode==='ko-zh'?['ko','zh']:mode==='en-zh'?['en','zh']:mode==='all'?['ko','zh','en']:[mode]}
+function captureAnchor(){if(activeView!=='reader')return null;const els=$$('#paragraphs > [data-index]');for(const el of els){const r=el.getBoundingClientRect();if(r.bottom>Math.min(window.innerHeight*.34,180))return {i:Number(el.dataset.index),y:r.top}}return null}
+function restoreAnchor(a){if(!a)return;const el=$(`#paragraphs > [data-index="${a.i}"]`);if(el)window.scrollBy(0,el.getBoundingClientRect().top-a.y)}
+function renderStory(preserveScroll=false){
+ if(!story)return;
+ const anchor=preserveScroll?captureAnchor():null;
+ $('#article-title').textContent=story.title.zh||story.title.ko||story.title.en||'未命名';
+ $('#article-sub').textContent=story.title.ko||'';
+ $('#article-author').textContent=story.author||'我的文章';
+ $('#article-count').textContent=`${story.blocks.length} 段`;
+ const langs=displayedLangs(),compared=langs.length>1;
+ const matches=query?story.blocks.map((b,i)=>({b,i})).filter(({b})=>['ko','zh','en'].some(k=>(b[k]||'').toLocaleLowerCase().includes(query))):story.blocks.map((b,i)=>({b,i}));
+ const box=$('#paragraphs');const frag=document.createDocumentFragment();
+ if(!matches.length){const el=document.createElement('div');el.className='empty';el.textContent='没有找到包含搜索词的段落';frag.appendChild(el)}
+ for(const {b,i} of matches){
+  if(b.ko==='＊'||b.ko==='*'){const el=document.createElement('div');el.className='scene-break';el.textContent='＊';el.dataset.index=i;frag.appendChild(el);continue}
+  const section=document.createElement('section');section.className='story-par '+(compared?'compared':'single')+(langs.length===3?' triple':'')+(query?' search-result':'');section.dataset.index=i;
+  for(const lang of langs)section.appendChild(makeColumn(b[lang]||'',lang,i,compared));
+  frag.appendChild(section)
+ }
+ box.replaceChildren(frag);
+ $$('#compare-panel [data-mode]').forEach(el=>{const selected=el.dataset.mode===mode;el.classList.toggle('selected',selected);el.setAttribute('aria-pressed',String(selected))});
+ const active=compared;$('#compare-trigger').classList.toggle('active',active);$('#compare-trigger').firstChild.textContent=active?'退出对照 ':'对照阅读 ';
+ if(anchor)restoreAnchor(anchor);
+}
+function closeMenus(){for(const id of ['compare-panel','type-panel','more-panel'])$('#'+id).classList.add('hidden');$('#compare-trigger').setAttribute('aria-expanded','false');$('#type-trigger').setAttribute('aria-expanded','false');$('#more-trigger').setAttribute('aria-expanded','false')}
+function togglePanel(panel,trigger){const open=$('#'+panel).classList.contains('hidden');closeMenus();if(open){$('#'+panel).classList.remove('hidden');$('#'+trigger).setAttribute('aria-expanded','true')}}
+function showView(which){
+ const previous=activeView;if(previous==='reader'&&which!=='reader'){lastReaderY=window.scrollY;saveStorage('scroll:'+currentId,lastReaderY)}
+ activeView=which;$$('.view').forEach(v=>v.classList.toggle('hidden',v.id!==which+'-view'));closeMenus();hidePopup();
+ if(which==='vocab')renderVocab();if(which==='import')renderStorySelect();window.scrollTo({top:which==='reader'&&previous!=='reader'?lastReaderY:0,behavior:'instant'})
+}
 const storyKey=id=>'story-'+id;
 function customStories(){return readStorage('custom-ids',[])}
 function renderStorySelect(){const select=$('#story-select');select.replaceChildren();const option=(id,title)=>{const o=document.createElement('option');o.value=id;o.textContent=title;select.appendChild(o)};option(DEFAULT_ID,'한입만 · 就一口');for(const x of customStories())option(x.id,x.title);select.value=currentId}
-async function loadStory(id,go=true){try{let data=id===DEFAULT_ID?await (await fetch('./stories/hanip.json')).json():readStorage(storyKey(id),null);if(!data||!Array.isArray(data.blocks))throw Error('文章数据不存在');story=data;currentId=id;query='';$('#search-input').value='';const pos=readStorage('position',null);page=pos?.id===id?pos.page:0;renderStory();if(go)showView('reader')}catch(e){toast('无法打开文章：'+e.message)}}
+async function loadStory(id,go=true){try{
+ let data=id===DEFAULT_ID?await (await fetch('./stories/hanip.json')).json():readStorage(storyKey(id),null);
+ if(!data||!Array.isArray(data.blocks))throw Error('文章数据不存在');
+ restoringScroll=true;story=data;currentId=id;mode=(id===DEFAULT_ID||data.blocks.some(b=>b.zh))?'zh':'ko';query='';$('#search-input').value='';
+ lastReaderY=Number(readStorage('scroll:'+id,0))||0;renderStory();if(go)showView('reader');
+ requestAnimationFrame(()=>{try{window.scrollTo(0,lastReaderY)}catch{};setTimeout(()=>{restoringScroll=false},160)});
+ }catch(e){toast('无法打开文章：'+e.message)}}
 function extractParas(s,fileName){if(/\.html?$/i.test(fileName)){const doc=new DOMParser().parseFromString(s,'text/html');const main=doc.querySelector('article')||doc.querySelector('main')||doc.body;main.querySelectorAll('script,style,nav,header,footer,aside').forEach(el=>el.remove());const p=Array.from(main.querySelectorAll('p')).map(el=>el.textContent.trim()).filter(Boolean);if(p.length)return p;return main.textContent.split(/\n\s*\n/).map(x=>x.trim()).filter(Boolean)}return s.trim().split(/\n\s*\n/).map(x=>x.replace(/\s*\n\s*/g,' ').trim()).filter(Boolean)}
 async function saveImport(){const file=$('#upload-file').files[0],text=$('#paste-text').value.trim();if(!file&&!text){toast('请先选择文件或粘贴韩语原文');return}const html=file?await file.text():text;const paras=extractParas(html,file?.name||'paste.txt');if(!paras.length){toast('没有提取到文章段落');return}const name=$('#new-title').value.trim()||file?.name.replace(/\.[^.]+$/,'')||'我的文章';const id='custom-'+Date.now().toString(36);const obj={id,title:{ko:name,zh:'',en:''},author:'',blocks:paras.map(ko=>({ko,zh:'',en:''}))};saveStorage(storyKey(id),obj);const ids=customStories();ids.push({id,title:name});saveStorage('custom-ids',ids);$('#import-feedback').textContent=`已导入 ${paras.length} 段`;$('#paste-text').value='';$('#upload-file').value='';$('#new-title').value='';await loadStory(id);toast(`已导入 ${paras.length} 段，可在「设置」翻译`)}
 function updateVocabCount(){$('#vocab-count').textContent=savedVocab.length}
@@ -55,7 +97,33 @@ if(lang==='en'){try{const response=await fetch('https://api.dictionaryapi.dev/ap
 }
 function extractJSON(s){let text=s.trim().replace(/^```(?:json)?\s*/i,'').replace(/```\s*$/,'').trim();try{return JSON.parse(text)}catch{const a=text.indexOf('{'),b=text.lastIndexOf('}');if(a>=0&&b>a)return JSON.parse(text.slice(a,b+1));throw Error('模型没有返回有效 JSON')}}
 async function doTranslate(){if(!story){toast('先导入一篇文章');return}const key=$('#api-key').value.trim(),endpoint=$('#api-endpoint').value.trim(),model=$('#api-model').value.trim();if(!key||!endpoint||!model){toast('请先填入 API 地址、模型名称与密钥');return}if(!/^https:\/\//.test(endpoint)){toast('API 地址必须是 HTTPS');return}const pending=story.blocks.map((b,i)=>({b,i})).filter(x=>x.b.ko!=='＊'&&(!x.b.en||!x.b.zh));if(!pending.length){toast('这篇文章已经有完整的中英译文');return}const button=$('#translate-story'),status=$('#translation-status');button.disabled=true;let done=0;try{for(let offset=0;offset<pending.length;offset+=6){const chunk=pending.slice(offset,offset+6);status.textContent=`翻译中 ${done} / ${pending.length} 段…`;const body={model,temperature:0.2,messages:[{role:'system',content:'You are a professional Korean fiction translator. Translate Korean prose faithfully into natural Chinese (zh) and English (en), retaining character names as 曹承衍/金宇硕 in Chinese and Cho Seungyeon/Kim Wooseok in English; maintain dialogue, profanity, style and content. Do not censor, summarize, omit or change paragraphs. Reply ONLY in JSON of the shape {"translations":[{"zh":"...","en":"..."}]}, same number and order as inputs.'},{role:'user',content:JSON.stringify(chunk.map(x=>x.b.ko))}],stream:false};const resp=await fetch(endpoint,{method:'POST',headers:{'Content-Type':'application/json',Authorization:'Bearer '+key},body:JSON.stringify(body)});if(!resp.ok){const detail=await resp.text();throw Error('API HTTP '+resp.status+': '+detail.slice(0,120))}const result=await resp.json();const raw=result?.choices?.[0]?.message?.content||'';const parsed=extractJSON(raw),out=parsed.translations;if(!Array.isArray(out)||out.length!==chunk.length)throw Error('译文段落数量与原文不一致，翻译已暂停');for(let j=0;j<chunk.length;j++){const z=out[j];if(!z||typeof z.zh!=='string'||typeof z.en!=='string')throw Error('译文格式不符合预期');chunk[j].b.zh=chunk[j].b.zh||z.zh;chunk[j].b.en=chunk[j].b.en||z.en}done+=chunk.length;if(currentId!==DEFAULT_ID)saveStorage(storyKey(currentId),story);renderStory()}status.textContent=`完成 ${done} 段的中英翻译`;toast('翻译完成，已保存到浏览器')}catch(e){status.textContent='已保存进度：'+done+' 段；失败原因：'+e.message;toast('翻译中断，可重新点击继续')}finally{button.disabled=false}}
-function initListeners(){$$('[data-tab]').forEach(x=>x.addEventListener('click',()=>showView(x.dataset.tab)));$$('.lang-controls input').forEach(el=>el.addEventListener('change',()=>{const state={ko:$('#show-ko').checked,zh:$('#show-zh').checked,en:$('#show-en').checked};if(!Object.values(state).some(Boolean)){el.checked=true;toast('至少保留一种语言');return}visible=state;saveStorage('visible',visible);renderStory()}));$('#prev-page').addEventListener('click',()=>setPage(page-1));$('#next-page').addEventListener('click',()=>setPage(page+1));$('#search-input').addEventListener('input',e=>{query=e.target.value.trim().toLocaleLowerCase();page=0;renderStory()});$('#font-plus').addEventListener('click',()=>{font=Math.min(1.5,+(font+.1).toFixed(2));document.documentElement.style.setProperty('--font-scale',font);saveStorage('font',font)});$('#font-minus').addEventListener('click',()=>{font=Math.max(.8,+(font-.1).toFixed(2));document.documentElement.style.setProperty('--font-scale',font);saveStorage('font',font)});$('#paragraphs').addEventListener('click',e=>{const btn=e.target.closest('.word');if(btn)lookupWord(btn)});$('#pop-close').addEventListener('click',hidePopup);$('#pop-save').addEventListener('click',saveWord);$('#pop-speak').addEventListener('click',()=>{if(currentPopup)speech(currentPopup.word,currentPopup.lang)});document.addEventListener('pointerdown',e=>{if(!$('#word-pop').classList.contains('hidden')&&!e.target.closest('#word-pop')&&!e.target.closest('.word'))hidePopup()});document.addEventListener('keydown',e=>{if(e.key==='Escape')hidePopup()});$('#save-import').addEventListener('click',saveImport);$('#open-story').addEventListener('click',()=>loadStory($('#story-select').value));$('#delete-story').addEventListener('click',()=>{const id=$('#story-select').value;if(id===DEFAULT_ID){toast('内置原文不可删除');return}if(!confirm('确定删除这篇导入文章及其本地译文吗？'))return;localStorage.removeItem(STORAGE+':'+storyKey(id));saveStorage('custom-ids',customStories().filter(x=>x.id!==id));loadStory(DEFAULT_ID)});$('#translate-story').addEventListener('click',doTranslate);$$('.pill-btn').forEach(b=>b.addEventListener('click',()=>{vocabFilter=b.id==='vocab-korean'?'ko':b.id==='vocab-english'?'en':'all';$$('.pill-btn').forEach(x=>x.classList.toggle('selected',x===b));renderVocab()}));$('#export-vocab').addEventListener('click',()=>saveFile('生词本.txt',savedVocab.map(x=>`${x.lang.toUpperCase()} · ${x.word}\n释义：${x.meaning}\n原句：${x.example}\n`).join('\n')))}
-async function init(){visible={...visible,...readStorage('visible',{})};for(const k of Object.keys(visible))$('#show-'+k).checked=visible[k];font=readStorage('font',1);document.documentElement.style.setProperty('--font-scale',font);updateVocabCount();initListeners();await loadStory(DEFAULT_ID,false);renderStorySelect()}
+function initListeners(){
+ $$('[data-tab]').forEach(x=>x.addEventListener('click',()=>showView(x.dataset.tab)));
+ $('#more-trigger').addEventListener('click',()=>togglePanel('more-panel','more-trigger'));
+ $('#compare-trigger').addEventListener('click',()=>{
+  if(mode!=='zh'&&displayedLangs().length>1){mode='zh';closeMenus();renderStory(true)}
+  else togglePanel('compare-panel','compare-trigger');
+ });
+ $('#type-trigger').addEventListener('click',()=>togglePanel('type-panel','type-trigger'));
+ $$('#compare-panel [data-mode]').forEach(el=>el.addEventListener('click',()=>{mode=el.dataset.mode;closeMenus();renderStory(true)}));
+ $('#search-trigger').addEventListener('click',()=>{closeMenus();$('#search-panel').classList.remove('hidden');$('#search-input').focus();showView('reader')});
+ $('#search-clear').addEventListener('click',()=>{query='';$('#search-input').value='';$('#search-panel').classList.add('hidden');renderStory(true)});
+ $('#search-input').addEventListener('input',e=>{query=e.target.value.trim().toLocaleLowerCase();renderStory(false);window.scrollTo(0,0)});
+ $('#font-plus').addEventListener('click',()=>{font=Math.min(1.5,+(font+.1).toFixed(2));document.documentElement.style.setProperty('--scale',font);saveStorage('font',font)});
+ $('#font-minus').addEventListener('click',()=>{font=Math.max(.8,+(font-.1).toFixed(2));document.documentElement.style.setProperty('--scale',font);saveStorage('font',font)});
+ $('#lookup-toggle').addEventListener('change',e=>{lookupEnabled=e.target.checked;renderStory(true);hidePopup()});
+ $('#paragraphs').addEventListener('click',e=>{const btn=e.target.closest('.word');if(btn&&lookupEnabled)lookupWord(btn)});
+ $('#pop-close').addEventListener('click',hidePopup);$('#pop-save').addEventListener('click',saveWord);$('#pop-speak').addEventListener('click',()=>{if(currentPopup)speech(currentPopup.word,currentPopup.lang)});
+ document.addEventListener('pointerdown',e=>{if(!$('#word-pop').classList.contains('hidden')&&!e.target.closest('#word-pop')&&!e.target.closest('.word'))hidePopup();if(!e.target.closest('.site-actions')&&!e.target.closest('.article-controls')&&!e.target.closest('.compare-panel')&&!e.target.closest('.type-panel'))closeMenus()});
+ document.addEventListener('keydown',e=>{if(e.key==='Escape'){hidePopup();closeMenus()}});
+ window.addEventListener('scroll',()=>{if(activeView!=='reader'||query||restoringScroll)return;clearTimeout(scrollSaveTimer);scrollSaveTimer=setTimeout(()=>saveStorage('scroll:'+currentId,Math.round(window.scrollY)),200)},{passive:true});
+ window.addEventListener('pagehide',()=>{if(activeView==='reader'&&!query)saveStorage('scroll:'+currentId,Math.round(window.scrollY))});
+ $('#save-import').addEventListener('click',saveImport);$('#open-story').addEventListener('click',()=>loadStory($('#story-select').value));
+ $('#delete-story').addEventListener('click',()=>{const id=$('#story-select').value;if(id===DEFAULT_ID){toast('内置原文不可删除');return}if(!confirm('确定删除这篇导入文章及其本地译文吗？'))return;localStorage.removeItem(STORAGE+':'+storyKey(id));saveStorage('custom-ids',customStories().filter(x=>x.id!==id));loadStory(DEFAULT_ID)});
+ $('#translate-story').addEventListener('click',doTranslate);
+ $$('.pill-btn').forEach(b=>b.addEventListener('click',()=>{vocabFilter=b.id==='vocab-korean'?'ko':b.id==='vocab-english'?'en':'all';$$('.pill-btn').forEach(x=>x.classList.toggle('selected',x===b));renderVocab()}));
+ $('#export-vocab').addEventListener('click',()=>saveFile('生词本.txt',savedVocab.map(x=>`${x.lang.toUpperCase()} · ${x.word}\n释义：${x.meaning}\n原句：${x.example}\n`).join('\n')));
+}
+async function init(){font=readStorage('font',1);document.documentElement.style.setProperty('--scale',font);updateVocabCount();initListeners();await loadStory(DEFAULT_ID,false);renderStorySelect()}
 init();
 })();
