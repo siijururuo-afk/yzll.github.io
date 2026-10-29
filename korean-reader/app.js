@@ -63,7 +63,16 @@ const enGloss={bite:'一口；咬',muffin:'玛芬蛋糕',wrapper:'包装纸',fam
 function toast(msg){const el=$('#toast');el.textContent=msg;el.classList.remove('hidden');clearTimeout(toastTimer);toastTimer=setTimeout(()=>el.classList.add('hidden'),3200)}
 function normalizeWord(word){return word.replace(/^[^\p{L}]+|[^\p{L}]+$/gu,'').trim()}
 function findKo(raw){const word=normalizeWord(raw),direct=koGloss[word];if(direct)return {data:direct,lemma:word};const commonSuffix=['으로부터','에서부터','한테서','이라고','이라고요','에게서','에게','한테','으로','처럼','보다','까지','부터','라도','이라','라고','하고','이랑','이나','만큼','에서','에는','으로','이야','이야기','한','이','가','은','는','을','를','도','의','에','만','랑','과','와','로','야','아','요','고','서','지','다','며','면'];for(const suffix of commonSuffix){if(word.endsWith(suffix)&&word.length>suffix.length+1){const stem=word.slice(0,-suffix.length);if(koGloss[stem])return {data:koGloss[stem],lemma:stem,suffix};}}let matches=Object.keys(koGloss).filter(k=>k.length>=2&&word.startsWith(k)&&word.length-k.length<=5).sort((a,b)=>b.length-a.length);return matches.length?{data:koGloss[matches[0]],lemma:matches[0],approx:true}:null}
-function findEn(raw){const w=normalizeWord(raw).toLowerCase(),variations=[w,w.replace(/'(s|re|ve|d|ll)$/,''),w.replace(/ies$/,'y'),w.replace(/ing$/,''),w.replace(/ing$/,'e'),w.replace(/ed$/,''),w.replace(/ed$/,'e'),w.replace(/s$/,'')];for(const a of variations){if(enGloss[a])return {lemma:a,mean:enGloss[a]}}return null}
+function findEn(raw){
+ const w=normalizeWord(raw).toLowerCase().replace(/’/g,"'");
+ const variations=[w,w.replace(/'(s|re|ve|d|ll)$/,''),w.replace(/ies$/,'y'),w.replace(/ves$/,'f'),w.replace(/ing$/,''),w.replace(/ing$/,'e'),w.replace(/(\w)\1ing$/,'$1'),w.replace(/ed$/,''),w.replace(/ed$/,'e'),w.replace(/(\w)\1ed$/,'$1'),w.replace(/es$/,''),w.replace(/s$/,'')];
+ const core=window.EN_ZH_CORE||{};
+ for(const lemma of new Set(variations)){
+  if(enGloss[lemma])return {lemma,mean:enGloss[lemma],pron:lemma==='complete'?'/kəmˈpliːt/':''};
+  if(core[lemma])return {lemma,mean:core[lemma],pron:lemma==='complete'?'/kəmˈpliːt/':''};
+ }
+ return null
+}
 function speech(t,lang){if(!('speechSynthesis'in window)){toast('当前浏览器不支持语音朗读');return}try{speechSynthesis.cancel();const u=new SpeechSynthesisUtterance(t);u.lang=lang==='ko'?'ko-KR':'en-US';u.rate=lang==='ko'?.78:.85;u.pitch=1;speechSynthesis.speak(u)}catch{toast('当前设备无法朗读此语言')}}
 function tokenize(container,text,lang,idx){const re=lang==='ko'?/[가-힣]+/g:/[A-Za-z]+(?:['’][A-Za-z]+)*/g;let last=0,m;while((m=re.exec(text))){if(m.index>last)container.appendChild(document.createTextNode(text.slice(last,m.index)));const btn=document.createElement('button');btn.className='word';btn.type='button';btn.textContent=m[0];btn.dataset.lang=lang;btn.dataset.idx=idx;btn.dataset.word=m[0];btn.setAttribute('aria-label','查询 '+m[0]);container.appendChild(btn);last=re.lastIndex}if(last<text.length)container.appendChild(document.createTextNode(text.slice(last)))}
 function makeColumn(text,lang,idx,showCaption){
@@ -202,28 +211,29 @@ function positionPopup(btn){const pop=$('#word-pop'),r=btn.getBoundingClientRect
 function displayPopup(){if(!currentPopup)return;const p=currentPopup;$('#pop-lang').textContent=p.lang==='ko'?'한국어 · KOREAN':'ENGLISH · VOCABULARY';$('#pop-word').textContent=p.word;$('#pop-pron').textContent=p.pron||'';$('#pop-meaning').textContent=p.meaning||'正在查询释义…';$('#pop-grammar').textContent=p.grammar||'';$('#pop-example').textContent=p.example||'';$('#pop-context-zh').textContent=p.chinese||'';const saved=savedVocab.some(x=>x.key===p.lang+':'+p.word.toLowerCase());$('#pop-save').textContent=saved?'✓ 已收藏':'＋ 收藏生词';$('#pop-dict').href=p.lang==='ko'?'https://ko.dict.naver.com/#/search?query='+encodeURIComponent(p.word):'https://dict.youdao.com/result?word='+encodeURIComponent(p.word.toLowerCase())+'&lang=en'}
 async function lookupWord(btn){const word=btn.dataset.word,lang=btn.dataset.lang,idx=+btn.dataset.idx,b=story.blocks[idx];hidePopup();activeToken=btn;btn.classList.add('active');const p={word,lang,meaning:'',pron:'',grammar:'',example:b[lang]||'',chinese:b.zh||''};currentPopup=p;
 if(lang==='ko'){const item=findKo(word);if(item){p.meaning=item.data[0]+' · '+item.data[1];p.grammar=item.data[2]+(item.lemma!==word?' · 词干/词条：'+item.lemma:'')+(item.approx?'（按前缀推测，须核对原词变化）':'')}else{p.meaning='本地词库未收录，正在尝试在线查词…';p.grammar='韩语助词和词尾可能附着在词干上，直接逐词翻译需核对上下文。'}}
-else{const item=findEn(word);if(item){p.meaning=item.mean;p.grammar=item.lemma!==word?'原形可能是：'+item.lemma:''}else p.meaning='正在查询在线英语词典…'}
+else{const item=findEn(word);if(item){p.meaning=item.mean;p.pron=item.pron||'';p.grammar=item.lemma!==word.toLowerCase()?'原形可能是：'+item.lemma:''}else p.meaning='本地词库未收录，正在查询中文意思…'}
 displayPopup();positionPopup(btn);
 if(lang==='ko'&&!findKo(word)){try{const response=await fetch('https://api.mymemory.translated.net/get?q='+encodeURIComponent(word)+'&langpair=ko%7Czh-CN');if(!response.ok)throw Error();const json=await response.json();const translated=json?.responseData?.translatedText;if(!translated||translated.toLowerCase().includes('mymemory')||translated===word)throw Error();p.meaning=translated;p.grammar='在线机器翻译（单词形式可能含词尾），请结合原句判断';}catch{p.meaning='暂未收录准确释义；请点击下方「词典」查询'}if(currentPopup===p){displayPopup();positionPopup(btn)}}
 if(lang==='en'){
  const key=word.toLowerCase();
  if(wordResultCache.has(key)){Object.assign(p,wordResultCache.get(key));if(currentPopup===p){displayPopup();positionPopup(btn)}return}
- const result={meaning:p.meaning||'',pron:'',grammar:p.grammar||''};
+ const result={meaning:p.meaning||'',pron:p.pron||'',grammar:p.grammar||''};
  const dictionary=(async()=>{try{
   const response=await fetch('https://api.dictionaryapi.dev/api/v2/entries/en/'+encodeURIComponent(key));
   if(!response.ok)throw Error('dictionary unavailable');
   const json=await response.json();const item=json?.[0];if(!item)return;
-  result.pron=item.phonetic||item.phonetics?.find(v=>v.text)?.text||'';
-  const defs=(item.meanings||[]).slice(0,2).map(m=>m.partOfSpeech+': '+(m.definitions?.[0]?.definition||'')).filter(Boolean);
-  result.grammar=defs.join(' · ');if(currentPopup===p){Object.assign(p,result);displayPopup();positionPopup(btn)}
+  result.pron=item.phonetic||item.phonetics?.find(v=>v.text)?.text||result.pron||'';
+  const pos={noun:'名词',verb:'动词',adjective:'形容词',adverb:'副词',pronoun:'代词',preposition:'介词',conjunction:'连词',interjection:'感叹词',determiner:'限定词',numeral:'数词'};
+  const types=[...new Set((item.meanings||[]).map(m=>pos[m.partOfSpeech]||m.partOfSpeech).filter(Boolean))];
+  result.grammar=(types.length?'词性：'+types.join('、'):'')+(p.grammar?' · '+p.grammar:'');if(currentPopup===p){Object.assign(p,result);displayPopup();positionPopup(btn)}
  }catch{}})();
- const translation=(async()=>{if(result.meaning)return;try{
-  const response=await fetch('https://api.mymemory.translated.net/get?q='+encodeURIComponent(key)+'&langpair=en%7Czh-CN');
+ const translation=(async()=>{if(result.meaning)return;const controller=new AbortController(),timer=setTimeout(()=>controller.abort(),4500);try{
+  const response=await fetch('https://api.mymemory.translated.net/get?q='+encodeURIComponent(key)+'&langpair=en%7Czh-CN',{signal:controller.signal});
   if(!response.ok)throw Error('translation unavailable');
   const json=await response.json();const zh=json?.responseData?.translatedText;
   if(!zh||zh.toLowerCase()===key||/mymemory|too many requests|quota/i.test(zh))throw Error('no translation');
   result.meaning=zh+'（在线参考，结合句子判断词义）';
- }catch{result.meaning='暂无可靠中文释义，请点击「词典」查询'}
+ }catch{result.meaning='暂时无法获取中文意思，请点击「词典」继续查询'}finally{clearTimeout(timer)}
  if(currentPopup===p){Object.assign(p,result);displayPopup();positionPopup(btn)}
  })();
  await Promise.allSettled([dictionary,translation]);wordResultCache.set(key,result);if(currentPopup===p){Object.assign(p,result);displayPopup();positionPopup(btn)}
