@@ -100,7 +100,7 @@ function renderStory(preserveScroll=false){
  const box=$('#paragraphs');const frag=document.createDocumentFragment();let originalOnlyShown=false;
  if(!matches.length){const el=document.createElement('div');el.className='empty';el.textContent='没有找到包含搜索词的段落';frag.appendChild(el)}
  for(const {b,i} of matches){
-  if(b.koOnly && !originalOnlyShown){const note=document.createElement('div');note.className='omission-inline';note.textContent='以下46段暂保留韩文原文。';frag.appendChild(note);originalOnlyShown=true;}
+  if(b.koOnly && !originalOnlyShown){const note=document.createElement('div');note.className='omission-inline';note.textContent='本段保留韩文原文；其余已翻译的对话按正常阅读模式显示。';frag.appendChild(note);originalOnlyShown=true;}
   if(b.image&&/^data:image\/(png|jpeg|webp|gif);base64,/.test(b.image)){
    const figure=document.createElement('figure');figure.className='story-media';figure.dataset.index=i;
    const img=document.createElement('img');img.src=b.image;img.alt='原文插图';img.loading='lazy';img.style.maxWidth='100%';figure.appendChild(img);frag.appendChild(figure);continue;
@@ -127,7 +127,7 @@ function renderStory(preserveScroll=false){
  const readable=story.blocks.filter(b=>b.ko&&!b.spacer&&b.ko!=='＊'&&b.ko!=='*');
  const hasZh=readable.every(b=>b.koOnly||Boolean(b.zh)),hasEn=readable.every(b=>b.koOnly||Boolean(b.en));
  $$('#compare-panel [data-mode]').forEach(el=>{const m=el.dataset.mode;const usable=(m==='ko'||((!m.includes('zh')||hasZh)&&(!m.includes('en')||hasEn)));el.disabled=!usable;el.title=usable?'':'该语言译文尚未补全，请先在「更多 → 翻译设置」翻译';const selected=m===mode;el.classList.toggle('selected',selected);el.setAttribute('aria-pressed',String(selected))});
- const availability=$('#translation-availability');if(availability){availability.classList.toggle('hidden',hasZh&&hasEn&&story.translationStatus!=='partial-ko-original');availability.textContent=story.translationStatus==='partial-ko-original'?'本章有46段保留韩文原文，其余部分可正常切换对照。':hasZh?'本篇英文译文尚未补全。可到「更多 → 翻译设置」翻译。':'本篇暂未备齐中文和英文译文，因此默认阅读韩文原文。可到「更多 → 翻译设置」翻译。'}
+ const availability=$('#translation-availability');if(availability){availability.classList.toggle('hidden',hasZh&&hasEn&&story.translationStatus!=='partial-ko-original');availability.textContent=story.translationStatus==='partial-ko-original'?`本章有${story.originalOnlyParagraphs||story.blocks.filter(b=>b.koOnly).length}段保留韩文原文，其余部分可正常切换对照。`:hasZh?'本篇英文译文尚未补全。可到「更多 → 翻译设置」翻译。':'本篇暂未备齐中文和英文译文，因此默认阅读韩文原文。可到「更多 → 翻译设置」翻译。'}
  renderChapterNav();
  const active=compared;
  const compareBtn=$('#compare-trigger');compareBtn.classList.toggle('active',active);compareBtn.setAttribute('aria-pressed',String(active));compareBtn.textContent=active?(mode==='ko-zh'?'韩中对照：开':mode==='all'?'三语对照：开':'英中对照：开'):'英中对照：关';
@@ -173,7 +173,7 @@ function renderStorySelect(){
   const title=document.createElement('strong');title.textContent=b.series?(String(b.part||'').startsWith('+')?'番外 '+b.part:'第'+(b.index??'ABCDE'.indexOf(b.part)+1)+'章 · '+b.part):b.zh;
   const sub=document.createElement('span');sub.className='book-original';sub.textContent=b.series?b.ko:b.ko;
   const meta=document.createElement('span');meta.className='book-meta';
-  meta.textContent=b.author+' · '+b.count+' 段 · '+(b.translation==='ko-only'?'韩文原文（中英文未译）':b.translation==='partial-ko-original'?'三语可读 · 46段保留韩文':b.translation==='complete'||b.series==='183 68 25'||id==='existence-weight'||id==='hanip'||id==='cover-eyes'?'三语已译':'按原文阅读');
+  meta.textContent=b.author+' · '+b.count+' 段 · '+(b.translation==='ko-only'?'韩文原文（中英文未译）':b.translation==='partial-ko-original'?'三语可读 · 部分段落保留韩文':b.translation==='complete'||b.series==='183 68 25'||id==='existence-weight'||id==='hanip'||id==='cover-eyes'?'三语已译':'按原文阅读');
   left.append(title,sub,meta);const right=document.createElement('span');right.className='book-action';right.textContent=id===currentId?'继续阅读':'开始阅读';
   item.append(left,right);if(b.series)item.classList.add('series-chapter');item.addEventListener('click',()=>loadStory(id));shelf.appendChild(item);
  }
