@@ -6,7 +6,7 @@
 <meta name="theme-color" content="#fff">
 <meta name="description" content="读小说，必要时才打开韩中英对照。">
 <title>문장 사이 · 阅读</title>
-<link rel="stylesheet" href="./style.css?v=20261028-library">
+<link rel="stylesheet" href="./style.css?v=20261029-inline-comparison">
 </head>
 <body>
 <header class="site-header">
@@ -30,11 +30,13 @@
       <div class="byline"><span id="article-author">삐삐</span> <span class="byline-sep">·</span> <span id="article-sub">한입만</span></div>
     </div>
     <div class="article-controls">
-      <button type="button" id="compare-trigger" class="control-link" aria-expanded="false" aria-controls="compare-panel">对照阅读 <span aria-hidden="true">⌄</span></button>
+      <button type="button" id="compare-trigger" class="control-link" aria-pressed="false" title="一键切换逐段英文＋中文对照">英中对照：关</button>
+      <button type="button" id="mode-trigger" class="control-link" aria-expanded="false" aria-controls="compare-panel">语言 <span aria-hidden="true">⌄</span></button>
+      <button type="button" id="lookup-quick" class="control-link" aria-pressed="true" title="打开后点击英文单词查看中文释义、IPA和例句">点词：开</button>
       <button type="button" id="type-trigger" class="control-link type-btn" aria-expanded="false" aria-controls="type-panel">Aa</button>
     </div>
     <div id="compare-panel" class="compare-panel hidden" aria-label="对照显示选项">
-      <span class="panel-intro">阅读方式</span>
+      <span class="panel-intro">选择语言 · 对照按原文段落上下排列（无需左右滑动）</span>
       <div class="mode-choices" role="group" aria-label="选择阅读语言">
         <button type="button" data-mode="zh" class="selected">只看中文</button>
         <button type="button" data-mode="ko">只看韩文</button>
@@ -49,7 +51,7 @@
       <span class="panel-intro">文字大小</span>
       <button id="font-minus" type="button" aria-label="缩小字体">A−</button>
       <button id="font-plus" type="button" aria-label="放大字体">A＋</button>
-      <label for="lookup-toggle" class="lookup-label"><input type="checkbox" id="lookup-toggle"> 开启点词注释</label>
+      <label for="lookup-toggle" class="lookup-label"><input type="checkbox" id="lookup-toggle"> 开启点词释义（含英文 IPA）</label>
     </div>
     <div id="search-panel" class="search-panel hidden"><input id="search-input" type="search" placeholder="搜索当前文章…" aria-label="搜索当前文章"><button id="search-clear" type="button">关闭</button></div>
     <article id="paragraphs" class="story-body" aria-label="文章正文"></article>
@@ -99,6 +101,6 @@
   <div class="pop-actions"><button id="pop-speak" class="border-btn">▷ 朗读</button><button id="pop-save" class="primary-btn">＋ 收藏生词</button><a id="pop-dict" href="#" target="_blank" rel="noopener noreferrer">词典 ↗</a></div>
 </div>
 <div id="toast" class="toast hidden" role="status"></div>
-<script src="./app.js?v=20261028-cgrade-all-translated" defer></script>
+<script src="./app.js?v=20261029-inline-comparison" defer></script>
 </body>
 </html>

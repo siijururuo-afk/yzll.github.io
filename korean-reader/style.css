@@ -46,3 +46,29 @@
 .mode-choices button:disabled{color:#c2c2c2;border-color:#eee;cursor:not-allowed;background:#fff}.translation-hint{font-size:12px;color:#999;line-height:1.8;margin:15px 0 0}
 
 .story-media{max-width:720px;width:100%;margin:25px auto 42px}.story-media iframe{display:block;width:100%;aspect-ratio:16/9;height:auto;border:0;background:#f5f5f5}.story-inner-heading{font-size:22px;font-weight:600;line-height:1.5;margin:66px 0 25px}.story-body .story-inner-heading+section{margin-top:0}@media(max-width:650px){.story-media{margin:22px 0 34px}.story-inner-heading{font-size:21px;margin-top:55px}}
+
+/* 2026-10-29: interleaved bilingual reading on ALL screen sizes. */
+.article-controls{justify-content:flex-start;gap:14px;flex-wrap:wrap;height:auto;min-height:62px}
+.article-controls #type-trigger{margin-left:auto}
+.article-controls .control-link{white-space:nowrap}
+.story-par.compared,.story-par.triple{display:flex!important;flex-direction:column;align-items:stretch;gap:5px;grid-template-columns:none!important;column-gap:0!important;row-gap:0!important;break-inside:avoid;margin:0 0 1.8em!important;padding:0 0 1.15em;border-bottom:1px solid #f1f1f1}
+.story-par.compared .text-column + .text-column{margin-top:7px}
+.story-par.compared .translation{width:100%;min-width:0;line-height:1.95}
+.story-par.triple .translation:last-child{grid-column:auto;border-top:none;padding-top:0}
+.story-par.compared .translation[data-lang=en]{font-size:1em;color:#252525}
+.story-par.compared .translation[data-lang=zh]{font-size:1em;color:#555}
+.story-par.compared .translation[data-lang=ko]{font-size:.96em;color:#5a5a5a}
+.story-par.compared .lang-caption{font-size:10px;margin-bottom:2px;color:#999}
+.story-par.compared p{margin:0}
+.word{cursor:pointer;text-decoration:underline;text-decoration-color:#d5d5d5;text-decoration-style:dotted;text-underline-offset:4px}
+.word:hover,.word:focus-visible,.word.active{text-decoration-color:currentColor}
+@media(max-width:560px){.article-controls{gap:8px;padding:7px 0}.article-controls .control-link{font-size:12px;padding:9px 1px}.article-controls #type-trigger{padding-right:3px}.story-par.compared{margin-bottom:1.5em!important}.story-par.compared .text-column + .text-column{margin-top:6px}}
+
+/* Per-paragraph English comparison; labels appear unobtrusively at each paragraph */
+.paragraph-translate{display:block;align-self:flex-end;margin:-8px 0 8px auto;padding:4px 0;border:0;background:transparent;color:#999;font-size:11px;line-height:1.5;cursor:pointer}
+.paragraph-translate:hover,.paragraph-translate:focus-visible{text-decoration:underline;color:#333}
+.story-par.compared .paragraph-translate{margin:2px 0 -9px auto}
+.story-par.single .paragraph-translate{margin:-15px 0 12px auto}
+@media(min-width:750px){.story-par.single .paragraph-translate{opacity:.45}.story-par.single:hover .paragraph-translate,.story-par.single:focus-within .paragraph-translate{opacity:1}}
+
+.translation-notice{font-size:.8rem;line-height:1.65;color:var(--muted,#676767);border-left:2px solid #aaa;padding:.5rem .8rem;margin:1rem 0 1.5rem}

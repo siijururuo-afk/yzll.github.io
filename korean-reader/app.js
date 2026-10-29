@@ -15,21 +15,21 @@ const BUILTINS={
  '1836825-d':{path:'1836825-d.json',zh:'183 68 25 · 第4章',ko:'183 68 25 D',author:'켈룩',count:131,series:'183 68 25',part:'D'},
  '1836825-e':{path:'1836825-e.json',zh:'183 68 25 · 第5章',ko:'183 68 25 E',author:'켈룩',count:186,series:'183 68 25',part:'E'},
  "sea-1":{path:"sea-1.json",zh:"你好，我的海 · 第1章",ko:"안녕, 나의 바다. 1",author:"장마",count:210,series:"你好，我的海",part:"1",index:1,total:7,translation:"complete"},
- "sea-2":{path:"sea-2.json",zh:"你好，我的海 · 第2章",ko:"안녕, 나의 바다. 2",author:"장마",count:168,series:"你好，我的海",part:"2",index:2,total:7,translation:"ko-only"},
- "sea-3":{path:"sea-3.json",zh:"你好，我的海 · 第3章",ko:"안녕, 나의 바다. 3",author:"장마",count:111,series:"你好，我的海",part:"3",index:3,total:7,translation:"ko-only"},
- "sea-4":{path:"sea-4.json",zh:"你好，我的海 · 第4章",ko:"안녕, 나의 바다. 4",author:"장마",count:183,series:"你好，我的海",part:"4",index:4,total:7,translation:"ko-only"},
- "sea-5":{path:"sea-5.json",zh:"你好，我的海 · 第5章",ko:"안녕, 나의 바다. 5",author:"장마",count:205,series:"你好，我的海",part:"5",index:5,total:7,translation:"ko-only"},
- "sea-6":{path:"sea-6.json",zh:"你好，我的海 · 第6章",ko:"안녕, 나의 바다. 6",author:"장마",count:159,series:"你好，我的海",part:"6",index:6,total:7,translation:"ko-only"},
- "sea-7":{path:"sea-7.json",zh:"你好，我的海 · 第7章（完结）",ko:"안녕, 나의 바다. 7",author:"장마",count:289,series:"你好，我的海",part:"7",index:7,total:7,translation:"ko-only"},
- "raspberry-a":{path:"raspberry-a.json",zh:"覆盆子时光 · A",ko:"라즈베리 타임 A",author:"간쇼아",count:190,series:"覆盆子时光",part:"A",index:1,total:6,translation:"ko-only"},
- "raspberry-b":{path:"raspberry-b.json",zh:"覆盆子时光 · B",ko:"라즈베리 타임 B",author:"간쇼아",count:185,series:"覆盆子时光",part:"B",index:2,total:6,translation:"ko-only"},
- "raspberry-c":{path:"raspberry-c.json",zh:"覆盆子时光 · C",ko:"라즈베리 타임 C",author:"간쇼아",count:172,series:"覆盆子时光",part:"C",index:3,total:6,translation:"ko-only"},
- "raspberry-d":{path:"raspberry-d.json",zh:"覆盆子时光 · D",ko:"라즈베리 타임 D",author:"간쇼아",count:124,series:"覆盆子时光",part:"D",index:4,total:6,translation:"ko-only"},
- "raspberry-e":{path:"raspberry-e.json",zh:"覆盆子时光 · E",ko:"라즈베리 타임 E",author:"간쇼아",count:139,series:"覆盆子时光",part:"E",index:5,total:6,translation:"ko-only"},
- "raspberry-f":{path:"raspberry-f.json",zh:"覆盆子时光 · F",ko:"라즈베리 타임 F",author:"간쇼아",count:136,series:"覆盆子时光",part:"F",index:6,total:6,translation:"ko-only"},
- "cross-gang-1":{path:"cross-gang-1.json",zh:"Cross Gang · 第1章",ko:"c25th, Cross Gang 01",author:"간쇼아",count:356,series:"Cross Gang",part:"1",index:1,total:3,translation:"ko-only"},
- "cross-gang-2":{path:"cross-gang-2.json",zh:"Cross Gang · 第2章",ko:"c25th, Cross Gang 02",author:"간쇼아",count:539,series:"Cross Gang",part:"2",index:2,total:3,translation:"ko-only"},
- "cross-gang-3":{path:"cross-gang-3.json",zh:"Cross Gang · 第3章",ko:"c25th, Cross Gang 03",author:"간쇼아",count:415,series:"Cross Gang",part:"3",index:3,total:3,translation:"ko-only"},
+ "sea-2":{path:"sea-2.json",zh:"你好，我的海 · 第2章",ko:"안녕, 나의 바다. 2",author:"장마",count:168,series:"你好，我的海",part:"2",index:2,total:7,translation:"complete"},
+ "sea-3":{path:"sea-3.json",zh:"你好，我的海 · 第3章",ko:"안녕, 나의 바다. 3",author:"장마",count:111,series:"你好，我的海",part:"3",index:3,total:7,translation:"complete"},
+ "sea-4":{path:"sea-4.json",zh:"你好，我的海 · 第4章",ko:"안녕, 나의 바다. 4",author:"장마",count:183,series:"你好，我的海",part:"4",index:4,total:7,translation:"complete"},
+ "sea-5":{path:"sea-5.json",zh:"你好，我的海 · 第5章",ko:"안녕, 나의 바다. 5",author:"장마",count:205,series:"你好，我的海",part:"5",index:5,total:7,translation:"complete"},
+ "sea-6":{path:"sea-6.json",zh:"你好，我的海 · 第6章",ko:"안녕, 나의 바다. 6",author:"장마",count:159,series:"你好，我的海",part:"6",index:6,total:7,translation:"complete"},
+ "sea-7":{path:"sea-7.json",zh:"你好，我的海 · 第7章（完结）",ko:"안녕, 나의 바다. 7",author:"장마",count:289,series:"你好，我的海",part:"7",index:7,total:7,translation:"complete"},
+ "raspberry-a":{path:"raspberry-a.json",zh:"覆盆子时光 · A",ko:"라즈베리 타임 A",author:"간쇼아",count:190,series:"覆盆子时光",part:"A",index:1,total:6,translation:"complete"},
+ "raspberry-b":{path:"raspberry-b.json",zh:"覆盆子时光 · B",ko:"라즈베리 타임 B",author:"간쇼아",count:185,series:"覆盆子时光",part:"B",index:2,total:6,translation:"complete"},
+ "raspberry-c":{path:"raspberry-c.json",zh:"覆盆子时光 · C",ko:"라즈베리 타임 C",author:"간쇼아",count:172,series:"覆盆子时光",part:"C",index:3,total:6,translation:"complete"},
+ "raspberry-d":{path:"raspberry-d.json",zh:"覆盆子时光 · D",ko:"라즈베리 타임 D",author:"간쇼아",count:124,series:"覆盆子时光",part:"D",index:4,total:6,translation:"complete"},
+ "raspberry-e":{path:"raspberry-e.json",zh:"覆盆子时光 · E",ko:"라즈베리 타임 E",author:"간쇼아",count:139,series:"覆盆子时光",part:"E",index:5,total:6,translation:"complete"},
+ "raspberry-f":{path:"raspberry-f.json",zh:"覆盆子时光 · F",ko:"라즈베리 타임 F",author:"간쇼아",count:136,series:"覆盆子时光",part:"F",index:6,total:6,translation:"complete"},
+ "cross-gang-1":{path:"cross-gang-1.json",zh:"Cross Gang · 第1章",ko:"c25th, Cross Gang 01",author:"간쇼아",count:356,series:"Cross Gang",part:"1",index:1,total:3,translation:"complete"},
+ "cross-gang-2":{path:"cross-gang-2.json",zh:"Cross Gang · 第2章",ko:"c25th, Cross Gang 02",author:"간쇼아",count:539,series:"Cross Gang",part:"2",index:2,total:3,translation:"complete"},
+ "cross-gang-3":{path:"cross-gang-3.json",zh:"Cross Gang · 第3章",ko:"c25th, Cross Gang 03",author:"간쇼아",count:415,series:"Cross Gang",part:"3",index:3,total:3,translation:"adapted"},
  "cgrade-1":{path:"cgrade-1.json", zh:"C级人生 · 第1章", ko:"씨끕인생 (1/5)", author:"us", count:157, translation:"complete", series:"C级人生", part:"1", index:1, total:7},
  "cgrade-2":{path:"cgrade-2.json", zh:"C级人生 · 第2章", ko:"씨끕인생 (2/5)", author:"us", count:116, translation:"complete", series:"C级人生", part:"2", index:2, total:7},
  "cgrade-3":{path:"cgrade-3.json", zh:"C级人生 · 第3章", ko:"씨끕인생 (3/5)", author:"us", count:109, translation:"complete", series:"C级人生", part:"3", index:3, total:7},
@@ -40,11 +40,15 @@ const BUILTINS={
  "first-person-pov":{path:"first-person-pov.json", zh:"第一人称主角视角", ko:"1인칭 주인공 시점", author:"us", count:261, translation:"complete"},
 };
 let story=null, currentId=DEFAULT_ID, font=1, query='', vocabFilter='all';
-let mode='zh', lookupEnabled=false, activeView='reader', scrollSaveTimer=null, restoringScroll=false, lastReaderY=0;
+let mode='zh', lookupEnabled=true, activeView='reader', scrollSaveTimer=null, restoringScroll=false, lastReaderY=0;
 let currentPopup=null, toastTimer=null, activeToken=null;
-const readStorage=(key,fallback)=>{try{return JSON.parse(localStorage.getItem(STORAGE+':'+key))??fallback}catch{return fallback}};
-const saveStorage=(key,val)=>{try{localStorage.setItem(STORAGE+':'+key,JSON.stringify(val))}catch{toast('本机存储空间不足，无法保存')}};
+const expandedEnglish=new Set(),foldedEnglish=new Set();
+const volatileStorage=new Map();
+const readStorage=(key,fallback)=>{if(volatileStorage.has(key))return volatileStorage.get(key);try{return JSON.parse(localStorage.getItem(STORAGE+':'+key))??fallback}catch{return fallback}};
+const saveStorage=(key,val)=>{volatileStorage.set(key,val);try{localStorage.setItem(STORAGE+':'+key,JSON.stringify(val))}catch{/* Private/file contexts may block persistent storage; keep this reading session functional. */}};
 let savedVocab=readStorage('vocab',[]);
+lookupEnabled=readStorage('lookup-enabled',true);
+const wordResultCache=new Map();
 const koGloss={
 '조승연':['曹承衍','Cho Seungyeon','人名'],'김우석':['金宇硕','Kim Wooseok','人名'],'승연':['承衍','Seungyeon','人名'],'우석':['宇硕','Wooseok','人名'],'종찬':['钟灿','Jongchan','人名'],
 '한입':['一口','a bite','名词'],'한입만':['就一口；只吃一口','just one bite','惯用表达'],'입':['嘴；口','mouth; bite','名词'],'먹다':['吃','to eat','动词'],'먹':['吃（词干）','eat','动词词干'],'먹었':['吃了','ate','动词变化'],'먹는':['正在吃的','eating','定语形'],'먹어':['吃；吃吧','eat','动词变化'],'먹을':['要吃的','to eat','定语形'],
@@ -71,7 +75,7 @@ function makeColumn(text,lang,idx,showCaption){
  else p.textContent=text;
  el.appendChild(p);return el;
 }
-function displayedLangs(){return mode==='ko-zh'?['ko','zh']:mode==='en-zh'?['en','zh']:mode==='all'?['ko','zh','en']:[mode]}
+function displayedLangs(){return mode==='ko-zh'?['zh','ko']:mode==='en-zh'?['en','zh']:mode==='all'?['zh','en','ko']:[mode]}
 function captureAnchor(){if(activeView!=='reader')return null;const els=$$('#paragraphs > [data-index]');for(const el of els){const r=el.getBoundingClientRect();if(r.bottom>Math.min(window.innerHeight*.34,180))return {i:Number(el.dataset.index),y:r.top}}return null}
 function restoreAnchor(a){if(!a)return;const el=$(`#paragraphs > [data-index="${a.i}"]`);if(el)window.scrollBy(0,el.getBoundingClientRect().top-a.y)}
 function renderStory(preserveScroll=false){
@@ -85,8 +89,10 @@ function renderStory(preserveScroll=false){
  const langs=displayedLangs(),compared=langs.length>1;
  const matches=query?story.blocks.map((b,i)=>({b,i})).filter(({b})=>['ko','zh','en'].some(k=>(b[k]||'').toLocaleLowerCase().includes(query))):story.blocks.map((b,i)=>({b,i}));
  const box=$('#paragraphs');const frag=document.createDocumentFragment();
+ if(story.translationStatus==='adapted'){const notice=document.createElement('aside');notice.className='translation-notice';notice.textContent=story.translationNote?.zh||'本篇包含明确标注的非露骨改写部分。';frag.appendChild(notice)}
  if(!matches.length){const el=document.createElement('div');el.className='empty';el.textContent='没有找到包含搜索词的段落';frag.appendChild(el)}
  for(const {b,i} of matches){
+  if(b.nonGraphicOmission && mode!=='ko')continue;
   if(b.image&&/^data:image\/(png|jpeg|webp|gif);base64,/.test(b.image)){
    const figure=document.createElement('figure');figure.className='story-media';figure.dataset.index=i;
    const img=document.createElement('img');img.src=b.image;img.alt='原文插图';img.loading='lazy';img.style.maxWidth='100%';figure.appendChild(img);frag.appendChild(figure);continue;
@@ -100,8 +106,13 @@ function renderStory(preserveScroll=false){
   if(b.heading){const el=document.createElement('h2');el.className='story-inner-heading';el.dataset.index=i;el.textContent=mode==='ko'?b.ko:b.zh||b.ko;frag.appendChild(el);continue}
   if(b.spacer){const el=document.createElement('div');el.className='scene-space';el.dataset.index=i;el.style.height=Math.min(100,14*b.spacer)+'px';frag.appendChild(el);continue}
   if(b.ko==='＊'||b.ko==='*'){const el=document.createElement('div');el.className='scene-break';el.textContent='＊';el.dataset.index=i;frag.appendChild(el);continue}
-  const section=document.createElement('section');section.className='story-par '+(compared?'compared':'single')+(langs.length===3?' triple':'')+(query?' search-result':'');section.dataset.index=i;
-  for(const lang of langs)section.appendChild(makeColumn(b[lang]||'',lang,i,compared));
+  const canToggle=Boolean(b.zh&&b.en)&&(mode==='zh'||mode==='en-zh');
+  const open=mode==='en-zh'?!foldedEnglish.has(i):expandedEnglish.has(i);
+  const localLangs=canToggle&&!open?['zh']:canToggle&&open?['en','zh']:langs;
+  const localCompared=localLangs.length>1;
+  const section=document.createElement('section');section.className='story-par '+(localCompared?'compared':'single')+(localLangs.length===3?' triple':'')+(query?' search-result':'');section.dataset.index=i;
+  for(const lang of localLangs)section.appendChild(makeColumn(b[lang]||'',lang,i,localCompared));
+  if(canToggle){const btn=document.createElement('button');btn.className='paragraph-translate';btn.type='button';btn.dataset.toggleEnglish=String(i);btn.textContent=open?'收起英文 −':'展开英文 ＋';btn.setAttribute('aria-expanded',String(open));section.appendChild(btn)}
   frag.appendChild(section)
  }
  box.replaceChildren(frag);
@@ -110,7 +121,10 @@ function renderStory(preserveScroll=false){
  $$('#compare-panel [data-mode]').forEach(el=>{const m=el.dataset.mode;const usable=(m==='ko'||((!m.includes('zh')||hasZh)&&(!m.includes('en')||hasEn)));el.disabled=!usable;el.title=usable?'':'该语言译文尚未补全，请先在「更多 → 翻译设置」翻译';const selected=m===mode;el.classList.toggle('selected',selected);el.setAttribute('aria-pressed',String(selected))});
  const availability=$('#translation-availability');if(availability){availability.classList.toggle('hidden',hasZh&&hasEn);availability.textContent=hasZh?'本篇英文译文尚未补全。可到「更多 → 翻译设置」翻译。':'本篇暂未备齐中文和英文译文，因此默认阅读韩文原文。可到「更多 → 翻译设置」翻译。'}
  renderChapterNav();
- const active=compared;$('#compare-trigger').classList.toggle('active',active);$('#compare-trigger').firstChild.textContent=active?'退出对照 ':'对照阅读 ';
+ const active=compared;
+ const compareBtn=$('#compare-trigger');compareBtn.classList.toggle('active',active);compareBtn.setAttribute('aria-pressed',String(active));compareBtn.textContent=active?(mode==='ko-zh'?'韩中对照：开':mode==='all'?'三语对照：开':'英中对照：开'):'英中对照：关';
+ const lookupBtn=$('#lookup-quick');lookupBtn.textContent=lookupEnabled?'点词：开':'点词：关';lookupBtn.classList.toggle('active',lookupEnabled);lookupBtn.setAttribute('aria-pressed',String(lookupEnabled));
+ $('#lookup-toggle').checked=lookupEnabled;
  if(anchor)restoreAnchor(anchor);
 }
 function renderChapterNav(){
@@ -124,7 +138,7 @@ function renderChapterNav(){
  for(const [offset,label] of [[-1,'上一章'],[1,'下一章']]){const next=idx+offset;if(next<0||next>=chapters.length)continue;const a=document.createElement('button');a.type='button';a.textContent=label+' · '+chapters[next][1].part;a.addEventListener('click',()=>loadStory(chapters[next][0]));controls.appendChild(a)}
  nav.appendChild(controls)
 }
-function closeMenus(){for(const id of ['compare-panel','type-panel','more-panel'])$('#'+id).classList.add('hidden');$('#compare-trigger').setAttribute('aria-expanded','false');$('#type-trigger').setAttribute('aria-expanded','false');$('#more-trigger').setAttribute('aria-expanded','false')}
+function closeMenus(){for(const id of ['compare-panel','type-panel','more-panel'])$('#'+id).classList.add('hidden');$('#mode-trigger').setAttribute('aria-expanded','false');$('#type-trigger').setAttribute('aria-expanded','false');$('#more-trigger').setAttribute('aria-expanded','false')}
 function togglePanel(panel,trigger){const open=$('#'+panel).classList.contains('hidden');closeMenus();if(open){$('#'+panel).classList.remove('hidden');$('#'+trigger).setAttribute('aria-expanded','true')}}
 function showView(which){
  const previous=activeView;if(previous==='reader'&&which!=='reader'){lastReaderY=window.scrollY;saveStorage('scroll:'+currentId,lastReaderY)}
@@ -151,7 +165,7 @@ function renderStorySelect(){
   const title=document.createElement('strong');title.textContent=b.series?(String(b.part||'').startsWith('+')?'番外 '+b.part:'第'+(b.index??'ABCDE'.indexOf(b.part)+1)+'章 · '+b.part):b.zh;
   const sub=document.createElement('span');sub.className='book-original';sub.textContent=b.series?b.ko:b.ko;
   const meta=document.createElement('span');meta.className='book-meta';
-  meta.textContent=b.author+' · '+b.count+' 段 · '+(b.translation==='ko-only'?'韩文原文（中英文未译）':b.translation==='complete'||b.series==='183 68 25'||id==='existence-weight'||id==='hanip'||id==='cover-eyes'?'三语已译':'按原文阅读');
+  meta.textContent=b.author+' · '+b.count+' 段 · '+(b.translation==='ko-only'?'韩文原文（中英文未译）':b.translation==='adapted'?'三语可读 · 部分亲密场景非露骨改写':b.translation==='complete'||b.series==='183 68 25'||id==='existence-weight'||id==='hanip'||id==='cover-eyes'?'三语已译':'按原文阅读');
   left.append(title,sub,meta);const right=document.createElement('span');right.className='book-action';right.textContent=id===currentId?'继续阅读':'开始阅读';
   item.append(left,right);if(b.series)item.classList.add('series-chapter');item.addEventListener('click',()=>loadStory(id));shelf.appendChild(item);
  }
@@ -168,7 +182,12 @@ async function loadStory(id,go=true){try{
   else data=readStorage(storyKey(id),null);
  if(!data||!Array.isArray(data.blocks))throw Error('文章数据不存在');
  if(BUILTINS[id]){const overlay=readStorage('translations:'+id,{});for(const [n,trans] of Object.entries(overlay)){const b=data.blocks[Number(n)];if(b&&trans){if(!b.zh&&trans.zh)b.zh=trans.zh;if(!b.en&&trans.en)b.en=trans.en}}}
- restoringScroll=true;story=data;currentId=id;mode=data.blocks.filter(b=>b.ko&&!b.spacer&&b.ko!=='＊'&&b.ko!=='*').every(b=>b.zh)?'zh':'ko';query='';$('#search-input').value='';
+ restoringScroll=true;story=data;currentId=id;expandedEnglish.clear();foldedEnglish.clear();
+ const readable=data.blocks.filter(b=>b.ko&&!b.spacer&&b.ko!=='＊'&&b.ko!=='*');
+ const hasZh=readable.every(b=>b.zh),hasEn=readable.every(b=>b.en);
+ const preferred=readStorage('reading-mode:'+id,hasZh?'zh':'ko');
+ mode=(preferred==='en'&&!hasEn)||(preferred.includes('en')&&!hasEn)||(preferred.includes('zh')&&!hasZh)?(hasZh?'zh':'ko'):preferred;
+ query='';$('#search-input').value='';
  lastReaderY=Number(readStorage('scroll:'+id,0))||0;renderStory();renderStorySelect();
   if(go){history.replaceState(null,'',location.pathname+'?story='+encodeURIComponent(id));showView('reader');}
  requestAnimationFrame(()=>{try{window.scrollTo(0,lastReaderY)}catch{};setTimeout(()=>{restoringScroll=false},160)});
@@ -181,13 +200,35 @@ function renderVocab(){const entries=savedVocab.filter(x=>vocabFilter==='all'||x
 function saveFile(name,content){const link=document.createElement('a'),blob=new Blob([content],{type:'text/plain;charset=utf-8'});link.href=URL.createObjectURL(blob);link.download=name;link.click();setTimeout(()=>URL.revokeObjectURL(link.href),2000)}
 function hidePopup(){if(activeToken)activeToken.classList.remove('active');activeToken=null;$('#word-pop').classList.add('hidden');currentPopup=null}
 function positionPopup(btn){const pop=$('#word-pop'),r=btn.getBoundingClientRect();pop.classList.remove('hidden');if(window.innerWidth<=650){pop.style.left='11px';pop.style.top='auto';return}const w=355;const left=Math.max(12,Math.min(window.innerWidth-w-12,r.left));pop.style.left=left+'px';pop.style.bottom='auto';pop.style.top=Math.max(12,Math.min(window.innerHeight-pop.offsetHeight-12,r.bottom+12))+'px';}
-function displayPopup(){if(!currentPopup)return;const p=currentPopup;$('#pop-lang').textContent=p.lang==='ko'?'한국어 · KOREAN':'ENGLISH · VOCABULARY';$('#pop-word').textContent=p.word;$('#pop-pron').textContent=p.pron||'';$('#pop-meaning').textContent=p.meaning||'正在查询释义…';$('#pop-grammar').textContent=p.grammar||'';$('#pop-example').textContent=p.example||'';$('#pop-context-zh').textContent=p.chinese||'';const saved=savedVocab.some(x=>x.key===p.lang+':'+p.word.toLowerCase());$('#pop-save').textContent=saved?'✓ 已收藏':'＋ 收藏生词';$('#pop-dict').href=p.lang==='ko'?'https://ko.dict.naver.com/#/search?query='+encodeURIComponent(p.word):'https://www.oxfordlearnersdictionaries.com/definition/english/'+encodeURIComponent(p.word.toLowerCase())}
+function displayPopup(){if(!currentPopup)return;const p=currentPopup;$('#pop-lang').textContent=p.lang==='ko'?'한국어 · KOREAN':'ENGLISH · VOCABULARY';$('#pop-word').textContent=p.word;$('#pop-pron').textContent=p.pron||'';$('#pop-meaning').textContent=p.meaning||'正在查询释义…';$('#pop-grammar').textContent=p.grammar||'';$('#pop-example').textContent=p.example||'';$('#pop-context-zh').textContent=p.chinese||'';const saved=savedVocab.some(x=>x.key===p.lang+':'+p.word.toLowerCase());$('#pop-save').textContent=saved?'✓ 已收藏':'＋ 收藏生词';$('#pop-dict').href=p.lang==='ko'?'https://ko.dict.naver.com/#/search?query='+encodeURIComponent(p.word):'https://dict.youdao.com/result?word='+encodeURIComponent(p.word.toLowerCase())+'&lang=en'}
 async function lookupWord(btn){const word=btn.dataset.word,lang=btn.dataset.lang,idx=+btn.dataset.idx,b=story.blocks[idx];hidePopup();activeToken=btn;btn.classList.add('active');const p={word,lang,meaning:'',pron:'',grammar:'',example:b[lang]||'',chinese:b.zh||''};currentPopup=p;
 if(lang==='ko'){const item=findKo(word);if(item){p.meaning=item.data[0]+' · '+item.data[1];p.grammar=item.data[2]+(item.lemma!==word?' · 词干/词条：'+item.lemma:'')+(item.approx?'（按前缀推测，须核对原词变化）':'')}else{p.meaning='本地词库未收录，正在尝试在线查词…';p.grammar='韩语助词和词尾可能附着在词干上，直接逐词翻译需核对上下文。'}}
 else{const item=findEn(word);if(item){p.meaning=item.mean;p.grammar=item.lemma!==word?'原形可能是：'+item.lemma:''}else p.meaning='正在查询在线英语词典…'}
 displayPopup();positionPopup(btn);
 if(lang==='ko'&&!findKo(word)){try{const response=await fetch('https://api.mymemory.translated.net/get?q='+encodeURIComponent(word)+'&langpair=ko%7Czh-CN');if(!response.ok)throw Error();const json=await response.json();const translated=json?.responseData?.translatedText;if(!translated||translated.toLowerCase().includes('mymemory')||translated===word)throw Error();p.meaning=translated;p.grammar='在线机器翻译（单词形式可能含词尾），请结合原句判断';}catch{p.meaning='暂未收录准确释义；请点击下方「词典」查询'}if(currentPopup===p){displayPopup();positionPopup(btn)}}
-if(lang==='en'){try{const response=await fetch('https://api.dictionaryapi.dev/api/v2/entries/en/'+encodeURIComponent(word.toLowerCase()));if(!response.ok)throw Error();const json=await response.json();const item=json?.[0];if(item){p.pron=item.phonetic||item.phonetics?.find(v=>v.text)?.text||'';const defs=(item.meanings||[]).slice(0,2).map(m=>m.partOfSpeech+': '+(m.definitions?.[0]?.definition||'')).filter(Boolean);p.grammar=defs.join(' · ');if(!p.meaning)p.meaning='英语词典定义如下（可点击词典查看更多）'}}catch{if(!p.meaning)p.meaning='暂未收录中文释义；请点击「词典」查询'}if(currentPopup===p){displayPopup();positionPopup(btn)}}
+if(lang==='en'){
+ const key=word.toLowerCase();
+ if(wordResultCache.has(key)){Object.assign(p,wordResultCache.get(key));if(currentPopup===p){displayPopup();positionPopup(btn)}return}
+ const result={meaning:p.meaning||'',pron:'',grammar:p.grammar||''};
+ const dictionary=(async()=>{try{
+  const response=await fetch('https://api.dictionaryapi.dev/api/v2/entries/en/'+encodeURIComponent(key));
+  if(!response.ok)throw Error('dictionary unavailable');
+  const json=await response.json();const item=json?.[0];if(!item)return;
+  result.pron=item.phonetic||item.phonetics?.find(v=>v.text)?.text||'';
+  const defs=(item.meanings||[]).slice(0,2).map(m=>m.partOfSpeech+': '+(m.definitions?.[0]?.definition||'')).filter(Boolean);
+  result.grammar=defs.join(' · ');if(currentPopup===p){Object.assign(p,result);displayPopup();positionPopup(btn)}
+ }catch{}})();
+ const translation=(async()=>{if(result.meaning)return;try{
+  const response=await fetch('https://api.mymemory.translated.net/get?q='+encodeURIComponent(key)+'&langpair=en%7Czh-CN');
+  if(!response.ok)throw Error('translation unavailable');
+  const json=await response.json();const zh=json?.responseData?.translatedText;
+  if(!zh||zh.toLowerCase()===key||/mymemory|too many requests|quota/i.test(zh))throw Error('no translation');
+  result.meaning=zh+'（在线参考，结合句子判断词义）';
+ }catch{result.meaning='暂无可靠中文释义，请点击「词典」查询'}
+ if(currentPopup===p){Object.assign(p,result);displayPopup();positionPopup(btn)}
+ })();
+ await Promise.allSettled([dictionary,translation]);wordResultCache.set(key,result);if(currentPopup===p){Object.assign(p,result);displayPopup();positionPopup(btn)}
+}
 }
 function extractJSON(s){let text=s.trim().replace(/^```(?:json)?\s*/i,'').replace(/```\s*$/,'').trim();try{return JSON.parse(text)}catch{const a=text.indexOf('{'),b=text.lastIndexOf('}');if(a>=0&&b>a)return JSON.parse(text.slice(a,b+1));throw Error('模型没有返回有效 JSON')}}
 async function doTranslate(){if(!story){toast('先导入一篇文章');return}const key=$('#api-key').value.trim(),endpoint=$('#api-endpoint').value.trim(),model=$('#api-model').value.trim();if(!key||!endpoint||!model){toast('请先填入 API 地址、模型名称与密钥');return}if(!/^https:\/\//.test(endpoint)){toast('API 地址必须是 HTTPS');return}const pending=story.blocks.map((b,i)=>({b,i})).filter(x=>x.b.ko&&x.b.ko!=='＊'&&!x.b.spacer&&(!x.b.en||!x.b.zh));if(!pending.length){toast('这篇文章已经有完整的中英译文');return}const button=$('#translate-story'),status=$('#translation-status');button.disabled=true;let done=0;try{for(let offset=0;offset<pending.length;offset+=6){const chunk=pending.slice(offset,offset+6);status.textContent=`翻译中 ${done} / ${pending.length} 段…`;const body={model,temperature:0.2,messages:[{role:'system',content:'You are a professional Korean fiction translator. Translate Korean prose faithfully into natural Chinese (zh) and English (en), retaining character names as 曹承衍/金宇硕 in Chinese and Cho Seungyeon/Kim Wooseok in English; maintain dialogue, profanity, style and content. Do not censor, summarize, omit or change paragraphs. Reply ONLY in JSON of the shape {"translations":[{"zh":"...","en":"..."}]}, same number and order as inputs.'},{role:'user',content:JSON.stringify(chunk.map(x=>x.b.ko))}],stream:false};const resp=await fetch(endpoint,{method:'POST',headers:{'Content-Type':'application/json',Authorization:'Bearer '+key},body:JSON.stringify(body)});if(!resp.ok){const detail=await resp.text();throw Error('API HTTP '+resp.status+': '+detail.slice(0,120))}const result=await resp.json();const raw=result?.choices?.[0]?.message?.content||'';const parsed=extractJSON(raw),out=parsed.translations;if(!Array.isArray(out)||out.length!==chunk.length)throw Error('译文段落数量与原文不一致，翻译已暂停');for(let j=0;j<chunk.length;j++){const z=out[j];if(!z||typeof z.zh!=='string'||typeof z.en!=='string')throw Error('译文格式不符合预期');chunk[j].b.zh=chunk[j].b.zh||z.zh;chunk[j].b.en=chunk[j].b.en||z.en}done+=chunk.length;if(BUILTINS[currentId]){const overlay=readStorage('translations:'+currentId,{});for(const entry of chunk)overlay[entry.i]={zh:entry.b.zh,en:entry.b.en};saveStorage('translations:'+currentId,overlay)}else saveStorage(storyKey(currentId),story);renderStory()}status.textContent=`完成 ${done} 段的中英翻译`;if(story.blocks.filter(b=>b.ko&&!b.spacer&&b.ko!=='＊'&&b.ko!=='*').every(b=>b.zh)){mode='zh';renderStory(true)}toast('翻译完成，译文已保存到本机浏览器')}catch(e){status.textContent='已保存进度：'+done+' 段；失败原因：'+e.message;toast('翻译中断，可重新点击继续')}finally{button.disabled=false}}
@@ -195,18 +236,26 @@ function initListeners(){
  $$('[data-tab]').forEach(x=>x.addEventListener('click',()=>showView(x.dataset.tab)));
  $('#more-trigger').addEventListener('click',()=>togglePanel('more-panel','more-trigger'));
  $('#compare-trigger').addEventListener('click',()=>{
-  if(mode!=='zh'&&displayedLangs().length>1){mode='zh';closeMenus();renderStory(true)}
-  else togglePanel('compare-panel','compare-trigger');
+  const complete=story.blocks.filter(b=>b.ko&&!b.spacer&&b.ko!=='＊'&&b.ko!=='*');
+  const hasZh=complete.every(b=>b.zh),hasEn=complete.every(b=>b.en);
+  if(displayedLangs().length>1){saveStorage('compare-mode',mode);mode=hasZh?'zh':'ko'}
+  else if(hasZh&&hasEn){mode=readStorage('compare-mode','en-zh');if(!['en-zh','ko-zh','all'].includes(mode))mode='en-zh'}
+  else if(hasZh){mode='ko-zh'}
+  else {toast('本章还没有完整译文，暂时只能阅读韩文');return}
+  saveStorage('reading-mode:'+currentId,mode);closeMenus();renderStory(true)
  });
+ $('#mode-trigger').addEventListener('click',()=>togglePanel('compare-panel','mode-trigger'));
  $('#type-trigger').addEventListener('click',()=>togglePanel('type-panel','type-trigger'));
- $$('#compare-panel [data-mode]').forEach(el=>el.addEventListener('click',()=>{mode=el.dataset.mode;closeMenus();renderStory(true)}));
+ $$('#compare-panel [data-mode]').forEach(el=>el.addEventListener('click',()=>{mode=el.dataset.mode;saveStorage('reading-mode:'+currentId,mode);if(displayedLangs().length>1)saveStorage('compare-mode',mode);closeMenus();renderStory(true)}));
+ function changeLookup(enabled){lookupEnabled=enabled;saveStorage('lookup-enabled',enabled);renderStory(true);hidePopup()}
+ $('#lookup-quick').addEventListener('click',()=>changeLookup(!lookupEnabled));
+ $('#lookup-toggle').addEventListener('change',e=>changeLookup(e.target.checked));
  $('#search-trigger').addEventListener('click',()=>{closeMenus();$('#search-panel').classList.remove('hidden');$('#search-input').focus();showView('reader')});
  $('#search-clear').addEventListener('click',()=>{query='';$('#search-input').value='';$('#search-panel').classList.add('hidden');renderStory(true)});
  $('#search-input').addEventListener('input',e=>{query=e.target.value.trim().toLocaleLowerCase();renderStory(false);window.scrollTo(0,0)});
  $('#font-plus').addEventListener('click',()=>{font=Math.min(1.5,+(font+.1).toFixed(2));document.documentElement.style.setProperty('--scale',font);saveStorage('font',font)});
  $('#font-minus').addEventListener('click',()=>{font=Math.max(.8,+(font-.1).toFixed(2));document.documentElement.style.setProperty('--scale',font);saveStorage('font',font)});
- $('#lookup-toggle').addEventListener('change',e=>{lookupEnabled=e.target.checked;renderStory(true);hidePopup()});
- $('#paragraphs').addEventListener('click',e=>{const btn=e.target.closest('.word');if(btn&&lookupEnabled)lookupWord(btn)});
+ $('#paragraphs').addEventListener('click',e=>{const btn=e.target.closest('.word');if(btn&&lookupEnabled){lookupWord(btn);return}const toggle=e.target.closest('[data-toggle-english]');if(!toggle)return;const idx=Number(toggle.dataset.toggleEnglish);const set=mode==='en-zh'?foldedEnglish:expandedEnglish;if(set.has(idx))set.delete(idx);else set.add(idx);renderStory(true)});
  $('#pop-close').addEventListener('click',hidePopup);$('#pop-save').addEventListener('click',saveWord);$('#pop-speak').addEventListener('click',()=>{if(currentPopup)speech(currentPopup.word,currentPopup.lang)});
  document.addEventListener('pointerdown',e=>{if(!$('#word-pop').classList.contains('hidden')&&!e.target.closest('#word-pop')&&!e.target.closest('.word'))hidePopup();if(!e.target.closest('.site-actions')&&!e.target.closest('.article-controls')&&!e.target.closest('.compare-panel')&&!e.target.closest('.type-panel'))closeMenus()});
  document.addEventListener('keydown',e=>{if(e.key==='Escape'){hidePopup();closeMenus()}});
