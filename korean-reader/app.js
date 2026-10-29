@@ -85,14 +85,14 @@ function renderStory(preserveScroll=false){
  $('#article-sub').textContent=story.title.ko||'';
  $('.byline').classList.toggle('long-title',(story.title.ko||'').length>30);
  $('#article-author').textContent=story.author||'我的文章';
- $('#article-count').textContent=`${story.blocks.length} 段`;
+ $('#article-count').textContent=`${story.blocks.filter(b=>b.ko&&!b.spacer&&b.ko!=='＊'&&b.ko!=='*').length} 段`;
  const langs=displayedLangs(),compared=langs.length>1;
  const matches=query?story.blocks.map((b,i)=>({b,i})).filter(({b})=>['ko','zh','en'].some(k=>(b[k]||'').toLocaleLowerCase().includes(query))):story.blocks.map((b,i)=>({b,i}));
- const box=$('#paragraphs');const frag=document.createDocumentFragment();
+ const box=$('#paragraphs');const frag=document.createDocumentFragment();let omissionShown=false;
  if(story.translationStatus==='adapted'){const notice=document.createElement('aside');notice.className='translation-notice';notice.textContent=story.translationNote?.zh||'本篇包含明确标注的非露骨改写部分。';frag.appendChild(notice)}
  if(!matches.length){const el=document.createElement('div');el.className='empty';el.textContent='没有找到包含搜索词的段落';frag.appendChild(el)}
  for(const {b,i} of matches){
-  if(b.nonGraphicOmission && mode!=='ko')continue;
+  if(b.nonGraphicOmission && mode!=='ko'){if(!omissionShown){const note=document.createElement('div');note.className='omission-inline';note.textContent='此处原文包含未成年人物的露骨描写，未作逐段翻译；情节已在上一段用非露骨概述交代。';frag.appendChild(note);omissionShown=true;}continue;}
   if(b.image&&/^data:image\/(png|jpeg|webp|gif);base64,/.test(b.image)){
    const figure=document.createElement('figure');figure.className='story-media';figure.dataset.index=i;
    const img=document.createElement('img');img.src=b.image;img.alt='原文插图';img.loading='lazy';img.style.maxWidth='100%';figure.appendChild(img);frag.appendChild(figure);continue;
