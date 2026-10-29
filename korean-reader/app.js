@@ -29,7 +29,7 @@ const BUILTINS={
  "raspberry-f":{path:"raspberry-f.json",zh:"覆盆子时光 · F",ko:"라즈베리 타임 F",author:"간쇼아",count:136,series:"覆盆子时光",part:"F",index:6,total:6,translation:"complete"},
  "cross-gang-1":{path:"cross-gang-1.json",zh:"Cross Gang · 第1章",ko:"c25th, Cross Gang 01",author:"간쇼아",count:356,series:"Cross Gang",part:"1",index:1,total:3,translation:"complete"},
  "cross-gang-2":{path:"cross-gang-2.json",zh:"Cross Gang · 第2章",ko:"c25th, Cross Gang 02",author:"간쇼아",count:539,series:"Cross Gang",part:"2",index:2,total:3,translation:"complete"},
- "cross-gang-3":{path:"cross-gang-3.json",zh:"Cross Gang · 第3章",ko:"c25th, Cross Gang 03",author:"간쇼아",count:415,series:"Cross Gang",part:"3",index:3,total:3,translation:"adapted"},
+ "cross-gang-3":{path:"cross-gang-3.json",zh:"Cross Gang · 第3章",ko:"c25th, Cross Gang 03",author:"간쇼아",count:415,series:"Cross Gang",part:"3",index:3,total:3,translation:"partial-ko-original"},
  "cgrade-1":{path:"cgrade-1.json", zh:"C级人生 · 第1章", ko:"씨끕인생 (1/5)", author:"us", count:157, translation:"complete", series:"C级人生", part:"1", index:1, total:7},
  "cgrade-2":{path:"cgrade-2.json", zh:"C级人生 · 第2章", ko:"씨끕인생 (2/5)", author:"us", count:116, translation:"complete", series:"C级人生", part:"2", index:2, total:7},
  "cgrade-3":{path:"cgrade-3.json", zh:"C级人生 · 第3章", ko:"씨끕인생 (3/5)", author:"us", count:109, translation:"complete", series:"C级人生", part:"3", index:3, total:7},
@@ -88,11 +88,10 @@ function renderStory(preserveScroll=false){
  $('#article-count').textContent=`${story.blocks.filter(b=>b.ko&&!b.spacer&&b.ko!=='＊'&&b.ko!=='*').length} 段`;
  const langs=displayedLangs(),compared=langs.length>1;
  const matches=query?story.blocks.map((b,i)=>({b,i})).filter(({b})=>['ko','zh','en'].some(k=>(b[k]||'').toLocaleLowerCase().includes(query))):story.blocks.map((b,i)=>({b,i}));
- const box=$('#paragraphs');const frag=document.createDocumentFragment();let omissionShown=false;
- if(story.translationStatus==='adapted'){const notice=document.createElement('aside');notice.className='translation-notice';notice.textContent=story.translationNote?.zh||'本篇包含明确标注的非露骨改写部分。';frag.appendChild(notice)}
+ const box=$('#paragraphs');const frag=document.createDocumentFragment();let originalOnlyShown=false;
  if(!matches.length){const el=document.createElement('div');el.className='empty';el.textContent='没有找到包含搜索词的段落';frag.appendChild(el)}
  for(const {b,i} of matches){
-  if(b.nonGraphicOmission && mode!=='ko'){if(!omissionShown){const note=document.createElement('div');note.className='omission-inline';note.textContent='此处原文包含未成年人物的露骨描写，未作逐段翻译；情节已在上一段用非露骨概述交代。';frag.appendChild(note);omissionShown=true;}continue;}
+  if(b.koOnly && !originalOnlyShown){const note=document.createElement('div');note.className='omission-inline';note.textContent='以下46段暂保留韩文原文。';frag.appendChild(note);originalOnlyShown=true;}
   if(b.image&&/^data:image\/(png|jpeg|webp|gif);base64,/.test(b.image)){
    const figure=document.createElement('figure');figure.className='story-media';figure.dataset.index=i;
    const img=document.createElement('img');img.src=b.image;img.alt='原文插图';img.loading='lazy';img.style.maxWidth='100%';figure.appendChild(img);frag.appendChild(figure);continue;
@@ -106,9 +105,9 @@ function renderStory(preserveScroll=false){
   if(b.heading){const el=document.createElement('h2');el.className='story-inner-heading';el.dataset.index=i;el.textContent=mode==='ko'?b.ko:b.zh||b.ko;frag.appendChild(el);continue}
   if(b.spacer){const el=document.createElement('div');el.className='scene-space';el.dataset.index=i;el.style.height=Math.min(100,14*b.spacer)+'px';frag.appendChild(el);continue}
   if(b.ko==='＊'||b.ko==='*'){const el=document.createElement('div');el.className='scene-break';el.textContent='＊';el.dataset.index=i;frag.appendChild(el);continue}
-  const canToggle=Boolean(b.zh&&b.en)&&(mode==='zh'||mode==='en-zh');
+  const canToggle=!b.koOnly&&Boolean(b.zh&&b.en)&&(mode==='zh'||mode==='en-zh');
   const open=mode==='en-zh'?!foldedEnglish.has(i):expandedEnglish.has(i);
-  const localLangs=canToggle&&!open?['zh']:canToggle&&open?['en','zh']:langs;
+  const localLangs=b.koOnly?['ko']:canToggle&&!open?['zh']:canToggle&&open?['en','zh']:langs;
   const localCompared=localLangs.length>1;
   const section=document.createElement('section');section.className='story-par '+(localCompared?'compared':'single')+(localLangs.length===3?' triple':'')+(query?' search-result':'');section.dataset.index=i;
   for(const lang of localLangs)section.appendChild(makeColumn(b[lang]||'',lang,i,localCompared));
@@ -117,9 +116,9 @@ function renderStory(preserveScroll=false){
  }
  box.replaceChildren(frag);
  const readable=story.blocks.filter(b=>b.ko&&!b.spacer&&b.ko!=='＊'&&b.ko!=='*');
- const hasZh=readable.every(b=>Boolean(b.zh)),hasEn=readable.every(b=>Boolean(b.en));
+ const hasZh=readable.every(b=>b.koOnly||Boolean(b.zh)),hasEn=readable.every(b=>b.koOnly||Boolean(b.en));
  $$('#compare-panel [data-mode]').forEach(el=>{const m=el.dataset.mode;const usable=(m==='ko'||((!m.includes('zh')||hasZh)&&(!m.includes('en')||hasEn)));el.disabled=!usable;el.title=usable?'':'该语言译文尚未补全，请先在「更多 → 翻译设置」翻译';const selected=m===mode;el.classList.toggle('selected',selected);el.setAttribute('aria-pressed',String(selected))});
- const availability=$('#translation-availability');if(availability){availability.classList.toggle('hidden',hasZh&&hasEn);availability.textContent=hasZh?'本篇英文译文尚未补全。可到「更多 → 翻译设置」翻译。':'本篇暂未备齐中文和英文译文，因此默认阅读韩文原文。可到「更多 → 翻译设置」翻译。'}
+ const availability=$('#translation-availability');if(availability){availability.classList.toggle('hidden',hasZh&&hasEn&&story.translationStatus!=='partial-ko-original');availability.textContent=story.translationStatus==='partial-ko-original'?'本章有46段保留韩文原文，其余部分可正常切换对照。':hasZh?'本篇英文译文尚未补全。可到「更多 → 翻译设置」翻译。':'本篇暂未备齐中文和英文译文，因此默认阅读韩文原文。可到「更多 → 翻译设置」翻译。'}
  renderChapterNav();
  const active=compared;
  const compareBtn=$('#compare-trigger');compareBtn.classList.toggle('active',active);compareBtn.setAttribute('aria-pressed',String(active));compareBtn.textContent=active?(mode==='ko-zh'?'韩中对照：开':mode==='all'?'三语对照：开':'英中对照：开'):'英中对照：关';
@@ -165,7 +164,7 @@ function renderStorySelect(){
   const title=document.createElement('strong');title.textContent=b.series?(String(b.part||'').startsWith('+')?'番外 '+b.part:'第'+(b.index??'ABCDE'.indexOf(b.part)+1)+'章 · '+b.part):b.zh;
   const sub=document.createElement('span');sub.className='book-original';sub.textContent=b.series?b.ko:b.ko;
   const meta=document.createElement('span');meta.className='book-meta';
-  meta.textContent=b.author+' · '+b.count+' 段 · '+(b.translation==='ko-only'?'韩文原文（中英文未译）':b.translation==='adapted'?'三语可读 · 部分亲密场景非露骨改写':b.translation==='complete'||b.series==='183 68 25'||id==='existence-weight'||id==='hanip'||id==='cover-eyes'?'三语已译':'按原文阅读');
+  meta.textContent=b.author+' · '+b.count+' 段 · '+(b.translation==='ko-only'?'韩文原文（中英文未译）':b.translation==='partial-ko-original'?'三语可读 · 46段保留韩文':b.translation==='complete'||b.series==='183 68 25'||id==='existence-weight'||id==='hanip'||id==='cover-eyes'?'三语已译':'按原文阅读');
   left.append(title,sub,meta);const right=document.createElement('span');right.className='book-action';right.textContent=id===currentId?'继续阅读':'开始阅读';
   item.append(left,right);if(b.series)item.classList.add('series-chapter');item.addEventListener('click',()=>loadStory(id));shelf.appendChild(item);
  }
@@ -184,7 +183,7 @@ async function loadStory(id,go=true){try{
  if(BUILTINS[id]){const overlay=readStorage('translations:'+id,{});for(const [n,trans] of Object.entries(overlay)){const b=data.blocks[Number(n)];if(b&&trans){if(!b.zh&&trans.zh)b.zh=trans.zh;if(!b.en&&trans.en)b.en=trans.en}}}
  restoringScroll=true;story=data;currentId=id;expandedEnglish.clear();foldedEnglish.clear();
  const readable=data.blocks.filter(b=>b.ko&&!b.spacer&&b.ko!=='＊'&&b.ko!=='*');
- const hasZh=readable.every(b=>b.zh),hasEn=readable.every(b=>b.en);
+ const hasZh=readable.every(b=>b.koOnly||b.zh),hasEn=readable.every(b=>b.koOnly||b.en);
  const preferred=readStorage('reading-mode:'+id,hasZh?'zh':'ko');
  mode=(preferred==='en'&&!hasEn)||(preferred.includes('en')&&!hasEn)||(preferred.includes('zh')&&!hasZh)?(hasZh?'zh':'ko'):preferred;
  query='';$('#search-input').value='';
@@ -231,13 +230,13 @@ if(lang==='en'){
 }
 }
 function extractJSON(s){let text=s.trim().replace(/^```(?:json)?\s*/i,'').replace(/```\s*$/,'').trim();try{return JSON.parse(text)}catch{const a=text.indexOf('{'),b=text.lastIndexOf('}');if(a>=0&&b>a)return JSON.parse(text.slice(a,b+1));throw Error('模型没有返回有效 JSON')}}
-async function doTranslate(){if(!story){toast('先导入一篇文章');return}const key=$('#api-key').value.trim(),endpoint=$('#api-endpoint').value.trim(),model=$('#api-model').value.trim();if(!key||!endpoint||!model){toast('请先填入 API 地址、模型名称与密钥');return}if(!/^https:\/\//.test(endpoint)){toast('API 地址必须是 HTTPS');return}const pending=story.blocks.map((b,i)=>({b,i})).filter(x=>x.b.ko&&x.b.ko!=='＊'&&!x.b.spacer&&(!x.b.en||!x.b.zh));if(!pending.length){toast('这篇文章已经有完整的中英译文');return}const button=$('#translate-story'),status=$('#translation-status');button.disabled=true;let done=0;try{for(let offset=0;offset<pending.length;offset+=6){const chunk=pending.slice(offset,offset+6);status.textContent=`翻译中 ${done} / ${pending.length} 段…`;const body={model,temperature:0.2,messages:[{role:'system',content:'You are a professional Korean fiction translator. Translate Korean prose faithfully into natural Chinese (zh) and English (en), retaining character names as 曹承衍/金宇硕 in Chinese and Cho Seungyeon/Kim Wooseok in English; maintain dialogue, profanity, style and content. Do not censor, summarize, omit or change paragraphs. Reply ONLY in JSON of the shape {"translations":[{"zh":"...","en":"..."}]}, same number and order as inputs.'},{role:'user',content:JSON.stringify(chunk.map(x=>x.b.ko))}],stream:false};const resp=await fetch(endpoint,{method:'POST',headers:{'Content-Type':'application/json',Authorization:'Bearer '+key},body:JSON.stringify(body)});if(!resp.ok){const detail=await resp.text();throw Error('API HTTP '+resp.status+': '+detail.slice(0,120))}const result=await resp.json();const raw=result?.choices?.[0]?.message?.content||'';const parsed=extractJSON(raw),out=parsed.translations;if(!Array.isArray(out)||out.length!==chunk.length)throw Error('译文段落数量与原文不一致，翻译已暂停');for(let j=0;j<chunk.length;j++){const z=out[j];if(!z||typeof z.zh!=='string'||typeof z.en!=='string')throw Error('译文格式不符合预期');chunk[j].b.zh=chunk[j].b.zh||z.zh;chunk[j].b.en=chunk[j].b.en||z.en}done+=chunk.length;if(BUILTINS[currentId]){const overlay=readStorage('translations:'+currentId,{});for(const entry of chunk)overlay[entry.i]={zh:entry.b.zh,en:entry.b.en};saveStorage('translations:'+currentId,overlay)}else saveStorage(storyKey(currentId),story);renderStory()}status.textContent=`完成 ${done} 段的中英翻译`;if(story.blocks.filter(b=>b.ko&&!b.spacer&&b.ko!=='＊'&&b.ko!=='*').every(b=>b.zh)){mode='zh';renderStory(true)}toast('翻译完成，译文已保存到本机浏览器')}catch(e){status.textContent='已保存进度：'+done+' 段；失败原因：'+e.message;toast('翻译中断，可重新点击继续')}finally{button.disabled=false}}
+async function doTranslate(){if(!story){toast('先导入一篇文章');return}const key=$('#api-key').value.trim(),endpoint=$('#api-endpoint').value.trim(),model=$('#api-model').value.trim();if(!key||!endpoint||!model){toast('请先填入 API 地址、模型名称与密钥');return}if(!/^https:\/\//.test(endpoint)){toast('API 地址必须是 HTTPS');return}const pending=story.blocks.map((b,i)=>({b,i})).filter(x=>x.b.ko&&x.b.ko!=='＊'&&!x.b.spacer&&!x.b.koOnly&&(!x.b.en||!x.b.zh));if(!pending.length){toast('这篇文章已经有完整的中英译文');return}const button=$('#translate-story'),status=$('#translation-status');button.disabled=true;let done=0;try{for(let offset=0;offset<pending.length;offset+=6){const chunk=pending.slice(offset,offset+6);status.textContent=`翻译中 ${done} / ${pending.length} 段…`;const body={model,temperature:0.2,messages:[{role:'system',content:'You are a professional Korean fiction translator. Translate Korean prose faithfully into natural Chinese (zh) and English (en), retaining character names as 曹承衍/金宇硕 in Chinese and Cho Seungyeon/Kim Wooseok in English; maintain dialogue, profanity, style and content. Do not censor, summarize, omit or change paragraphs. Reply ONLY in JSON of the shape {"translations":[{"zh":"...","en":"..."}]}, same number and order as inputs.'},{role:'user',content:JSON.stringify(chunk.map(x=>x.b.ko))}],stream:false};const resp=await fetch(endpoint,{method:'POST',headers:{'Content-Type':'application/json',Authorization:'Bearer '+key},body:JSON.stringify(body)});if(!resp.ok){const detail=await resp.text();throw Error('API HTTP '+resp.status+': '+detail.slice(0,120))}const result=await resp.json();const raw=result?.choices?.[0]?.message?.content||'';const parsed=extractJSON(raw),out=parsed.translations;if(!Array.isArray(out)||out.length!==chunk.length)throw Error('译文段落数量与原文不一致，翻译已暂停');for(let j=0;j<chunk.length;j++){const z=out[j];if(!z||typeof z.zh!=='string'||typeof z.en!=='string')throw Error('译文格式不符合预期');chunk[j].b.zh=chunk[j].b.zh||z.zh;chunk[j].b.en=chunk[j].b.en||z.en}done+=chunk.length;if(BUILTINS[currentId]){const overlay=readStorage('translations:'+currentId,{});for(const entry of chunk)overlay[entry.i]={zh:entry.b.zh,en:entry.b.en};saveStorage('translations:'+currentId,overlay)}else saveStorage(storyKey(currentId),story);renderStory()}status.textContent=`完成 ${done} 段的中英翻译`;if(story.blocks.filter(b=>b.ko&&!b.spacer&&b.ko!=='＊'&&b.ko!=='*').every(b=>b.koOnly||b.zh)){mode='zh';renderStory(true)}toast('翻译完成，译文已保存到本机浏览器')}catch(e){status.textContent='已保存进度：'+done+' 段；失败原因：'+e.message;toast('翻译中断，可重新点击继续')}finally{button.disabled=false}}
 function initListeners(){
  $$('[data-tab]').forEach(x=>x.addEventListener('click',()=>showView(x.dataset.tab)));
  $('#more-trigger').addEventListener('click',()=>togglePanel('more-panel','more-trigger'));
  $('#compare-trigger').addEventListener('click',()=>{
   const complete=story.blocks.filter(b=>b.ko&&!b.spacer&&b.ko!=='＊'&&b.ko!=='*');
-  const hasZh=complete.every(b=>b.zh),hasEn=complete.every(b=>b.en);
+  const hasZh=complete.every(b=>b.koOnly||b.zh),hasEn=complete.every(b=>b.koOnly||b.en);
   if(displayedLangs().length>1){saveStorage('compare-mode',mode);mode=hasZh?'zh':'ko'}
   else if(hasZh&&hasEn){mode=readStorage('compare-mode','en-zh');if(!['en-zh','ko-zh','all'].includes(mode))mode='en-zh'}
   else if(hasZh){mode='ko-zh'}
