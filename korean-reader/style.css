@@ -72,3 +72,5 @@
 @media(min-width:750px){.story-par.single .paragraph-translate{opacity:.45}.story-par.single:hover .paragraph-translate,.story-par.single:focus-within .paragraph-translate{opacity:1}}
 
 .translation-notice{font-size:.8rem;line-height:1.65;color:var(--muted,#676767);border-left:2px solid #aaa;padding:.5rem .8rem;margin:1rem 0 1.5rem}
+/* Place-based notice for non-verbatim, non-graphic passages. */
+.omission-inline{font-size:13px;line-height:1.85;color:#888;border-left:2px solid #ddd;padding:6px 0 6px 14px;margin:10px 0 30px}
