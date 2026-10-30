@@ -6,7 +6,7 @@
 <meta name="theme-color" content="#fff">
 <meta name="description" content="读小说，必要时才打开韩中英对照。">
 <title>문장 사이 · 阅读</title>
-<link rel="stylesheet" href="./style.css?v=20261029-reader-audit">
+<link rel="stylesheet" href="./style.css?v=20261030-chinese-toggle-v3">
 </head>
 <body>
 <header class="site-header">
@@ -30,19 +30,19 @@
       <div class="byline"><span id="article-author">삐삐</span> <span class="byline-sep">·</span> <span id="article-sub">한입만</span></div>
     </div>
     <div class="article-controls">
-      <button type="button" id="compare-trigger" class="control-link" aria-pressed="false" title="一键切换逐段英文＋中文对照">英中对照：关</button>
+      <button type="button" id="compare-trigger" class="control-link" aria-pressed="false" title="一键显示或收起整章中文">显示全部中文</button>
       <button type="button" id="mode-trigger" class="control-link" aria-expanded="false" aria-controls="compare-panel">语言 <span aria-hidden="true">⌄</span></button>
       <button type="button" id="lookup-quick" class="control-link" aria-pressed="true" title="打开后点击英文单词查看中文释义、IPA和例句">点词：开</button>
       <button type="button" id="type-trigger" class="control-link type-btn" aria-expanded="false" aria-controls="type-panel">Aa</button>
     </div>
     <div id="compare-panel" class="compare-panel hidden" aria-label="对照显示选项">
-      <span class="panel-intro">选择语言 · 对照按原文段落上下排列（无需左右滑动）</span>
+      <span class="panel-intro">默认英文阅读，中文按需展开。可用顶部按钮一键开关，或逐段展开。</span>
       <div class="mode-choices" role="group" aria-label="选择阅读语言">
-        <button type="button" data-mode="zh" class="selected">只看中文</button>
+        <button type="button" data-mode="zh">只看中文</button>
         <button type="button" data-mode="ko">只看韩文</button>
         <button type="button" data-mode="en">只看英文</button>
         <button type="button" data-mode="ko-zh">韩中对照</button>
-        <button type="button" data-mode="en-zh">英中对照</button>
+        <button type="button" data-mode="en-zh" class="selected">英文＋可展开中文</button>
         <button type="button" data-mode="all">三语对照</button>
       </div>
       <p id="translation-availability" class="translation-hint hidden"></p>
@@ -105,6 +105,6 @@
 <script src="./en-zh-h-n.js?v=20261029-zh-core" defer></script>
 <script src="./en-zh-o-t.js?v=20261029-zh-core" defer></script>
 <script src="./en-zh-u-z.js?v=20261029-zh-core" defer></script>
-<script src="./app.js?v=20261029-zh-core" defer></script>
+<script src="./app.js?v=20261030-chinese-toggle-v3" defer></script>
 </body>
 </html>
