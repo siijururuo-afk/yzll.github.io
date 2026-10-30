@@ -74,3 +74,16 @@
 .translation-notice{font-size:.8rem;line-height:1.65;color:var(--muted,#676767);border-left:2px solid #aaa;padding:.5rem .8rem;margin:1rem 0 1.5rem}
 /* Place-based notice for non-verbatim, non-graphic passages. */
 .omission-inline{font-size:13px;line-height:1.85;color:#888;border-left:2px solid #ddd;padding:6px 0 6px 14px;margin:10px 0 30px}
+
+
+/* English-first reading: make Chinese reveal controls easy to reach, without hiding English. */
+.article-controls #compare-trigger{background:#222;color:#fff;border-radius:6px;padding:9px 13px;font-weight:500}
+.article-controls #compare-trigger:hover,.article-controls #compare-trigger.active{background:#444;color:#fff}
+.article-controls #compare-trigger:disabled{background:#ededed;color:#aaa;cursor:not-allowed}
+.story-par.single .text-column[data-lang="en"] p{margin-bottom:0}
+.story-par .paragraph-translate{display:block;align-self:flex-end;margin:6px 0 10px auto;padding:5px 10px;min-height:30px;border:1px solid #e8e8e8;border-radius:5px;background:#fff;color:#666;font-size:12px;font-weight:400;line-height:1.5;cursor:pointer;opacity:1}
+.story-par.single .paragraph-translate,.story-par.compared .paragraph-translate{margin:6px 0 10px auto;opacity:1}
+.story-par .paragraph-translate:hover,.story-par .paragraph-translate:focus-visible{border-color:#aaa;background:#fafafa;color:#222;text-decoration:none;outline-offset:2px}
+.story-par.compared .text-column[data-lang="en"]{color:#222}
+.story-par.compared .text-column[data-lang="zh"]{color:#666;padding-top:4px}
+@media(max-width:560px){.article-controls{gap:12px}.article-controls #compare-trigger{padding:8px 10px}.story-par .paragraph-translate{min-height:34px}}
