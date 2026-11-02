@@ -6,6 +6,9 @@ const $$=s=>Array.from(document.querySelectorAll(s));
 const STORAGE='between-lines-v2';
 const DEFAULT_ID='hanip';
 const BUILTINS={
+ 'so-romantic-up':{path:'so-romantic-up.json',zh:"So F**kin' Romantic · 上篇",ko:"So F**kin' Romantic 上",author:'이로',count:246,series:"So F**kin' Romantic",part:'上',index:1,total:3,translation:'complete'},
+ 'so-romantic-mid':{path:'so-romantic-mid.json',zh:"So F**kin' Romantic · 中篇",ko:"So F**kin' Romantic 中",author:'이로',count:190,series:"So F**kin' Romantic",part:'中',index:2,total:3,translation:'complete'},
+ 'so-romantic-down':{path:'so-romantic-down.json',zh:"So F**kin' Romantic · 下篇（完结）",ko:"So F**kin' Romantic 下",author:'이로',count:261,series:"So F**kin' Romantic",part:'下',index:3,total:3,translation:'complete'},
  'hanip':{path:'hanip.json',zh:'就一口',ko:'한입만',author:'삐삐',count:142},
  'cover-eyes':{path:'cover-eyes.json',zh:'用手掌遮不住天空，但总能遮住你的眼睛吧',ko:'손바닥으로하늘을가리진못해도네눈을가릴순있겠지',author:'作者未注明',count:32},
  'existence-weight':{path:'existence-weight.json',zh:'存在的重量',ko:'존재의 무게',author:'넘버',count:361},
@@ -143,6 +146,7 @@ function renderStory(preserveScroll=false){
    const figure=document.createElement('figure');figure.className='story-media';figure.dataset.index=i;
    const img=document.createElement('img');img.src=b.image;img.alt=b.imageAlt||'原文插图';img.loading='lazy';img.style.maxWidth='100%';figure.appendChild(img);frag.appendChild(figure);continue;
   }
+  if(b.embedUrl && !b.embed){const videoMatch=/^https:\/\/www\.youtube-nocookie\.com\/embed\/([A-Za-z0-9_-]{11})$/.exec(b.embedUrl);if(videoMatch)b.embed=videoMatch[1]}
   if(b.embed){
     const figure=document.createElement('figure');figure.className='story-media';figure.dataset.index=i;
     const iframe=document.createElement('iframe');iframe.title='原文附带的视频';iframe.loading='lazy';iframe.referrerPolicy='strict-origin-when-cross-origin';iframe.sandbox='allow-scripts allow-same-origin allow-presentation';iframe.allow='fullscreen; picture-in-picture';iframe.allowFullscreen=true;
@@ -229,7 +233,7 @@ function renderStorySelect(){
 }
 async function loadStory(id,go=true){try{
  let data;
-  if(BUILTINS[id]){const response=await fetch('./stories/'+BUILTINS[id].path+(id.startsWith('ice-ice-')?'?v=20261102-peugeot-v5':''));if(!response.ok)throw Error('网络加载失败（HTTP '+response.status+'）');data=await response.json()}
+  if(BUILTINS[id]){const response=await fetch('./stories/'+BUILTINS[id].path+((id.startsWith('ice-ice-')||id.startsWith('so-romantic-'))?'?v=20261102-so-romantic-v6':''));if(!response.ok)throw Error('网络加载失败（HTTP '+response.status+'）');data=await response.json()}
   else data=readStorage(storyKey(id),null);
  if(!data||!Array.isArray(data.blocks))throw Error('文章数据不存在');
  if(BUILTINS[id]){const overlay=readStorage('translations:'+id,{});for(const [n,trans] of Object.entries(overlay)){const b=data.blocks[Number(n)];if(b&&trans){if(!b.zh&&trans.zh)b.zh=trans.zh;if(!b.en&&trans.en)b.en=trans.en}}}
