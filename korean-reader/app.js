@@ -229,7 +229,7 @@ function renderStorySelect(){
 }
 async function loadStory(id,go=true){try{
  let data;
-  if(BUILTINS[id]){const response=await fetch('./stories/'+BUILTINS[id].path+(id.startsWith('ice-ice-')?'?v=20261102-ice-images-v4':''));if(!response.ok)throw Error('网络加载失败（HTTP '+response.status+'）');data=await response.json()}
+  if(BUILTINS[id]){const response=await fetch('./stories/'+BUILTINS[id].path+(id.startsWith('ice-ice-')?'?v=20261102-peugeot-v5':''));if(!response.ok)throw Error('网络加载失败（HTTP '+response.status+'）');data=await response.json()}
   else data=readStorage(storyKey(id),null);
  if(!data||!Array.isArray(data.blocks))throw Error('文章数据不存在');
  if(BUILTINS[id]){const overlay=readStorage('translations:'+id,{});for(const [n,trans] of Object.entries(overlay)){const b=data.blocks[Number(n)];if(b&&trans){if(!b.zh&&trans.zh)b.zh=trans.zh;if(!b.en&&trans.en)b.en=trans.en}}}
