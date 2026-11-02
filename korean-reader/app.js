@@ -7,6 +7,7 @@ const STORAGE='between-lines-v2';
 const DEFAULT_ID='hanip';
 const BUILTINS={
  'good-1':{path:'good-1.json',zh:'好人会谈一场糟糕的恋爱 · 第1章',ko:'좋은 사람은 나쁜 연애를 하게 돼 1',author:'RQ',count:82,series:'好人会谈一场糟糕的恋爱',part:'1',index:1,total:9,translation:'complete'},
+ 'good-2':{path:'good-2.json',zh:'好人会谈一场糟糕的恋爱 · 第2章',ko:'좋은 사람은 나쁜 연애를 하게 돼 2',author:'RQ',count:115,series:'好人会谈一场糟糕的恋爱',part:'2',index:2,total:9,translation:'complete'},
  'so-romantic-up':{path:'so-romantic-up.json',zh:"So F**kin' Romantic · 上篇",ko:"So F**kin' Romantic 上",author:'이로',count:246,series:"So F**kin' Romantic",part:'上',index:1,total:3,translation:'complete'},
  'so-romantic-mid':{path:'so-romantic-mid.json',zh:"So F**kin' Romantic · 中篇",ko:"So F**kin' Romantic 中",author:'이로',count:190,series:"So F**kin' Romantic",part:'中',index:2,total:3,translation:'complete'},
  'so-romantic-down':{path:'so-romantic-down.json',zh:"So F**kin' Romantic · 下篇（完结）",ko:"So F**kin' Romantic 下",author:'이로',count:261,series:"So F**kin' Romantic",part:'下',index:3,total:3,translation:'complete'},
