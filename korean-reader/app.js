@@ -141,7 +141,7 @@ function renderStory(preserveScroll=false){
   if(b.koOnly && !originalOnlyShown){const note=document.createElement('div');note.className='omission-inline';note.textContent='本段保留韩文原文；其余已翻译的对话按正常阅读模式显示。';frag.appendChild(note);originalOnlyShown=true;}
   if(b.image&&/^data:image\/(png|jpeg|webp|gif);base64,/.test(b.image)){
    const figure=document.createElement('figure');figure.className='story-media';figure.dataset.index=i;
-   const img=document.createElement('img');img.src=b.image;img.alt='原文插图';img.loading='lazy';img.style.maxWidth='100%';figure.appendChild(img);frag.appendChild(figure);continue;
+   const img=document.createElement('img');img.src=b.image;img.alt=b.imageAlt||'原文插图';img.loading='lazy';img.style.maxWidth='100%';figure.appendChild(img);frag.appendChild(figure);continue;
   }
   if(b.embed){
     const figure=document.createElement('figure');figure.className='story-media';figure.dataset.index=i;
@@ -229,7 +229,7 @@ function renderStorySelect(){
 }
 async function loadStory(id,go=true){try{
  let data;
-  if(BUILTINS[id]){const response=await fetch('./stories/'+BUILTINS[id].path+(id.startsWith('ice-ice-')?'?v=20261102-ice-context-v3':''));if(!response.ok)throw Error('网络加载失败（HTTP '+response.status+'）');data=await response.json()}
+  if(BUILTINS[id]){const response=await fetch('./stories/'+BUILTINS[id].path+(id.startsWith('ice-ice-')?'?v=20261102-ice-images-v4':''));if(!response.ok)throw Error('网络加载失败（HTTP '+response.status+'）');data=await response.json()}
   else data=readStorage(storyKey(id),null);
  if(!data||!Array.isArray(data.blocks))throw Error('文章数据不存在');
  if(BUILTINS[id]){const overlay=readStorage('translations:'+id,{});for(const [n,trans] of Object.entries(overlay)){const b=data.blocks[Number(n)];if(b&&trans){if(!b.zh&&trans.zh)b.zh=trans.zh;if(!b.en&&trans.en)b.en=trans.en}}}
