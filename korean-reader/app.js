@@ -11,6 +11,7 @@ const BUILTINS={
  'good-3':{path:'good-3.json',zh:'好人会谈一场糟糕的恋爱 · 第3章',ko:'좋은 사람은 나쁜 연애를 하게 돼 3',author:'RQ',count:62,series:'好人会谈一场糟糕的恋爱',part:'3',index:3,total:9,translation:'complete'},
  'good-4':{path:'good-4.json',zh:'好人会谈一场糟糕的恋爱 · 第4章',ko:'좋은 사람은 나쁜 연애를 하게 돼 4',author:'RQ',count:78,series:'好人会谈一场糟糕的恋爱',part:'4',index:4,total:9,translation:'complete'},
  'good-5':{path:'good-5.json',zh:'好人会谈一场糟糕的恋爱 · 第5章',ko:'좋은 사람은 나쁜 연애를 하게 돼 5',author:'RQ',count:87,series:'好人会谈一场糟糕的恋爱',part:'5',index:5,total:9,translation:'complete'},
+ 'good-6':{path:'good-6.json',zh:'好人会谈一场糟糕的恋爱 · 第6章',ko:'좋은 사람은 나쁜 연애를 하게 돼 6',author:'RQ',count:29,series:'好人会谈一场糟糕的恋爱',part:'6',index:6,total:9,translation:'complete'},
  'so-romantic-up':{path:'so-romantic-up.json',zh:"So F**kin' Romantic · 上篇",ko:"So F**kin' Romantic 上",author:'이로',count:246,series:"So F**kin' Romantic",part:'上',index:1,total:3,translation:'complete'},
  'so-romantic-mid':{path:'so-romantic-mid.json',zh:"So F**kin' Romantic · 中篇",ko:"So F**kin' Romantic 中",author:'이로',count:190,series:"So F**kin' Romantic",part:'中',index:2,total:3,translation:'complete'},
  'so-romantic-down':{path:'so-romantic-down.json',zh:"So F**kin' Romantic · 下篇（完结）",ko:"So F**kin' Romantic 下",author:'이로',count:261,series:"So F**kin' Romantic",part:'下',index:3,total:3,translation:'complete'},
