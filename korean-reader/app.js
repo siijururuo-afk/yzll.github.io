@@ -149,7 +149,7 @@ function renderStory(preserveScroll=false){
     if(/^[a-zA-Z0-9_-]{11}$/.test(b.embed)){iframe.src='https://www.youtube-nocookie.com/embed/'+b.embed;figure.appendChild(iframe)}
     frag.appendChild(figure);continue;
   }
-  if(b.imageMissing){const notice=document.createElement('div');notice.className='omission-inline';notice.dataset.index=i;notice.textContent='[原文图片未离线保存]';frag.appendChild(notice);continue}
+  if(b.imageMissing){const notice=document.createElement('div');notice.className='omission-inline';notice.dataset.index=i;notice.textContent=b.imageSlot?`第3章原文图片 ${b.imageSlot.endsWith('-1')?'1/2':'2/2'}（Instagram 情节处，图片未离线保存）`:'[原文图片未离线保存]';frag.appendChild(notice);continue}
    if(b.heading){const el=document.createElement('h2');el.className='story-inner-heading';el.dataset.index=i;el.textContent=mode==='ko'?b.ko:(mode==='en'||mode==='en-zh'?b.en||b.zh||b.ko:b.zh||b.ko);frag.appendChild(el);continue}
   if(b.spacer){const el=document.createElement('div');el.className='scene-space';el.dataset.index=i;el.style.height=Math.min(100,14*b.spacer)+'px';frag.appendChild(el);continue}
   if(b.ko==='＊'||b.ko==='*'){const el=document.createElement('div');el.className='scene-break';el.textContent='＊';el.dataset.index=i;frag.appendChild(el);continue}
@@ -229,7 +229,7 @@ function renderStorySelect(){
 }
 async function loadStory(id,go=true){try{
  let data;
-  if(BUILTINS[id]){const response=await fetch('./stories/'+BUILTINS[id].path);if(!response.ok)throw Error('网络加载失败（HTTP '+response.status+'）');data=await response.json()}
+  if(BUILTINS[id]){const response=await fetch('./stories/'+BUILTINS[id].path+(id.startsWith('ice-ice-')?'?v=20261102-ice-standard-v2':''));if(!response.ok)throw Error('网络加载失败（HTTP '+response.status+'）');data=await response.json()}
   else data=readStorage(storyKey(id),null);
  if(!data||!Array.isArray(data.blocks))throw Error('文章数据不存在');
  if(BUILTINS[id]){const overlay=readStorage('translations:'+id,{});for(const [n,trans] of Object.entries(overlay)){const b=data.blocks[Number(n)];if(b&&trans){if(!b.zh&&trans.zh)b.zh=trans.zh;if(!b.en&&trans.en)b.en=trans.en}}}
