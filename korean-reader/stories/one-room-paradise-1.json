@@ -1,0 +1,577 @@
+{
+  "id": "one-room-paradise-1",
+  "title": {
+    "ko": "원룸 파라다이스 1",
+    "zh": "单间天堂 · 第1章",
+    "en": "One-Room Paradise · Chapter 1"
+  },
+  "author": "데님",
+  "series": {
+    "name": "单间天堂",
+    "part": "1",
+    "index": 1,
+    "total": 5
+  },
+  "translationStatus": "in-progress",
+  "translationProgress": {
+    "translatedParagraphs": 40,
+    "totalParagraphs": 111
+  },
+  "blocks": [
+    {
+      "ko": "트리거 있음",
+      "zh": "含触发性内容",
+      "en": "Contains triggering content."
+    },
+    {
+      "ko": "아, 이제 진짜 뭐하고 살아야 되냐.",
+      "zh": "啊，现在到底要靠什么活下去啊。",
+      "en": "Ah, what the hell am I supposed to do with my life now?"
+    },
+    {
+      "ko": "아이돌 준비생, 아니 아이돌 포기생 김우석은 눈을 끔뻑였다. 아이돌 연습생만 하길 10년이었다. 지금 데뷔해도 늙었다고 욕 먹을 나이 스물 넷. 스물 넷 김우석의 결말이야 뻔했다. 소속사는 김우석이 더 이상 상품성이 없을 거라 판단했다. 당연했다. 쫓겨났다. 김우석은 하루아침에 소속사에서 잘리고 백수가 됐다. 소속사는 김우석의 인생을 책임져주지 않는다. 아무리 김우석이 10년 동안 보고 지낸 사이여도. 공과 사인지 싸가지인지 뭔지 아무튼, 김우석을 그렇게 내쳤다.",
+      "zh": "偶像预备生，不，应该说放弃当偶像的金宇硕眨了眨眼。他当偶像练习生已经整整十年了。二十四岁，就算现在出道也会被骂老的年纪。二十四岁的金宇硕，结局可想而知。经纪公司判断他已经没有商品价值了。理所当然。他被赶出来了。一夜之间遭公司解约，成了无业游民。公司不会对金宇硕的人生负责，哪怕他们已经相处了十年。公私分明也好，没礼貌也罢，反正就是这样把金宇硕踢了出去。",
+      "en": "Kim Wooseok, a would-be idol—or rather, a former would-be idol—blinked. He'd been a trainee for ten years. At twenty-four, he was already at an age where people would call him old even if he debuted now. The ending was obvious. His agency decided he had no commercial value left. Naturally, they kicked him out. Overnight he lost his place at the agency and became unemployed. The agency wasn't responsible for his life, even after knowing him for ten years. Professionalism or plain rudeness, whatever it was, they discarded him."
+    },
+    {
+      "ko": "김우석은 그 후로 몸 하나 겨우 뉘일 수 있는 고시원에 틀어박혔다. 그 작은 방 안에 애벌레처럼 웅크린 채로 날을 보냈다. 작은 방은 고치였다. 김우석을 보호해줄 유일한 곳. 전봇대에 불도 잘 안 들어오는 낙후된 곳에 지어진 허름한 고시원만이 김우석의 안식처였다. 아이돌 하겠다고 부모와 대판 싸우고 몰래 나온 후로, 김우석에게 믿을 것은 자기 자신 뿐이었다. 성공해서 돌아가야 체면이 있는데 성공은 개뿔, 쪽박만 찼으니 부모 얼굴을 볼 수가 없었다.",
+      "zh": "此后金宇硕躲进了一间勉强容得下自己身体的考试院小屋。蜷缩在那个小房间里，像幼虫一样度过每一天。那小房间就是他的茧。唯一能够保护金宇硕的地方。只有那栋位于连电线杆上的灯都不怎么亮的破旧街区里的简陋考试院，才是他的安身之处。当年为了当偶像和父母大吵一架、偷偷跑出来以后，金宇硕就只能相信自己。原本打算成功之后风风光光地回家，成功个屁，混得一败涂地，哪还有脸去见父母。",
+      "en": "After that, Wooseok shut himself in a tiny gosiwon room with barely enough space to lie down. He spent his days curled up like a larva. The little room was his cocoon, the only place that could protect him. That shabby boarding house in a run-down area, where even the streetlights barely worked, became his only refuge. Since he'd fought bitterly with his parents and secretly left home to become an idol, he'd had only himself to rely on. He was supposed to return triumphantly after succeeding. Success, my ass. He'd failed miserably and couldn't face his parents."
+    },
+    {
+      "ko": "김우석은 그 방에서 생각했다. 뭘 해야 하지. 김우석은 고등학교도 때려쳤다. 매일 춤과 노래만 연습하느라 공부는 해본 적도 없었다. 김우석은 항상 '쟤 깨워'의 쟤를 맡았다. 덕분에 선생님들의 블랙리스트에 올라가길 수백 번이었다. 지금이라도 대학에 가긴 글러 먹었단 소리다. 그렇다고 취업을 하기엔 빽도 없다. 그야말로 몸뚱아리 빼곤 가진 게 없는 놈이 됐다. 김우석의 인생은 그야말로 망한 인생이 되어가고 있었다. 청춘을 남들과 달리 꿈을 찾아갔다는 죄로.",
+      "zh": "金宇硕在房间里思考：该做些什么？他连高中都退学了。每天只顾练舞唱歌，根本没怎么学习。金宇硕总是老师说“把那家伙叫醒”时的那个“那家伙”。因此上老师的黑名单都不知道几百回了。换句话说，现在再想上大学也没戏。可要找工作也没有背景。成了个除了身体什么也没有的人。金宇硕的人生正在实实在在地变成失败的人生。仅仅因为年轻时和别人不一样，去追逐了梦想。",
+      "en": "In that room Wooseok wondered what to do. He'd dropped out of high school. He'd spent every day practicing dancing and singing and had barely studied. When teachers said, \"Wake that kid up,\" he was always \"that kid.\" He'd been on their blacklists hundreds of times. Going to college now was hopeless. But he had no connections to find a job either. He'd become someone with nothing but his own body. His life was turning into an utterly ruined one, all because he'd chosen to chase a dream in his youth rather than live like everyone else."
+    },
+    {
+      "ko": "작은 고치 속에서 생각만 일주일이나 했으나 소용이 없었다. 사실대로 말하자. 소용이 없는 건 아니고 그냥 하기 싫었다. 생각이고 뭐고 해봤자 달라질 게 있나. 그럼 김우석은 그저 입술이나 잘근잘근 씹는 것이다. 답도 없는 무력감에 빠져서.",
+      "zh": "在那个小茧里思考了整整一周，却毫无用处。说实话，也不是毫无用处，只是他根本不想做。想来想去又能改变什么呢？于是金宇硕只是咬着嘴唇，陷在无解的无力感中。",
+      "en": "He thought inside that cocoon for an entire week, to no avail. Well, not exactly to no avail. He just didn't want to do anything. What would thinking change? Wooseok simply chewed on his lips and sank into helplessness without an answer."
+    },
+    {
+      "ko": "하지만 고시원에서라도 살기 위해선 돈이 필요한 것. 김우석은 고시원에 낼 돈이 얼마 안 남은 시점부터 움직이기 시작했다. 알바를 시작했다. 근처 편의점 알바로. 사장 아재는 지 편의점에 관심이 없었다. 맨날 알아서 하란다. 모든 업무는 전타임 알바가 알려줬다. 문제는 전타임 알바가 싸가지 존나 없었다. 하나를 처 알려주고 열을 알길 바란다. 따지고 보면 김우석보다 두 살은 어린데. 김우석은 아가리에 걸레를 문 알바에게 한마디 하고 싶었다. 그러나 입을 다물었다. 저 새끼보다 지 인생이 더 바닥이라 말싸움도 질 거 같았거든.",
+      "zh": "但哪怕是住考试院，活下去也需要钱。眼看付房租的钱没剩多少，金宇硕才终于动起来。他找了份兼职，在附近的便利店。老板大叔完全不关心自己的店，天天只叫他自己看着办。所有工作都靠上一班的兼职教。问题是，上一班的那家伙他妈的非常没礼貌。教一个就恨不得他会十个。论年龄还比金宇硕小两岁。金宇硕真想骂那个满嘴喷粪的兼职几句，可还是闭了嘴。因为感觉自己的人生比那混蛋还烂，连吵架都可能输。",
+      "en": "But even living in a gosiwon required money. With rent money running out, he finally got moving. He took a part-time job at a nearby convenience store. The middle-aged owner couldn't care less about his own store and kept telling Wooseok to figure things out. The worker on the previous shift taught him everything. The problem was that this worker was fucking rude. He showed Wooseok one thing and expected him to know ten. He was two years younger than Wooseok, too. Wooseok wanted to tell that foul-mouthed jerk off, but stayed quiet. He felt his own life was worse than that bastard's and he'd lose even a verbal fight."
+    },
+    {
+      "ko": "알바가 제대로 알려주지 않아서 김우석은 포스기를 독학으로 깨우쳤다. 하나하나 다 눌러보고 검색했다. 다행히도 손님에게 얼빠진 모습을 보일 일은 없었다.",
+      "zh": "那个兼职没好好教，金宇硕只好自学收银系统。每个按钮都自己按一遍，再去搜索。幸好还不至于在客人面前露出一副傻样。",
+      "en": "Because the other worker didn't teach him properly, Wooseok taught himself the register system, pressing each button and looking things up. Fortunately, he didn't have to look stupid in front of customers."
+    },
+    {
+      "ko": "그렇게 또 한 달. 편의점과 고시원만 오가길 수백번. 유통기한이 지난 편의점 삼각김밥을 고시원에 싸가던 김우석은 생각했다. 이렇게 사는 삶은 무슨 의미가 있지? 하나도 의미 없지 않은가? 유통기한 다 지난 삼각김밥을 주섬주섬 가방에 담으면서 오늘은 무슨 맛이 남았나 보는 게 무슨 의미가 있지? 개 같은 알바에게 속으로 쪼잔하게 욕을 뇌까리는 것이, 얼마나 볼품 없어 보이는가.",
+      "zh": "就这样又过了一个月。便利店和考试院之间来来回回不知道多少遍。把便利店过期的三角饭团带回考试院时，金宇硕想：过这种日子有什么意义？一点意义都没有吧？把过期三角饭团一股脑塞进包里，还得看看今天剩了什么口味，这到底有什么意义？只能在心里小家子气地骂那混账兼职，又显得多么寒碜。",
+      "en": "Another month went by. Countless trips between the store and his boarding house. Carrying expired convenience-store triangle kimbap home, Wooseok wondered what the point of this life was. Wasn't it completely meaningless? What was the point of stuffing expired rice balls in his bag and checking which flavors were left? How pathetic was it to curse that shitty colleague under his breath?"
+    },
+    {
+      "ko": "빛나는 아이돌의 삶을 동경했다. 그 삶을 따라 불빛 가득한 도시 서울로 왔다. 그 빛이 자기가 되고 싶단 일념 하나로. 제 청춘을 태워서 빛나겠단 생각으로. 근데 지금 자신은 빛나는가? 당당하게 대답할 수 있다. 아니, 전혀. 하나도 빛나지 않았다. 제 삶의 주인공은 자신이라던데, 주인공이 과연 이래도 되는가? 그 이전에 주인공이긴 한가? 이게 내 삶이 맞나?",
+      "zh": "他曾憧憬闪闪发光的偶像生活。为了那种生活来到灯火辉煌的首尔。一心想自己也成为那道光，燃烧青春来发光。可是现在的自己在发光吗？他可以理直气壮地回答：不，完全没有。一点也不亮。人们说自己是自己人生的主人公，可主人公真的可以这样吗？在那之前，他算得上主人公吗？这真的是我的人生吗？",
+      "en": "He'd admired the dazzling lives of idols. He'd come to brightly lit Seoul to pursue that life, determined to become that light himself, to burn his youth so he could shine. But was he shining now? He could answer without hesitation: No. Not at all. Not one bit. People said you were the protagonist of your own life, but could a protagonist really live like this? Was he even the protagonist? Was this really his life?"
+    },
+    {
+      "ko": "방향성을 못 잡았다. 그저 빙글빙글 돈다. 나아갈 수 없다. 그저, 그저 돌기만.",
+      "zh": "找不到方向。只是在原地打转。无法向前。只是不停地转，转。",
+      "en": "He couldn't find a direction. He just went in circles, unable to move forward. Around and around."
+    },
+    {
+      "ko": "그래.",
+      "zh": "是啊。",
+      "en": "Right."
+    },
+    {
+      "ko": "그날 김우석은 결정했다.",
+      "zh": "那天金宇硕下定了决心。",
+      "en": "That day, Kim Wooseok made a decision."
+    },
+    {
+      "ko": "차도 다니지 않는 골목길 도로 위에서.",
+      "zh": "就在那条连车都不经过的小巷马路上。",
+      "en": "On the road in an alley that cars didn't even use."
+    },
+    {
+      "ko": "죽겠다고.",
+      "zh": "决定去死。",
+      "en": "He would die."
+    },
+    {
+      "ko": "조승연 김우석",
+      "zh": "曹承衍 金宇硕",
+      "en": "Cho Seungyeon, Kim Wooseok."
+    },
+    {
+      "ko": "죽음을 결정한 뒤로는 마음이 가벼웠다. 미래에 대한 걱정도 없으니까. 당장 내야 될 고시원 비를 생각 안 해도 된다는 게 좋았다. 제일 큰 지출이 사라지니 할 수 있는 게 많아졌다. 유통기한 다 지난 삼각김밥 대신 새 삼각김밥을 돈 주고 사 먹을 수 있었다. 그것 뿐이랴, 삼각김밥 대신 치킨을 먹을 수도 있었다.",
+      "zh": "决定死亡之后，心情反而轻松了。不必再担心未来了。光是不必考虑马上要缴的考试院房租，就很开心。最大的一笔开销没了，能做的事也多了。可以花钱买新鲜的三角饭团吃，而不是只吃过期货。不止如此，还可以不吃饭团，去吃炸鸡。",
+      "en": "Once he'd decided to die, he felt lighter. No need to worry about the future. Not having to think about the rent payment coming due was wonderful. Without his biggest expense, he could do so much more. He could buy fresh triangle kimbap instead of eating expired ones. He could even have fried chicken instead of kimbap."
+    },
+    {
+      "ko": "역시 사람은 마음에 여유가 생겨야 한다. 여유가 생기니, 전타임 알바가 지랄 떠는 것도 예쁘게 보였다. 알바의 개지랄 염병 쇼도 웃으며 넘겼다. 하하, 네가 난리를 피워봐라. 어차피 뒤지면 그만이야~",
+      "zh": "人果然得在心里有余裕才行。轻松下来之后，连上一班兼职发神经都显得顺眼了。对方再怎么胡闹，他也能笑着带过。哈哈，你闹吧。反正死了就完事啦～",
+      "en": "People really needed room to breathe. With that peace of mind, even the previous worker's tantrums seemed almost charming. Wooseok could laugh them off. Ha ha, throw your fit. I'll be dead anyway~"
+    },
+    {
+      "ko": "김우석에겐 버릇이 생겼다. 아무리 좆같은 일이 있어도 뒤지면 그만이라고 외치는 버릇. 줄여서 어. 뒤.그.였다. 이 말만 외치면 평온해졌다. 김우석은 오늘도 부처 같은 마음가짐으로 전타임 알바의 사방팔방으로 튀는 아가리 침을 견디고 계산대 앞에 앉았다.",
+      "zh": "金宇硕养成了一个习惯。无论遇到多操蛋的事，都喊“死了就行了”。简称“反·正·会·死”。只要念这句话就能平静下来。今天的金宇硕也抱着佛祖一般的心态，忍受上一班兼职到处乱喷的唾沫，坐到收银台前。",
+      "en": "Wooseok developed a habit of saying \"It'll be over when I'm dead\" no matter how awful something was. He shortened it into a little catchphrase. Just saying it made him calm. Today, with the serenity of a Buddha, he endured the spit flying from the previous worker's mouth and sat down at the register."
+    },
+    {
+      "ko": "2300원입니다. 네. 안녕히 가세요.",
+      "zh": "二千三百韩元。好的。慢走。",
+      "en": "Two thousand three hundred won. Yes. Goodbye."
+    },
+    {
+      "ko": "5800원입니다. 현금 10000원 받았습니다.",
+      "zh": "五千八百韩元。收您一万韩元现金。",
+      "en": "Five thousand eight hundred won. Ten thousand won in cash received."
+    },
+    {
+      "ko": "1600원입니다. 네. 안녕히 가세요.",
+      "zh": "一千六百韩元。好的。慢走。",
+      "en": "One thousand six hundred won. Yes. Goodbye."
+    },
+    {
+      "ko": "영혼 없이 바코드를 찍어댔다. 기계처럼 인사했다. 손님의 얼굴을 보지도 않았다. 어차피 다 익숙한 얼굴일 텐데.",
+      "zh": "毫无灵魂地一遍遍扫条形码，像机器一样打招呼。连客人的脸都不看。反正应该都是些老面孔。",
+      "en": "He scanned barcodes without a soul and greeted people like a machine. He didn't even look at their faces. They were all familiar anyway."
+    },
+    {
+      "ko": "편의점에 오는 손님들은 늘 구면이었다. 동네 구린 편의점에 새로운 사람이 오겠는가. 늘 오던 사람들이 슬리퍼 끌고 오지. 당연히 김우석은 그들의 얼굴을 외웠다. 특히 빨리 외운 건 진상이었다. 허구한 날 술 마시고 편의점 돌아다니다 아이스크림 통 뚜껑 열고 가는 놈, 목욕 가운 입고 편의점 오는 놈, 그 외 등등. 다 짜증 났지만 그중에 최악은 따로 있었다. 맨날 뫼비우스만 피워대면서 굳이 굳이 다른 담배 말하다가 마지막에 뫼비우스 스카이블루 달라고 하는 새끼. 최악 중의 최악이었다. 이 새끼는 뫼비우스만 사가길래 미리 뫼비우스 꺼내주면 다른 거 피울 건데 왜 꺼내냐고 지랄을 해댔다. 그래서 다른 거 뭐 찾으시냐고 물으면 담배 종류 오억개 씨불이다가 결국은 뫼비우스 산다. 진상이면 그냥 갈 것이지, 꼭 편의점 앞에서 담배 두 대는 피우고 갔다. 우석은 이 빌런을 뫼비우스 씹새끼라 칭했다. 줄여서 뫼비우스라고 부르기도 했다.",
+      "zh": "来这间便利店的客人永远都是熟人。谁会特意来这种破社区的便利店啊？总是那些拖着拖鞋的熟客。当然，金宇硕记得他们的脸。最快记住的尤其是难缠的客人。整天喝酒逛便利店、把冰柜盖子掀开就走的家伙，穿着浴袍来买东西的家伙等等。个个都令人烦躁，但最差劲的还另有其人：明明天天只抽七星（MEVIUS），却非得先说一大堆其他香烟，最后才要七星天空蓝的混蛋。简直是极品。因为那家伙只买七星，金宇硕提前拿出来，他又发火说自己今天要抽别的，干吗给他拿这个。要是问那您找哪种，他就叽叽歪歪报上五亿种香烟的名字，最后还是买七星。难缠就算了，还非得在便利店门口抽完两根才走。金宇硕给这个恶棍取名“七星傻逼”，有时简称“七星”。",
+      "en": "The customers at that store were always familiar. Who would visit a new store in such a crappy neighborhood? Only the usual people dragging their slippers through the door. Naturally, Wooseok remembered their faces, especially the troublesome ones: the drunk who opened the ice cream freezer and left it open, the person who came in wearing a bathrobe, and so on. They were all irritating, but one was worse than the rest: the bastard who always smoked Mevius yet insisted on naming other brands before finally requesting Mevius Sky Blue. The worst of the worst. Since he always bought Mevius, Wooseok once prepared it in advance, only to be yelled at for assuming he'd smoke that today. When asked what he did want, the man listed about five hundred million kinds of cigarettes and ended up buying Mevius anyway. As if being a nuisance wasn't enough, he always smoked two cigarettes outside before leaving. Wooseok named the villain \"Mevius Asshole,\" shortened to \"Mevius.\""
+    },
+    {
+      "ko": "뫼비우스씹새끼는 3일에 한 번씩 오는데, 오늘이 그날이었다. 어김없이 팔자걸음으로 걸어오더니 말보로를 불렀다. 뫼비우스나 말할 것이지. 그래, 뒤지면 그만이야. 뒤지면 끝. 속으로 개 쌍욕을 하던 김우석이 부처 웃음을 지었다.",
+      "zh": "七星傻逼三天来一次，而今天就是那个日子。他照旧外八字走进来，开口就说要万宝路。直接说七星不就好了。行，反正死了就完事。死了就结束了。心里把对方祖宗十八代骂了个遍，金宇硕露出佛祖般的笑容。",
+      "en": "Mevius Asshole came every three days, and today was his day. He swaggered in as usual and asked for Marlboro. Just say Mevius already. Fine, it'll all be over when I'm dead. Cursing him viciously inside, Wooseok produced a Buddha-like smile."
+    },
+    {
+      "ko": "\"네, 말보로 뭐로 드릴까요?\"",
+      "zh": "“好的，万宝路要哪款？”",
+      "en": "\"Certainly. Which Marlboro?\""
+    },
+    {
+      "ko": "\"아니야, 딴 거 딴 거.\"",
+      "zh": "“不是，别的，别的。”",
+      "en": "\"No, something else, something else.\""
+    },
+    {
+      "ko": "\"뭐로 드려요?\"",
+      "zh": "“您要哪种？”",
+      "en": "\"Which one?\""
+    },
+    {
+      "ko": "\"필라멘트.\"",
+      "zh": "“菲拉蒙。”",
+      "en": "\"Filament.\""
+    },
+    {
+      "ko": "\"필라멘트 뭐로 드릴까요?\"",
+      "zh": "“菲拉蒙哪款？”",
+      "en": "\"Which Filament?\""
+    },
+    {
+      "ko": "\"아냐, 됐다. 됐어 그냥. 딴 거.\"",
+      "zh": "“不是，不要了。算了。别的。”",
+      "en": "\"No, forget it. Something else.\""
+    },
+    {
+      "ko": "또 시작됐다. 빙빙 돌리기 스킬. 김우석이 더 밝게 웃었다. 빨리 말하라는 최대한의 압박이었다. 그러나 뫼비우스의 철판은 김우석의 알바용 웃음보다 두꺼웠다.",
+      "zh": "又开始了。他那套绕圈子神技。金宇硕笑得更加灿烂，这是他能施加的最大程度的“赶紧说”压力。然而七星那厚脸皮比金宇硕的营业笑容还厚。",
+      "en": "Here it was again, his endless runaround. Wooseok smiled even brighter, putting as much pressure as possible into the expression for him to hurry up. But Mevius's thick skin was thicker than Wooseok's customer-service smile."
+    },
+    {
+      "ko": "5분이나 담배 이름 말하기 놀이를 했다. 이젠 말했던 걸 또 말하고 있었다. 어느새 줄도 생겼다. 물론 그래봤자 한 명이지만.",
+      "zh": "两个人光玩报香烟名字就玩了五分钟。现在连已经报过的名字都开始重复。身后不知不觉排起队了，虽然只有一个人。",
+      "en": "They spent five whole minutes playing the name-the-cigarette game, repeating brands they'd already mentioned. A line had formed behind him—just one person, admittedly."
+    },
+    {
+      "ko": "결국 버티다 못한 뒷사람이 뫼비우스에게 개꼽을 줬다.",
+      "zh": "终于，后面的人忍不了了，狠狠给七星甩了脸色。",
+      "en": "Finally, the person behind him couldn't take it anymore and gave Mevius a sharp rebuke."
+    },
+    {
+      "ko": "\"아저씨, 안 살 거면 나가는 게 좋을 거 같은데.\"",
+      "zh": "“大叔，不买的话就出去吧。”",
+      "en": "\"Sir, if you're not buying anything, you should leave.\""
+    },
+    {
+      "ko": "뫼비우스는 뒷사람을 째려보다 뫼비우스 스카이블루 사서 토꼈다. 꼽 먹은 게 쪽팔린 것인지, 오늘은 밖에서 담배 두 대도 안 피우고 그냥 갔다. 김우석은 저를 구해준 뒤에 있는 손님에게 편의점용 미소를 500퍼센트 발휘했다. 그러고 보니 처음 보는 얼굴이었다.",
+      "zh": "七星狠狠瞪了身后的人一眼，买了盒七星天空蓝就溜了。大概是被怼得丢人，今天连门口那两根烟都没抽便直接走了。金宇硕向解救了自己的那位客人展现出百分之五百的便利店营业笑容。这么一看，是张没见过的脸。",
+      "en": "Mevius glared back, bought his Mevius Sky Blue and fled. Perhaps embarrassed at being told off, he didn't even smoke his usual two cigarettes outside. Wooseok flashed the customer who saved him a five-hundred-percent customer-service smile. Come to think of it, he'd never seen this face before."
+    },
+    {
+      "ko": "처음 보는데, 얼굴도 잘생겨서 힐끔힐끔 쳐다봤다. 눈동자를 위아래로 굴리면서 옷도 스캔했다. 옷은 또 다 명품이었다. 명품 입을 만한 사람들은 이런 동네에서 안 사는데. 이상했다. 그렇다고 엄청난 관심을 가진 건 아니었다. 곧 죽을 사람이 관심 가져봤자 쓸모도 없고 할 것도 없었다.",
+      "zh": "因为没见过，又长得好看，金宇硕忍不住多瞥了几眼。眼珠上下转着，也扫描了对方的衣服。竟然从头到脚都是名牌。买得起名牌的人按理不会住在这种街区。真奇怪。不过也没多大兴趣。反正快死的人有兴趣也毫无用处，什么都做不了。",
+      "en": "The stranger was handsome, so Wooseok kept stealing glances at him, looking up and down and scanning his clothes. Every piece was designer. People who wore designer clothes didn't usually live in neighborhoods like this. Strange. But he wasn't profoundly interested. What use was interest to someone about to die?"
+    },
+    {
+      "ko": "7200원입니다. 네, 현금 10000원 받았습니다. 안녕히 가세요. 손님은 쿨한 결제 후 밖에 주차돼있는 개간지 스포츠카를 타고 사라졌다. 김우석은 사라진 스포츠카의 자리를 넋 놓고 쳐다봤다. 진상 상대하느라 스포츠카가 밖에 있는지도 몰랐네. 저렇게 돈 많은 사람이면 살기 편하겠지? 잠시 쓸데없는 생각을 했다. 하지만 이내 그만뒀다. 평생 없을 일에 대한 망상은 사람을 지치게 하니까. 어차피 저 사람은 돈도 많으니까 이런 후진 곳엔 다시 올 일 없겠지.",
+      "zh": "七千二百韩元。好的，收您一万韩元现金。慢走。客人爽快结账后，坐上停在门口的一辆帅炸了的跑车离开。金宇硕呆呆地看着跑车消失的位置。忙着对付难缠的客人，竟没发现门口还有辆跑车。这么有钱的人活着应该很轻松吧？他短暂想了些没用的东西，但很快又停止了。幻想自己这辈子都不可能拥有的东西，只会让人疲惫。反正那个人那么有钱，应该再也不会来这种破地方了吧。",
+      "en": "Seven thousand two hundred won. Ten thousand won in cash received. Goodbye. After paying coolly, the customer left in an incredibly stylish sports car parked outside. Wooseok stared vacantly at the space it had occupied. He'd been so busy with Mevius that he hadn't noticed the sports car. Life must be easier for someone that rich, he thought briefly. Then he stopped. Fantasizing about something he'd never have only exhausted him. Someone with that much money wouldn't visit a shabby place like this again, surely."
+    },
+    {
+      "ko": "김우석의 예상과는 다르게 개부자 손님은 하루걸러 하루 찾아왔다. 뫼비우스보다 더 자주 오는 셈이었다. 김우석은 그 손님에게 개부자란 별명을 붙였다. 관심이 안 간다면 거짓이었다. 비슷한 나이대에 잘생긴 얼굴, 괜찮은 첫인상. 관심을 가지기 충분했다. 말 한 번 걸어볼까 생각이 들길 수어 번이었으나 싹 다 실천하진 않았다. 죽을 놈이 삶에 미련 가지면 안 되는 법이었다.",
+      "zh": "跟金宇硕想的不同，那个超级有钱的客人隔一天就来一次。比七星来得还勤。金宇硕给他取了个外号“超级有钱”。说完全不感兴趣是假的。年龄相仿，长得好看，第一印象也不错。这已经足够引人注意了。好多次想和他说说话，却一次也没有付诸行动。一个要死的人，可不能对生活产生留恋。",
+      "en": "Contrary to Wooseok's expectation, the filthy-rich customer returned every other day, more often than Mevius. Wooseok nicknamed him \"Filthy Rich.\" He'd be lying to say he wasn't interested. They seemed about the same age; the stranger was handsome and made a good first impression. Plenty of reasons to be curious. Wooseok thought about starting a conversation many times, but never did. A person who's about to die shouldn't get attached to life."
+    },
+    {
+      "ko": "김우석은 디데이를 정했다. 괜히 더 살고 싶어지기 전에 끝내버리는 게 낫다는 생각이었다. 김우석은 고시원 비를 내기 일주일 전을 택했다. 죽을 장소는 한강이었다. 고시원에서 목매달고 죽으면 안 그래도 까탈스러운 주인이 뒤진 새끼 때문에 방값 떨어진다고 죽은 영혼한테 저주 퍼부을 것 같았다. 차라리 한강에 풍덩 뛰어들어서 물고기 밥이나 되는 게 사후에도 도움이 될 듯했다.",
+      "zh": "金宇硕定下了日子。他觉得，最好在莫名其妙又想活下去之前结束。他选了缴考试院房租前一周。准备去汉江。他想，在考试院上吊的话，那个本就挑剔的房东肯定会骂死人害他房价下跌，连死后的灵魂都要诅咒。倒不如跳进汉江喂鱼，还能死后做点贡献。",
+      "en": "Wooseok picked a day. Better to finish everything before he started wanting to live again. He chose a date one week before his rent was due. He decided on the Han River. If he died in his gosiwon, its fussy owner would curse his soul for lowering the room's value. Better, he thought, to go into the river and feed the fish than cause trouble for the landlord even after death."
+    },
+    {
+      "ko": "하루하루 벽에 걸린 달력에 엑스 표시를 그었다. 하나, 둘, 셋, 넷. 엑스 표시가 늘어날 때마다 마음의 짐이 하나씩 줄어들었다. 첫 번째로 그은 엑스는 부모님, 두 번째로 그은 엑스는 아이돌, 세 번째로 그은 엑스는 고등학교. 미련을 까맣게 엑스 표시로 물들였다. 미련이 있었다는 것도 티 안 나게 아주 까맣게.",
+      "zh": "",
+      "en": ""
+    },
+    {
+      "ko": "디데이가 8일 남았을 때, 사장에게 그만둔다고 했다. 사장은 별 말 없이 알았다 했다. 그래도 몇 달을 일했는데 이유는 물어봐 줄 줄 알았다. 일부러 핑계도 생각해 왔는데 쓸모가 없었다. 사장에겐 일주일까지만 나온다고 했다. 역시 사장은 또 알겠다 했다. 김우석은 자신이 정말 기계의 일부가 된 것 같다는 생각을 했다. 기계하니까 고등학교 수업에서 들었던 철학자 한 명이 있었던 거 같은데, 기억이 안 났다. 아이돌 준비 말고 그냥 앉아서 공부를 했어야 했는데. 정말 의미 없는 삶. 한 달 전 김우석의 생각과 달라진 게 티끌만큼도 없었다.",
+      "zh": "",
+      "en": ""
+    },
+    {
+      "ko": "그렇게 디데이까지 겨우 6일 남았을 시점. 개부자 손님이 말을 걸었다.",
+      "zh": "",
+      "en": ""
+    },
+    {
+      "ko": "“몇 살이에요?”",
+      "zh": "",
+      "en": ""
+    },
+    {
+      "ko": "몇 살이냐고. 머쓱하게 물어왔다. 말문 트이기 무섭게 자기 이름, 나이, 학교 등 모든 것을 불었다. 개부자 손님의 이름은 조승연, 우석과 동갑인 스물넷, 현재 대학교 재학 중이랬다. 김우석은 조승연의 자기소개를 듣고 더 입을 다물고 싶었다. 자기는 자기 소개할 게 딱히 없었다. 김우석, 스물넷, 고등학교 자퇴하고 알바 중? 자신을 수식하는 모든 단어가 짜쳤다.",
+      "zh": "",
+      "en": ""
+    },
+    {
+      "ko": "그렇다고 진짜 입을 다물면 열심히 자기소개 해준 사람의 입장은 어떻겠는가. 기분 개 잡치겠지. 그래서 김우석도 대충 대답했다.",
+      "zh": "",
+      "en": ""
+    },
+    {
+      "ko": "“김우석, 동갑이에요.”",
+      "zh": "",
+      "en": ""
+    },
+    {
+      "ko": "“우와. 어디 대학 다녀요?”",
+      "zh": "",
+      "en": ""
+    },
+    {
+      "ko": "“저는 대학 안 다니는데.”",
+      "zh": "",
+      "en": ""
+    },
+    {
+      "ko": "“아…. 죄송해요.”",
+      "zh": "",
+      "en": ""
+    },
+    {
+      "ko": "“괜찮아요.”",
+      "zh": "",
+      "en": ""
+    },
+    {
+      "ko": "조승연은 캔 커피 두 개를 사더니, 하나를 김우석 줬다. 이건 통성명 기념 선물. 아, 네. 조승연은 카운터 앞에 서서 김우석에게 자꾸 말을 걸어댔다. 김우석은 그게 싫지가 않아서 계속 대답해줬다. 오랜만에 하는 사람다운 대화였다.",
+      "zh": "",
+      "en": ""
+    },
+    {
+      "ko": "“알바 언제 나와?”",
+      "zh": "",
+      "en": ""
+    },
+    {
+      "ko": "“매일.”",
+      "zh": "",
+      "en": ""
+    },
+    {
+      "ko": "“안 힘들어?”",
+      "zh": "",
+      "en": ""
+    },
+    {
+      "ko": "“그냥, 할 만해.”",
+      "zh": "",
+      "en": ""
+    },
+    {
+      "ko": "조승연의 입은 새로운 손님이 오자 멈췄다. 다음에 또 올게. 조승연은 그렇게 말하고는 제 스포츠카를 끌고 사라졌다. 김우석은 괜히 조승연의 스포츠카가 주차되어 있던 곳을 한참 동안 쳐다봤다.",
+      "zh": "",
+      "en": ""
+    },
+    {
+      "ko": "조승연은 김우석이 그만두는 날까지 매일 찾아왔다. 찾아와선 캔 커피 두 잔을 사서 하나는 김우석 주고 이야기를 나눴다. 김우석은 끝까지 편의점을 그만둔다는 소리를 하지 않았다. 그저 스쳐 지나가는 사람에 불과한데 굳이 사소한 것까지 보고해준다면 부담스러울까 봐. 개부자 조승연은 원래 얘기하던 사람 하나 사라진다고 신경 쓸 거 같아 보이지 않았다.",
+      "zh": "",
+      "en": ""
+    },
+    {
+      "ko": "내일 또 올게.",
+      "zh": "",
+      "en": ""
+    },
+    {
+      "ko": "…….",
+      "zh": "",
+      "en": ""
+    },
+    {
+      "ko": "김우석은 대답하지 않았다.",
+      "zh": "",
+      "en": ""
+    },
+    {
+      "ko": "원룸 파라다이스",
+      "zh": "",
+      "en": ""
+    },
+    {
+      "ko": "조승연 김우석",
+      "zh": "",
+      "en": ""
+    },
+    {
+      "ko": "D-1.",
+      "zh": "",
+      "en": ""
+    },
+    {
+      "ko": "김우석은 마지막 하루를 누워서 보냈다. 마지막 만찬이랍시고 화려한 걸 챙겨 먹긴 개뿔, 그냥 굶었다. 연습생 시절에 굶는 건 일상이어서 딱히 문제가 되는 건 없었다. 알바도 안 가니 할 일도 없었다. 1인용 침대에 누워서 유튜브를 눌렀다. 순식간에 영상이 주르륵 떴다. 우석의 알고리즘은 여전히 아이돌에 고정이었다. 온갖 아이돌들의 안무 영상과 무대 영상, 팬들이 만든 교차편집이 김우석의 유튜브를 채우고 있었다. 개 중에는 저를 내친 소속사에서 갓 나온 신인 아이돌 영상도 포함이었다. 꼴 보기가 싫어서 껐다.",
+      "zh": "",
+      "en": ""
+    },
+    {
+      "ko": "고요한 방 안에 누워있으니 조승연의 목소리가 떠올랐다. 조승연의 목소리는 쉽게 잊히는 소리가 아니었다. 가볍게 내려앉아서 오래도록 기억되는 목소리였다. 마지막으로 한 번만 갔다 올까? 걔는 오늘 온다고 했는데. 김우석이 몸을 일으켜 앉았다. 그러나 금방 다시 누웠다. 이러면 쓸데없는 미련 같잖아.",
+      "zh": "",
+      "en": ""
+    },
+    {
+      "ko": "달력으로 시선을 돌렸다. 빨갛게 동그라미 친 숫자가 보였다. 엑스 표시도 내일이면 끝이었다. 마음을 까맣게 칠하는 일도 내일이 마지막이다.",
+      "zh": "",
+      "en": ""
+    },
+    {
+      "ko": "D-DAY.",
+      "zh": "",
+      "en": ""
+    },
+    {
+      "ko": "드디어 오늘이었다.",
+      "zh": "",
+      "en": ""
+    },
+    {
+      "ko": "오늘 죽어야지.",
+      "zh": "",
+      "en": ""
+    },
+    {
+      "ko": "김우석은 눈을 뜨자마자 강조해놓은 숫자 위로 이번엔 빨간 마카를 찍찍 그었다. 그리곤 방 안을 치웠다. 방 안에 있는 거라곤 옷과 신발이 끝이었다. 연습생 생활을 하는 동안 품위 유지비라면서 준 돈으로 산 것들이었다. 사실 그마저도 당근으로 팔아먹어서 몇 개 없었다. 옷들은 예쁘게 개고, 신발은 한 쪽에 정렬했다. 자켓 하나, 후드티 하나, 바지 하나, 컨버스 한 켤레만 남긴 채로.",
+      "zh": "",
+      "en": ""
+    },
+    {
+      "ko": "청소를 다 한 뒤엔 컨버스를 신고 밖으로 나갔다. 날씨가 맑았다. 어디 써먹을 곳도 없는데 날이 너무 좋았다. 이상하게 심술이 났다.",
+      "zh": "",
+      "en": ""
+    },
+    {
+      "ko": "김우석은 바로 마포 대교로 향했다. 차가 쌩쌩 달리고 있었다. 많은 사람들이 다리를 건넜다. 누구는 혼자, 누구는 친구와, 누구는 반려 동물과 함께였다. 사람이 많았다. 여기서 뛰어들었다간 지나가는 사람들의 관심만 받을 것이 분명했다. 난간을 만지작거리다 손을 내렸다.",
+      "zh": "",
+      "en": ""
+    },
+    {
+      "ko": "난간엔 위로 문구인지 뭔지가 쓰여 있었다. 천천히 걸으면서 문구들을 읽었다. 걷는 동안, 지나가던 노인 하나가 우석에게 부모님이 참 이쁘게 낳아주셨다는 감상평을 남기고 갔다. 김우석은 괜히 울컥했다. 역시 마포 대교엔 사람이 많다. 이런 말도 해주는 사람이 있는 걸 보면.",
+      "zh": "",
+      "en": ""
+    },
+    {
+      "ko": "그래서 사람이 없어질 시간까지 한강 벤치에 앉아있었다. 한강에도 사람이 그득그득했다. 세상 모든 사람이 서울에만 있는 것 같았다. 그렇지 않는 이상, 사람이 이렇게 많을 수가 없었다. 한강 공원의 분위기는 화기애애했다. 다들 누군가와 함께 웃었고, 얘기했다. 김우석은 이 공간에서 무의식적으로 조승연을 떠올렸다. 조승연이 옆에 앉아있었다면 무슨 말을 했을까. 그냥 지나쳐가는 생각 중 하나였다.",
+      "zh": "",
+      "en": ""
+    },
+    {
+      "ko": "멍하니 하늘로 고개를 들어올렸다. 하늘은 파랗다. 움직이는 구름들은 평화롭다. 시야 끝으로 보이는 나뭇가지가 살랑인다. 귓가엔 사람들의 웃음소리가 들린다. 모든 것이 유난히 좋은 날이다. 유난히도.",
+      "zh": "",
+      "en": ""
+    },
+    {
+      "ko": "유난스럽게 김우석의 마음만 잿빛이었다.",
+      "zh": "",
+      "en": ""
+    },
+    {
+      "ko": "모든 것이 파랗고 해맑은 이곳에서,",
+      "zh": "",
+      "en": ""
+    },
+    {
+      "ko": "김우석 하나만.",
+      "zh": "",
+      "en": ""
+    },
+    {
+      "ko": "우석은 빨리 해가 지면 좋겠다고, 그렇게 생각했다.",
+      "zh": "",
+      "en": ""
+    },
+    {
+      "ko": "오후 10시 20분. 해가 저물고도 한참은 저물었을 시간. 원래라면 편의점에 있을 시간. 김우석은 그제서야 움직였다. 이번엔 원효 대교로 갔다. 이유는 없었다. 그냥 원효 대교가 보였고, 원효 대교로 가고 싶었다. 원효 대교엔 사람이 없었다. 우석이 곧바로 난간을 잡았다. 차가운 쇠의 촉감이 김우석의 피부를 소름돋게 했다. 뛴 적도 없는데 숨이 터질 듯했다. 소속사에서 월말 평가 보기 직전에, 자주 느꼈던 증상이었다. 김우석은 이 상태를 잠재우는 법을 알았다. 눈을 감고 천천히 심호흡했다. 후- 하-. 가빴던 숨이 사그라든다.",
+      "zh": "",
+      "en": ""
+    },
+    {
+      "ko": "솔직히 죽기보다 못한 삶이라고 생각한다. 간헐적으로 내쉬는 숨은 우석에겐 너무 버거웠다. 숨을 내쉬는데 질식사할 것 같았다. 갈 곳 없는 몸은 거추장스러웠다. 10대란 울타리도 사라진 지금, 20대의 나이는 짐이 된 지 오래였다.",
+      "zh": "",
+      "en": ""
+    },
+    {
+      "ko": "자켓 주머니에 있던 핸드폰을 있는 힘껏 한강으로 던졌다. 슝. 풍덩. 핸드폰이 검은 물 속으로 서서히 잡혀들어갔다. 이젠 제 차례였다. 우석의 한쪽 발이 난간을 딛었다. 이어서 남은 한 발도 난간을 밟았다. 시야가 높아졌다. 더 높은 곳에서 보는 한강은 괴물 같았다. 저를 잡아먹으려고 기다리는, 그런 괴물.",
+      "zh": "",
+      "en": ""
+    },
+    {
+      "ko": "이제 뛰어내리기만 하면 됐다. 막상 뛰어내리려니 긴장이 되긴 됐다. 누가 밀어주면 좋겠는데…. 그럴 일은 없으니 스스로 해야 했다. 우석이 천천히, 눈을 감았다. 힘을 빼고, 찬 밤공기에 몸을 맡기면 그만이었다.",
+      "zh": "",
+      "en": ""
+    },
+    {
+      "ko": "우석이 초를 셌다.",
+      "zh": "",
+      "en": ""
+    },
+    {
+      "ko": "셋, 둘. 잠깐만. 어?",
+      "zh": "",
+      "en": ""
+    },
+    {
+      "ko": "몸이 앞으로 향해야 하는데 반대로 갔다. 누군가가 제 손을 잡아 당기고 있었다. 우석의 눈이 번쩍 뜨였다. 이렇게 뒤로 넘어가면 대가리 깨지는데? 죽는 건 괜찮아도 아픈 건 싫었다. 우석이 빠르게 중심을 잡았다. 뒤에서 누가 넘어지지 않게 저를 안고 있었다. 누구야? 어이없어서 한 마디 하려고 했는데, 앞에 보이는 사람이 아는 사람이었다.",
+      "zh": "",
+      "en": ""
+    },
+    {
+      "ko": "\"조승연?\"",
+      "zh": "",
+      "en": ""
+    },
+    {
+      "ko": "만화 같은 타이밍이었다.",
+      "zh": "",
+      "en": ""
+    },
+    {
+      "ko": "\"괜찮아?\"",
+      "zh": "",
+      "en": ""
+    },
+    {
+      "ko": "여기서 뭐하고 있는 거야. 답지 않게 말하는 조승연의 표정이 험했다. 김우석은 눈만 끔뻑였다. 내가 죽는다는데 왜 네 표정이 그래? 딱히 친한 사이도 아니잖아. 하고 싶은 말이 목구멍까지 올라왔지만, 하진 못했다. 죽음의 문턱 앞에서 보이는 얼굴이 쓸데없이 반가웠기 때문에.",
+      "zh": "",
+      "en": ""
+    },
+    {
+      "ko": "\"너 이러는 거 부모님이 아셔?\"",
+      "zh": "",
+      "en": ""
+    },
+    {
+      "ko": "\"모르겠지. 연락 끊겼으니까.\"",
+      "zh": "",
+      "en": ""
+    },
+    {
+      "ko": "\"야…! 그래서 이래도 되는 건 아니잖아.\"",
+      "zh": "",
+      "en": ""
+    },
+    {
+      "ko": "조승연의 목소리가 격양됐다. 정작 김우석은 덤덤했다. 오랜만에 듣는 꾸중은 꽤 신선했다. 우석이 주변을 살폈다. 원효대교 한가운데 조승연 스포츠카가 있었다. 운전하고 가다가 우석을 본 모양이었다. 기가 막힌 우연이었다.",
+      "zh": "",
+      "en": ""
+    },
+    {
+      "ko": "한참동안 조승연의 훈계를 들었다. 그러니까 금방 경찰이 왔다. 듣기론 지나가는 행인이 신고를 했다고. 조승연은 김우석 대신 사과를 했다. 제 친구인데, 얘가 요즘 힘들어서 그래요. 제가 얘 잘 데리고 갈게요. 바쁘신데 죄송합니다. 조승연은 그러더니 개비싼 차에 김우석을 조수석에 무작정 집어넣었다.",
+      "zh": "",
+      "en": ""
+    },
+    {
+      "ko": "승연은 우석을 태우고 운전했다. 김우석은 조승연의 눈치를 봤다. 얼떨결에 얻어탄 개비싼 스포츠카 오너가 개빡쳐보이는데 어떻게 눈치를 안 보는가. 우석은 힐끔힐끔 승연을 쳐다봤다. 운전하는 승연의 표정이 아까보단 풀어져 있었다. 우석은 이때를 틈타 말했다.",
+      "zh": "",
+      "en": ""
+    },
+    {
+      "ko": "\"그냥 아무데서나 내려줘도 돼.\"",
+      "zh": "",
+      "en": ""
+    },
+    {
+      "ko": "\"그럼 혼자 있는 거 아니야?\"",
+      "zh": "",
+      "en": ""
+    },
+    {
+      "ko": "\"그렇지 뭐.\"",
+      "zh": "",
+      "en": ""
+    },
+    {
+      "ko": "혼자. 혼자라는 말에 속이 울렁거렸다. 혼자인 게 한두 번이 아니었는데. 당연한 일인데. 조승연이 말하니까 이상하게 속이 안 좋았다. 늦게 찾아온 차 멀미인가. 우석이 고개를 돌려 창밖을 쳐다봤다. 창에 승연의 모습이 비쳤다. 그리고 그 앞에는 김우석. 제 옆에 누군가가 같이 보이는 게 어색하기 그지 없었다.",
+      "zh": "",
+      "en": ""
+    },
+    {
+      "ko": "우석이 슬쩍 창문을 내렸다. 차가운 밤공기가 차 안으로 들어왔다. 승연의 머리카락이 밤바람에 휘날린다. 숨이 막혔다. 우석은 비닐을 뒤집어쓴 기분이었다. 비닐에다 바늘만한 숨구멍을 겨우 뚫어놓은 기분.",
+      "zh": "",
+      "en": ""
+    },
+    {
+      "ko": "승연이 덤덤하게 한 마디 얹었다.",
+      "zh": "",
+      "en": ""
+    },
+    {
+      "ko": "\"이런 날에 혼자 있으면 외로워.\"",
+      "zh": "",
+      "en": ""
+    },
+    {
+      "ko": "\"그럼, 어디로 가는 거야?\"",
+      "zh": "",
+      "en": ""
+    },
+    {
+      "ko": "\"아, 내 작업실.\"",
+      "zh": "",
+      "en": ""
+    },
+    {
+      "ko": "\"작업실?\"",
+      "zh": "",
+      "en": ""
+    },
+    {
+      "ko": "\"응, 우리 집은 지금 좀 더러워서. \"",
+      "zh": "",
+      "en": ""
+    },
+    {
+      "ko": "말하는 조승연의 목소리가 이다지도 다정했다.",
+      "zh": "",
+      "en": ""
+    },
+    {
+      "ko": "안 올리려고 했는데 스핀 누나들 덕분에 올립니다...",
+      "zh": "",
+      "en": ""
+    },
+    {
+      "ko": "추천 브금",
+      "zh": "",
+      "en": ""
+    }
+  ]
+}
