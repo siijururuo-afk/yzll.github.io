@@ -19,7 +19,7 @@ const BUILTINS={
  'one-room-paradise-2':{path:'one-room-paradise-2.json',zh:'单间天堂 · 第2章',ko:'원룸 파라다이스 2',author:'데님',count:133,series:'单间天堂',part:'2',index:2,total:5,translation:'complete'},
  'one-room-paradise-3':{path:'one-room-paradise-3.json',zh:'单间天堂 · 第3章',ko:'원룸 파라다이스 3',author:'데님',count:128,series:'单间天堂',part:'3',index:3,total:5,translation:'complete'},
  'one-room-paradise-4':{path:'one-room-paradise-4.json',zh:'单间天堂 · 第4章',ko:'원룸 파라다이스 4',author:'데님',count:117,series:'单间天堂',part:'4',index:4,total:5,translation:'complete'},
- 'one-room-paradise-5':{path:'one-room-paradise-5.json',zh:'单间天堂 · 第5章',ko:'원룸 파라다이스 5',author:'데님',count:98,series:'单间天堂',part:'5',index:5,total:5,translation:'complete'},
+ 'one-room-paradise-5':{path:'one-room-paradise-5.json',zh:'单间天堂 · 第5章',ko:'원룸 파라다이스 5',author:'데님',count:110,series:'单间天堂',part:'5',index:5,total:5,translation:'complete'},
  'so-romantic-up':{path:'so-romantic-up.json',zh:"So F**kin' Romantic · 上篇",ko:"So F**kin' Romantic 上",author:'이로',count:246,series:"So F**kin' Romantic",part:'上',index:1,total:3,translation:'complete'},
  'so-romantic-mid':{path:'so-romantic-mid.json',zh:"So F**kin' Romantic · 中篇",ko:"So F**kin' Romantic 中",author:'이로',count:190,series:"So F**kin' Romantic",part:'中',index:2,total:3,translation:'complete'},
  'so-romantic-down':{path:'so-romantic-down.json',zh:"So F**kin' Romantic · 下篇（完结）",ko:"So F**kin' Romantic 下",author:'이로',count:261,series:"So F**kin' Romantic",part:'下',index:3,total:3,translation:'complete'},
@@ -149,7 +149,7 @@ function renderStory(preserveScroll=false){
  $('#article-sub').textContent=story.title.ko||'';
  $('.byline').classList.toggle('long-title',(story.title.ko||'').length>30);
  $('#article-author').textContent=story.author||'我的文章';
- $('#article-count').textContent=`${story.blocks.filter(b=>b.ko&&!b.spacer&&!b.imageMissing&&b.ko!=='＊'&&b.ko!=='*').length} 段`;
+ $('#article-count').textContent=`${story.blocks.filter(b=>b.ko&&!b.spacer&&!b.imageMissing&&!b.heading&&b.ko!=='＊'&&b.ko!=='*').length} 段`;
  const langs=displayedLangs(),compared=langs.length>1;
  const matches=query?story.blocks.map((b,i)=>({b,i})).filter(({b})=>['ko','zh','en'].some(k=>(b[k]||'').toLocaleLowerCase().includes(query))):story.blocks.map((b,i)=>({b,i}));
  const box=$('#paragraphs');const frag=document.createDocumentFragment();let originalOnlyShown=false;
@@ -175,7 +175,7 @@ function renderStory(preserveScroll=false){
   const visibleChinese=canToggle&&isChineseVisible(i);
   const localLangs=b.koOnly?['ko']:mode==='en-zh'&&b.en?(visibleChinese?['en','zh']:['en']):langs;
   const localCompared=localLangs.length>1;
-  const section=document.createElement('section');section.className='story-par '+(localCompared?'compared':'single')+(localLangs.length===3?' triple':'')+(query?' search-result':'');section.dataset.index=i;
+  const section=document.createElement('section');section.className='story-par '+(localCompared?'compared':'single')+(localLangs.length===3?' triple':'')+(query?' search-result':'')+(b.bubbleSide==='incoming'||b.bubbleSide==='outgoing'?' story-bubble story-bubble-'+b.bubbleSide:'');section.dataset.index=i;
   for(const lang of localLangs)section.appendChild(makeColumn(b[lang]||'',lang,i,localCompared&&lang!=='en'));
   if(canToggle){
    const btn=document.createElement('button');btn.className='paragraph-translate';btn.type='button';
