@@ -18,6 +18,7 @@ const BUILTINS={
  'one-room-paradise-1':{path:'one-room-paradise-1.json',zh:'单间天堂 · 第1章',ko:'원룸 파라다이스 1',author:'데님',count:111,series:'单间天堂',part:'1',index:1,total:5,translation:'complete'},
  'one-room-paradise-2':{path:'one-room-paradise-2.json',zh:'单间天堂 · 第2章',ko:'원룸 파라다이스 2',author:'데님',count:133,series:'单间天堂',part:'2',index:2,total:5,translation:'complete'},
  'one-room-paradise-3':{path:'one-room-paradise-3.json',zh:'单间天堂 · 第3章',ko:'원룸 파라다이스 3',author:'데님',count:128,series:'单间天堂',part:'3',index:3,total:5,translation:'complete'},
+ 'one-room-paradise-4':{path:'one-room-paradise-4.json',zh:'单间天堂 · 第4章',ko:'원룸 파라다이스 4',author:'데님',count:117,series:'单间天堂',part:'4',index:4,total:5,translation:'complete'},
  'so-romantic-up':{path:'so-romantic-up.json',zh:"So F**kin' Romantic · 上篇",ko:"So F**kin' Romantic 上",author:'이로',count:246,series:"So F**kin' Romantic",part:'上',index:1,total:3,translation:'complete'},
  'so-romantic-mid':{path:'so-romantic-mid.json',zh:"So F**kin' Romantic · 中篇",ko:"So F**kin' Romantic 中",author:'이로',count:190,series:"So F**kin' Romantic",part:'中',index:2,total:3,translation:'complete'},
  'so-romantic-down':{path:'so-romantic-down.json',zh:"So F**kin' Romantic · 下篇（完结）",ko:"So F**kin' Romantic 下",author:'이로',count:261,series:"So F**kin' Romantic",part:'下',index:3,total:3,translation:'complete'},
