@@ -14,8 +14,8 @@
   },
   "translationStatus": "complete",
   "translationProgress": {
-    "translatedParagraphs": 98,
-    "totalParagraphs": 98
+    "translatedParagraphs": 110,
+    "totalParagraphs": 110
   },
   "blocks": [
     {
@@ -37,6 +37,12 @@
       "ko": "그니까 이게 무슨 말이냐면 김우석은 조승연 대딸쳐주는 게 이상하지 않다는 뜻이다.",
       "zh": "所以说，这句话的意思就是：金宇硕不觉得替曹承衍用手解决有什么奇怪的。",
       "en": "In other words, Kim Wooseok didn't find the idea of helping Cho Seungyeon finish by hand especially strange."
+    },
+    {
+      "heading": true,
+      "ko": "원룸 파라다이스",
+      "zh": "单间天堂",
+      "en": "One-Room Paradise"
     },
     {
       "ko": "조승연 김우석",
@@ -244,6 +250,9 @@
       "en": "/"
     },
     {
+      "embed": "bigdWlzhZ_A"
+    },
+    {
       "ko": "자고로 인간이란 본인의 욕망을 추구하는 법이다. 새로운 자극에 눈을 뜨면 당연히 그 자극을 좇을 수밖에 없다. 김우석에겐 조승연과 했던 키스가 그랬다. 평생을 모태 솔로로 산 김우석에게 키스라는 건 유례없는 도파민이었다.",
       "zh": "人总是追求自己的欲望。一旦发现新的刺激，自然忍不住追逐。对金宇硕而言，和曹承衍的吻就是那种刺激。母胎单身至今，他头一回体验到了接吻这种前所未有的多巴胺。",
       "en": "Humans pursue their desires. When they discover a new sensation, they chase it. For Wooseok, kissing Seungyeon had been exactly that. Single since birth, he'd never experienced dopamine quite like it."
@@ -274,14 +283,86 @@
       "en": "After finishing inventory, he checked his phone and found a message."
     },
     {
+      "ko": "우석아 ㅠㅠ 작업이 조금 오래 걸려서 못 데리러 갈 거 같은데",
+      "zh": "宇硕啊ㅠㅠ工作花的时间有点长，我可能没法去接你了",
+      "en": "Wooseok ㅠㅠ My work's taking longer than expected, so I don't think I can come pick you up.",
+      "bubbleSide": "incoming"
+    },
+    {
+      "ko": "택시 보내줄 테니까 작업실로 올래?",
+      "zh": "我给你叫辆出租车，你愿意来工作室吗？",
+      "en": "I'll send a taxi. Would you come to the studio?",
+      "bubbleSide": "incoming"
+    },
+    {
+      "ko": "싫으면 집으로 바로 가도 돼",
+      "zh": "不想来的话直接回家也行",
+      "en": "If you don't want to, you can go straight home.",
+      "bubbleSide": "incoming"
+    },
+    {
+      "ko": "미안 ㅠㅠ",
+      "zh": "对不起ㅠㅠ",
+      "en": "Sorry ㅠㅠ",
+      "bubbleSide": "incoming"
+    },
+    {
       "ko": "요즘 승연이 바빠 보이긴 했다. 종강이 얼마 남지 않아, 퀄리티를 올리는 중이라고. 그래도 우석이 퇴근할 때가 되면 작업을 끝내고 데리러 왔었다. 바쁘면 그럴 필요 없는데. 우석이 키보드 자판을 눌렀다.",
       "zh": "承衍最近确实很忙，临近期末，正在提升作品的质量。可每当宇硕快下班，他还是会收工来接。明明忙就不用这样。宇硕按下键盘。",
       "en": "Seungyeon had seemed busy lately. With the semester ending soon, he was working to improve the quality of his project. Still, he always finished in time to collect Wooseok after his shift. He didn't need to if he was busy. Wooseok began typing."
     },
     {
+      "ko": "아니 괜찮아",
+      "zh": "没有，没关系",
+      "en": "No, it's okay.",
+      "bubbleSide": "outgoing"
+    },
+    {
+      "ko": "작업실로 갈게",
+      "zh": "我去工作室",
+      "en": "I'll go to the studio.",
+      "bubbleSide": "outgoing"
+    },
+    {
+      "ko": "뭐 먹고 싶은 거 있어? 있으면 사갈게",
+      "zh": "有什么想吃的吗？有的话我买过去",
+      "en": "Want anything to eat? I can pick something up on my way.",
+      "bubbleSide": "outgoing"
+    },
+    {
+      "ko": "· · ·",
+      "zh": "· · ·",
+      "en": "· · ·",
+      "bubbleSide": "incoming"
+    },
+    {
       "ko": "조승연은 바로 문자를 입력하기 시작했다.",
       "zh": "曹承衍立刻开始输入回复。",
       "en": "Seungyeon immediately started typing a reply."
+    },
+    {
+      "ko": "아냐 내가 시켜둘게",
+      "zh": "不用，我会先点好的",
+      "en": "No, I'll order it ahead of time.",
+      "bubbleSide": "incoming"
+    },
+    {
+      "ko": "끝나구 연락해 택시 보낼게",
+      "zh": "结束后联系我，我给你叫出租车",
+      "en": "Let me know when you're finished. I'll send a taxi.",
+      "bubbleSide": "incoming"
+    },
+    {
+      "ko": "응",
+      "zh": "嗯",
+      "en": "Yeah.",
+      "bubbleSide": "outgoing"
+    },
+    {
+      "ko": "이따 봐",
+      "zh": "待会儿见",
+      "en": "See you later.",
+      "bubbleSide": "outgoing"
     },
     {
       "ko": "이따 보자는 말이 간지러웠다. 조승연한테 보내는 문자는 어려웠다. 승연이 너무 다정해서 어떻게 말해야 할지 감이 안 왔다. 오히려 대면이면 말을 하겠는데, 오히려 오프라인이면 말투가 보이지 않아서 더 과하게 상상됐다.",
