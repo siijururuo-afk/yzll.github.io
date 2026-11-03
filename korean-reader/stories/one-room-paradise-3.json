@@ -19,6 +19,9 @@
   },
   "blocks": [
     {
+      "embed": "PHW3GmSPwzU"
+    },
+    {
       "ko": "너희 집이 어딨는지 까먹었어.",
       "zh": "我忘了你家在哪儿。",
       "en": "I forgot where your place is."
@@ -39,6 +42,12 @@
       "en": "I'll come pick you up."
     },
     {
+      "heading": true,
+      "ko": "원룸 파라다이스",
+      "zh": "单间天堂",
+      "en": "One-Room Paradise"
+    },
+    {
       "ko": "조승연 김우석",
       "zh": "曹承衍 金宇硕",
       "en": "Cho Seungyeon, Kim Wooseok."
@@ -51,27 +60,32 @@
     {
       "ko": "우석아!",
       "zh": "宇硕啊！",
-      "en": "Wooseok!"
+      "en": "Wooseok!",
+      "bubbleSide": "incoming"
     },
     {
       "ko": "혹시 밥 먹었어?",
       "zh": "吃过饭了吗？",
-      "en": "Have you eaten?"
+      "en": "Have you eaten?",
+      "bubbleSide": "incoming"
     },
     {
       "ko": "너는?",
       "zh": "你呢？",
-      "en": "Have you?"
+      "en": "Have you?",
+      "bubbleSide": "outgoing"
     },
     {
       "ko": "나?",
       "zh": "我？",
-      "en": "Me?"
+      "en": "Me?",
+      "bubbleSide": "incoming"
     },
     {
       "ko": "나는 안 먹었지 ㅎㅎ",
       "zh": "我还没吃呢 哈哈",
-      "en": "I haven't eaten haha."
+      "en": "I haven't eaten haha.",
+      "bubbleSide": "incoming"
     },
     {
       "ko": "우석이 답장을 고민했다. 방금 삼각김밥 먹었는데. 어차피 집에 같이 가야 되는데, 혼자 먹으면 뻘쭘하려나. 안 먹었다고 해야 하나. 그렇다고 안 먹었다고 거짓말하기엔 양심에 찔렸다. 그리고 안 먹었다고 하면 조승연이 사줄 거 같아서. 이미 폐만 끼쳤고, 끼칠 예정인데 더 뭔가를 받아먹으면 안 됐다. 최대한 죽은 듯이 사는 게 조승연에게 그나마 짐이 되지 않는 길이었다. 같이 살자고 말한 것도 걔한테는 큰 결심일 테니까.",
@@ -81,22 +95,26 @@
     {
       "ko": "난 먹었는데",
       "zh": "我吃过了",
-      "en": "I've eaten."
+      "en": "I've eaten.",
+      "bubbleSide": "outgoing"
     },
     {
       "ko": "뭐 먹었는데?",
       "zh": "吃的什么？",
-      "en": "What did you eat?"
+      "en": "What did you eat?",
+      "bubbleSide": "incoming"
     },
     {
       "ko": "삼각김밥",
       "zh": "三角饭团",
-      "en": "Triangle kimbap."
+      "en": "Triangle kimbap.",
+      "bubbleSide": "outgoing"
     },
     {
       "ko": "뭐야 그게 어떻게 밥이야",
       "zh": "什么啊 那怎么能算饭",
-      "en": "What? How is that a meal?"
+      "en": "What? How is that a meal?",
+      "bubbleSide": "incoming"
     },
     {
       "ko": "난 이게 밥이 맞는데. 고시원 사는 내내 돈에 쪼들렸다. 김우석의 밥은 고시원에서 제공되는 김치, 라면, 밥이 대부분이었다. 아니면 가끔 나오는 편의점 폐기 삼각김밥 아니면 도시락, 컵라면이었다. 그런데 조승연은 제가 먹던 게 어떻게 밥이냐고 한다. 핸드폰 액정 속 글자가 울렁거린다. 다시 한번 조승연과 제 거리를 느낀다.",
@@ -106,27 +124,32 @@
     {
       "ko": "새벽에 배고플 거 같은데",
       "zh": "半夜可能会饿",
-      "en": "You'll probably be hungry tonight."
+      "en": "You'll probably be hungry tonight.",
+      "bubbleSide": "incoming"
     },
     {
       "ko": "먹고 싶은 거 있어?",
       "zh": "有想吃的吗？",
-      "en": "Is there anything you want?"
+      "en": "Is there anything you want?",
+      "bubbleSide": "incoming"
     },
     {
       "ko": "너 먹고 싶은 거 먹어",
       "zh": "你吃你想吃的就行",
-      "en": "Eat what you want to eat."
+      "en": "Eat what you want to eat.",
+      "bubbleSide": "outgoing"
     },
     {
       "ko": "나 도착할 때까지 생각해보고 있어",
       "zh": "等我到之前先想想",
-      "en": "Think about it before I arrive."
+      "en": "Think about it before I arrive.",
+      "bubbleSide": "incoming"
     },
     {
       "ko": "금방 가",
       "zh": "我很快到",
-      "en": "I'll be there soon."
+      "en": "I'll be there soon.",
+      "bubbleSide": "incoming"
     },
     {
       "ko": "응 빨리 와ㅣ",
