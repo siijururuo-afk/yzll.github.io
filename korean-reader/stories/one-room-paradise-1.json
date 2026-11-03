@@ -573,5 +573,8 @@
       "zh": "推荐背景音乐",
       "en": "Recommended background music."
     }
-  ]
+  ],
+  "sourceMedia": {
+    "backgroundMusicYouTubeEmbed": "https://www.youtube-nocookie.com/embed/KuOOtTS4U1E"
+  }
 }
