@@ -87,3 +87,42 @@
 .story-par.compared .text-column[data-lang="en"]{color:#222}
 .story-par.compared .text-column[data-lang="zh"]{color:#666;padding-top:4px}
 @media(max-width:560px){.article-controls{gap:12px}.article-controls #compare-trigger{padding:8px 10px}.story-par .paragraph-translate{min-height:34px}}
+
+/* Original Postype message bubbles restored from uploaded HTML, without changing
+   ordinary novel paragraphs or the single-column bilingual reading layout. */
+.story-body .story-par.story-bubble{
+ box-sizing:border-box;width:fit-content;max-width:86%;
+ margin-bottom:12px!important;padding:10px 16px!important;
+ border:0!important;border-radius:19px;
+ overflow-wrap:anywhere;
+}
+.story-body .story-par.story-bubble-incoming{
+ margin-left:0!important;margin-right:auto!important;
+ background:#f2f2f3;color:#2c2c2f;
+}
+.story-body .story-par.story-bubble-outgoing{
+ margin-left:auto!important;margin-right:0!important;
+ background:#3478ff;color:#fff;
+}
+.story-body .story-par.story-bubble.compared,
+.story-body .story-par.story-bubble.triple{
+ max-width:95%;gap:5px!important;padding-bottom:10px!important;
+}
+.story-body .story-par.story-bubble .text-column,
+.story-body .story-par.story-bubble .translation,
+.story-body .story-par.story-bubble .translation p{
+ color:inherit!important;
+}
+.story-body .story-par.story-bubble .text-column p{
+ margin:0!important;line-height:1.7;
+}
+.story-body .story-par.story-bubble .lang-caption{
+ color:inherit;opacity:.63;
+}
+.story-body .story-par.story-bubble-outgoing .paragraph-translate{
+ color:#fff;border-color:rgba(255,255,255,.45);background:rgba(0,0,0,.06);
+}
+@media(max-width:600px){
+ .story-body .story-par.story-bubble{max-width:91%}
+ .story-body .story-par.story-bubble.compared{max-width:97%}
+}
