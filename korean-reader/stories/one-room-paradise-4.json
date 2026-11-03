@@ -39,6 +39,15 @@
       "en": "That's why he didn't want to run into them: the agency employees who'd eaten away at his confidence and belittled him. They were always ready to judge his life hopeless."
     },
     {
+      "embed": "DC6JppqHkaM"
+    },
+    {
+      "heading": true,
+      "ko": "원룸 파라다이스",
+      "zh": "单间天堂",
+      "en": "One-Room Paradise"
+    },
+    {
       "ko": "조승연 김우석",
       "zh": "曹承衍 金宇硕",
       "en": "Cho Seungyeon, Kim Wooseok."
@@ -241,17 +250,20 @@
     {
       "ko": "나 오늘 좀 늦을 거 같아",
       "zh": "我今天可能会晚一点",
-      "en": "I think I'll be a little late today."
+      "en": "I think I'll be a little late today.",
+      "bubbleSide": "incoming"
     },
     {
       "ko": "기다리지 말고 저녁 시켜 먹어!",
       "zh": "别等我啦，自己点晚饭吃！",
-      "en": "Don't wait for me, order dinner!"
+      "en": "Don't wait for me, order dinner!",
+      "bubbleSide": "incoming"
     },
     {
       "ko": "폰에 내 계정으로 배민 깔려있지? 먹고 싶은 거 먹으면 돼",
       "zh": "手机里装着登录了我账号的外卖民族吧？想吃什么就吃",
-      "en": "You have the Baemin delivery app logged into my account, right? Get whatever you want."
+      "en": "You have the Baemin delivery app logged into my account, right? Get whatever you want.",
+      "bubbleSide": "incoming"
     },
     {
       "ko": "그렇구나. 오늘은 안 오는 구나.",
@@ -331,7 +343,8 @@
     {
       "ko": "승연아 보고 싶어 빨리 와",
       "zh": "承衍啊 想你了 快点回来",
-      "en": "Seungyeon, I miss you. Come back soon."
+      "en": "Seungyeon, I miss you. Come back soon.",
+      "bubbleSide": "outgoing"
     },
     {
       "ko": "바로 올 거란 생각은 안 했다. 그런 기대까지 할 염치는 없었다. 마음에 담아둔 말을 보내고 나니 졸음이 밀려왔다. 눈꺼풀이 무거웠다.",
