@@ -126,3 +126,8 @@
  .story-body .story-par.story-bubble{max-width:91%}
  .story-body .story-par.story-bubble.compared{max-width:97%}
 }
+
+/* Korean source-faithful import: keep paragraph indentation and original empty spacing. */
+.story-body.original-layout .story-par .text-column p{text-indent:1em}
+.story-body.original-layout .story-par.compared .text-column p{text-indent:1em}
+.story-body.original-layout .story-par .paragraph-translate{text-indent:0}
