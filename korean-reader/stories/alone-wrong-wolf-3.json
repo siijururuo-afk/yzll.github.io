@@ -19,15 +19,36 @@
   "sourceAudit": {
     "file": "혼자 틀린 이리 3 ~ 5.html",
     "sourceElementCount": 166,
-    "sourceTextElements": 99,
-    "sourceEmptyElements": 67,
+    "sourceTextElements": 101,
+    "sourceEmptyElements": 65,
     "sourceImages": 0,
     "sourceEmbeddedMedia": 0,
     "sourceIndexPreserved": true,
-    "sourceRange": "0-165",
-    "note": "从用户上传的Postype离线HTML逐段译成中文；保留每一段和空白结构。"
+    "sourceRange": "0-162",
+    "note": "从用户上传的Postype离线HTML逐段译成中文；保留每一段和空白结构。",
+    "headingCount": 3
   },
   "blocks": [
+    {
+      "spacer": 2,
+      "sourceTag": "h4",
+      "sourceIndex": "heading-empty",
+      "align": "right"
+    },
+    {
+      "heading": true,
+      "zh": "独自错了的狼",
+      "sourceTag": "h4",
+      "sourceIndex": "heading-title",
+      "align": "right"
+    },
+    {
+      "heading": true,
+      "zh": "3",
+      "sourceTag": "h5",
+      "sourceIndex": "heading-number",
+      "align": "right"
+    },
     {
       "spacer": 2,
       "sourceIndex": 0,
@@ -742,21 +763,6 @@
     {
       "spacer": 2,
       "sourceIndex": 162,
-      "sourceTag": "p"
-    },
-    {
-      "spacer": 2,
-      "sourceIndex": 163,
-      "sourceTag": "p"
-    },
-    {
-      "spacer": 2,
-      "sourceIndex": 164,
-      "sourceTag": "p"
-    },
-    {
-      "spacer": 2,
-      "sourceIndex": 165,
       "sourceTag": "p"
     }
   ]
