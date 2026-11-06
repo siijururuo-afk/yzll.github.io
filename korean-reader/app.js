@@ -6,7 +6,8 @@ const $$=s=>Array.from(document.querySelectorAll(s));
 const STORAGE='between-lines-v2';
 const DEFAULT_ID='hanip';
 const BUILTINS={
- 'alone-wrong-wolf-1':{path:'alone-wrong-wolf-1.json',zh:'独自错了的狼 · 第1章',ko:'혼자 틀린 이리 1',author:'作者未标注',count:140,series:'独自错了的狼',part:'1',index:1,total:1,translation:'zh-complete'},
+ 'alone-wrong-wolf-1':{path:'alone-wrong-wolf-1.json',zh:'独自错了的狼 · 第1章',ko:'혼자 틀린 이리 1',author:'作者未标注',count:140,series:'独自错了的狼',part:'1',index:1,total:5,translation:'zh-complete'},
+ 'alone-wrong-wolf-2':{path:'alone-wrong-wolf-2.json',zh:'独自错了的狼 · 第2章',ko:'혼자 틀린 이리 2',author:'作者未标注',count:145,series:'独自错了的狼',part:'2',index:2,total:5,translation:'zh-complete'},
  'good-1':{path:'good-1.json',zh:'好人会谈一场糟糕的恋爱 · 第1章',ko:'좋은 사람은 나쁜 연애를 하게 돼 1',author:'RQ',count:82,series:'好人会谈一场糟糕的恋爱',part:'1',index:1,total:9,translation:'complete'},
  'good-2':{path:'good-2.json',zh:'好人会谈一场糟糕的恋爱 · 第2章',ko:'좋은 사람은 나쁜 연애를 하게 돼 2',author:'RQ',count:115,series:'好人会谈一场糟糕的恋爱',part:'2',index:2,total:9,translation:'complete'},
  'good-3':{path:'good-3.json',zh:'好人会谈一场糟糕的恋爱 · 第3章',ko:'좋은 사람은 나쁜 연애를 하게 돼 3',author:'RQ',count:62,series:'好人会谈一场糟糕的恋爱',part:'3',index:3,total:9,translation:'complete'},
@@ -180,7 +181,7 @@ function renderStory(preserveScroll=false){
     frag.appendChild(figure);continue;
   }
   if(b.imageMissing){const notice=document.createElement('div');notice.className='omission-inline';notice.dataset.index=i;notice.textContent=b.imageSlot?`第3章原文图片 ${b.imageSlot.endsWith('-1')?'1/2':'2/2'}（Instagram 情节处，图片未离线保存）`:'[原文图片未离线保存]';frag.appendChild(notice);continue}
-   if(b.heading){const el=document.createElement('h2');el.className='story-inner-heading';el.dataset.index=i;el.textContent=mode==='ko'?b.ko:(mode==='en'||mode==='en-zh'?b.en||b.zh||b.ko:b.zh||b.ko);if(b.align)el.style.textAlign=b.align;frag.appendChild(el);continue}
+   if(b.heading){const el=document.createElement('h2');el.className='story-inner-heading';el.dataset.index=i;el.textContent=mode==='ko'?b.ko:(mode==='en'||mode==='en-zh'?b.en||b.zh||b.ko:b.zh||b.ko);if(b.align)el.style.textAlign=b.align;if(story.koZhToggle&&b.sourceEmphasis)el.style.fontStyle='italic';frag.appendChild(el);continue}
   if(b.spacer){const el=document.createElement('div');el.className='scene-space';el.dataset.index=i;el.style.height=Math.min(100,14*b.spacer)+'px';frag.appendChild(el);continue}
   if(b.ko==='＊'||b.ko==='*'){const el=document.createElement('div');el.className='scene-break';el.textContent='＊';el.dataset.index=i;frag.appendChild(el);continue}
   const koZhToggle=Boolean(story.koZhToggle&&mode==='ko-zh');
@@ -188,7 +189,7 @@ function renderStory(preserveScroll=false){
   const visibleChinese=canToggle&&isChineseVisible(i);
   const localLangs=b.koOnly?['ko']:koZhToggle?(visibleChinese?['ko','zh']:['ko']):mode==='en-zh'&&b.en?(visibleChinese?['en','zh']:['en']):langs;
   const localCompared=localLangs.length>1;
-  const section=document.createElement('section');section.className='story-par '+(localCompared?'compared':'single')+(localLangs.length===3?' triple':'')+(query?' search-result':'')+(b.bubbleSide==='incoming'||b.bubbleSide==='outgoing'?' story-bubble story-bubble-'+b.bubbleSide:'');section.dataset.index=i;
+  const section=document.createElement('section');section.className='story-par '+(localCompared?'compared':'single')+(localLangs.length===3?' triple':'')+(query?' search-result':'')+(b.bubbleSide==='incoming'||b.bubbleSide==='outgoing'?' story-bubble story-bubble-'+b.bubbleSide:'');section.dataset.index=i;if(b.align)section.style.textAlign=b.align;
   for(const lang of localLangs)section.appendChild(makeColumn(b[lang]||'',lang,i,localCompared&&lang!=='en'));
   if(canToggle){
    const btn=document.createElement('button');btn.className='paragraph-translate';btn.type='button';
