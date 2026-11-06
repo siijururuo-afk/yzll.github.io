@@ -130,7 +130,7 @@ function render(){
  box.classList.toggle('original-layout',Boolean(current.sourceAudit||current.koZhToggle));
  const blocks=current.blocks||[];let unfinished=0,printed=0;
  blocks.forEach((b,i)=>{
-  const value=(b.zh||'').trim();
+  const value=b.koOnly?'':(b.zh||'').trim();
   if(searchText && !value.toLowerCase().includes(searchText))return;
   if(b.image&&(/^(data:image\/(png|jpeg|webp|gif);base64,|\.\/images\/|images\/|https:\/\/)/i.test(b.image))){
    const f=document.createElement('figure');f.className='story-media';f.dataset.index=i;
