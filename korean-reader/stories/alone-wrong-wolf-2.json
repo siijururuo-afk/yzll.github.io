@@ -24,7 +24,21 @@
     "sourceTextElements": 147,
     "sourceEmptyElements": 87,
     "sourceImages": 0,
-    "sourceEmbeddedMedia": 0
+    "sourceEmbeddedMedia": 0,
+    "sourceAlignmentRight": 7,
+    "sourceStrongElements": 3,
+    "sourceEmphasisElements": 2,
+    "messagePositions": [
+      43,
+      44,
+      45,
+      111,
+      112,
+      113,
+      114,
+      115,
+      116
+    ]
   },
   "blocks": [
     {
@@ -37,7 +51,8 @@
       "en": "",
       "sourceIndex": 1,
       "heading": true,
-      "align": "right"
+      "align": "right",
+      "sourceEmphasis": true
     },
     {
       "ko": "2",
@@ -45,7 +60,8 @@
       "en": "",
       "sourceIndex": 2,
       "heading": true,
-      "align": "right"
+      "align": "right",
+      "sourceEmphasis": true
     },
     {
       "spacer": 2,
@@ -269,7 +285,8 @@
       "ko": "오후 12:25「김은수.」",
       "zh": "下午12:25「金恩秀。」",
       "en": "",
-      "sourceIndex": 44
+      "sourceIndex": 44,
+      "align": "right"
     },
     {
       "ko": "「아, 그래. 사실 걔 중화요리 싫어해. 기름기 많아서 느끼하데.」오후 12:26",
@@ -623,7 +640,8 @@
       "ko": "오후 1:28「누나.」",
       "zh": "下午1:28「姐。」",
       "en": "",
-      "sourceIndex": 111
+      "sourceIndex": 111,
+      "align": "right"
     },
     {
       "ko": "「웬일이래? 먼저 연락을 다 하고?」오후 1:28",
@@ -635,7 +653,8 @@
       "ko": "오후 1:28「저 바 관둬요.」",
       "zh": "下午1:28「我不在酒吧干了。」",
       "en": "",
-      "sourceIndex": 113
+      "sourceIndex": 113,
+      "align": "right"
     },
     {
       "ko": "「뭐?」오후 1:29",
@@ -647,7 +666,8 @@
       "ko": "오후 1:29「번호 삭제할게요.」",
       "zh": "下午1:29「我要删掉你的号码了。」",
       "en": "",
-      "sourceIndex": 115
+      "sourceIndex": 115,
+      "align": "right"
     },
     {
       "ko": "「야, 김우석!」오후 1:29",
