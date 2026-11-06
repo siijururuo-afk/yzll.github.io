@@ -18,15 +18,45 @@
   },
   "sourceAudit": {
     "file": "혼자 틀린 이리 3 ~ 5.html",
-    "sourceElementCount": 178,
-    "sourceTextElements": 111,
+    "sourceElementCount": 180,
+    "sourceTextElements": 113,
     "sourceEmptyElements": 67,
     "sourceImages": 0,
     "sourceEmbeddedMedia": 0,
-    "sourceRange": "166-343",
-    "sourceIndexPreserved": true
+    "sourceRange": "163-340",
+    "sourceIndexPreserved": true,
+    "headingCount": 2
   },
   "blocks": [
+    {
+      "heading": true,
+      "zh": "独自错了的狼",
+      "sourceTag": "h4",
+      "sourceIndex": "heading-title",
+      "align": "right"
+    },
+    {
+      "heading": true,
+      "zh": "4",
+      "sourceTag": "h4",
+      "sourceIndex": "heading-number",
+      "align": "right"
+    },
+    {
+      "spacer": 2,
+      "sourceTag": "p",
+      "sourceIndex": 163
+    },
+    {
+      "spacer": 2,
+      "sourceTag": "p",
+      "sourceIndex": 164
+    },
+    {
+      "spacer": 2,
+      "sourceTag": "p",
+      "sourceIndex": 165
+    },
     {
       "zh": "曹承衍和金恩秀的蜜月过得枯燥乏味。别人都趁蜜月去度假，他们俩却只想着借蜜月之名工作。恩秀要去参加GPU虚拟化技术公司Bitfusion的投资会议，承衍则想拿下雪佛龙的半潜式原油生产设施订单。于是两人达成共识：蜜月地点就定在美国！也只一起走到那里，之后便分别前往得克萨斯和加利福尼亚。",
       "sourceIndex": 166
@@ -789,21 +819,6 @@
     {
       "spacer": 2,
       "sourceIndex": 340,
-      "sourceTag": "p"
-    },
-    {
-      "spacer": 2,
-      "sourceIndex": 341,
-      "sourceTag": "p"
-    },
-    {
-      "spacer": 2,
-      "sourceIndex": 342,
-      "sourceTag": "p"
-    },
-    {
-      "spacer": 2,
-      "sourceIndex": 343,
       "sourceTag": "p"
     }
   ]
