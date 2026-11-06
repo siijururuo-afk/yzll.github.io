@@ -6,6 +6,7 @@ const $$=s=>Array.from(document.querySelectorAll(s));
 const STORAGE='between-lines-v2';
 const DEFAULT_ID='hanip';
 const BUILTINS={
+ 'alone-wrong-wolf-1':{path:'alone-wrong-wolf-1.json',zh:'独自错了的狼 · 第1章',ko:'혼자 틀린 이리 1',author:'作者未标注',count:140,series:'独自错了的狼',part:'1',index:1,total:1,translation:'zh-complete'},
  'good-1':{path:'good-1.json',zh:'好人会谈一场糟糕的恋爱 · 第1章',ko:'좋은 사람은 나쁜 연애를 하게 돼 1',author:'RQ',count:82,series:'好人会谈一场糟糕的恋爱',part:'1',index:1,total:9,translation:'complete'},
  'good-2':{path:'good-2.json',zh:'好人会谈一场糟糕的恋爱 · 第2章',ko:'좋은 사람은 나쁜 연애를 하게 돼 2',author:'RQ',count:115,series:'好人会谈一场糟糕的恋爱',part:'2',index:2,total:9,translation:'complete'},
  'good-3':{path:'good-3.json',zh:'好人会谈一场糟糕的恋爱 · 第3章',ko:'좋은 사람은 나쁜 연애를 하게 돼 3',author:'RQ',count:62,series:'好人会谈一场糟糕的恋爱',part:'3',index:3,total:9,translation:'complete'},
@@ -107,6 +108,14 @@ function makeColumn(text,lang,idx,showCaption){
  if(showCaption){const caption=document.createElement('div');caption.className='lang-caption';caption.textContent=lang==='ko'?'한국어 · 原文':lang==='en'?'English':'中文';el.appendChild(caption)}
  const p=document.createElement('p');
  if(!text){p.className='empty-lang';p.textContent='尚无译文，可到「更多 → 翻译设置」翻译';}
+ else if(story?.koZhToggle&&lang==='ko'&&story.blocks?.[idx]?.sourceEmphasisText&&text.includes(story.blocks[idx].sourceEmphasisText)){
+  const word=story.blocks[idx].sourceEmphasisText,position=text.indexOf(word);
+  if(lookupEnabled)tokenize(p,text.slice(0,position),'ko',idx);else p.appendChild(document.createTextNode(text.slice(0,position)));
+  const emphasis=document.createElement('em');
+  if(lookupEnabled)tokenize(emphasis,word,'en',idx);else emphasis.textContent=word;
+  p.appendChild(emphasis);
+  if(lookupEnabled)tokenize(p,text.slice(position+word.length),'ko',idx);else p.appendChild(document.createTextNode(text.slice(position+word.length)));
+ }
  else if(lookupEnabled&&(lang==='ko'||lang==='en'))tokenize(p,text,lang,idx);
  else p.textContent=text;
  el.appendChild(p);return el;
@@ -116,7 +125,7 @@ function isChineseVisible(i){return chineseOverrides.has(i)?!showAllChinese:show
 function setChineseParagraph(section,i,visible){
  if(!section||!story)return;
  const b=story.blocks[i];
- if(!b||!b.en||!b.zh||b.koOnly)return;
+ if(!b||!b.zh||b.koOnly||!(mode==='en-zh'?Boolean(b.en):Boolean(story.koZhToggle&&mode==='ko-zh')))return;
  const existing=section.querySelector('.text-column[data-lang="zh"]');
  if(visible&&!existing){
   const zhColumn=makeColumn(b.zh,'zh',i,true);
@@ -134,11 +143,14 @@ function setChineseParagraph(section,i,visible){
 }
 function updateTopChineseControl(hasEn){
  const btn=$('#compare-trigger');
- btn.disabled=!hasEn;
- btn.textContent=mode==='en-zh'&&showAllChinese?'收起全部中文':'显示全部中文';
- btn.setAttribute('aria-pressed',String(mode==='en-zh'&&showAllChinese));
- btn.classList.toggle('active',mode==='en-zh'&&showAllChinese);
- btn.title=hasEn?'一键显示或收起整章的中文翻译':'本章没有完整英文译文';
+ const koZhToggle=Boolean(story?.koZhToggle&&mode==='ko-zh');
+ const available=hasEn||koZhToggle;
+ btn.disabled=!available;
+ const currentToggleMode=mode==='en-zh'||koZhToggle;
+ btn.textContent=currentToggleMode&&showAllChinese?'收起全部中文':'显示全部中文';
+ btn.setAttribute('aria-pressed',String(currentToggleMode&&showAllChinese));
+ btn.classList.toggle('active',currentToggleMode&&showAllChinese);
+ btn.title=available?'一键显示或收起整章的中文翻译':'本章没有完整英文译文';
 }
 function captureAnchor(){if(activeView!=='reader')return null;const els=$$('#paragraphs > [data-index]');for(const el of els){const r=el.getBoundingClientRect();if(r.bottom>Math.min(window.innerHeight*.34,180))return {i:Number(el.dataset.index),y:r.top}}return null}
 function restoreAnchor(a){if(!a)return;const el=$(`#paragraphs > [data-index="${a.i}"]`);if(el)window.scrollBy(0,el.getBoundingClientRect().top-a.y)}
@@ -152,7 +164,7 @@ function renderStory(preserveScroll=false){
  $('#article-count').textContent=`${story.blocks.filter(b=>b.ko&&!b.spacer&&!b.imageMissing&&!b.heading&&b.ko!=='＊'&&b.ko!=='*').length} 段`;
  const langs=displayedLangs(),compared=langs.length>1;
  const matches=query?story.blocks.map((b,i)=>({b,i})).filter(({b})=>['ko','zh','en'].some(k=>(b[k]||'').toLocaleLowerCase().includes(query))):story.blocks.map((b,i)=>({b,i}));
- const box=$('#paragraphs');const frag=document.createDocumentFragment();let originalOnlyShown=false;
+ const box=$('#paragraphs');box.classList.toggle('original-layout',Boolean(story.koZhToggle));const frag=document.createDocumentFragment();let originalOnlyShown=false;
  if(!matches.length){const el=document.createElement('div');el.className='empty';el.textContent='没有找到包含搜索词的段落';frag.appendChild(el)}
  for(const {b,i} of matches){
   if(b.koOnly && !originalOnlyShown){const note=document.createElement('div');note.className='omission-inline';note.textContent='本段保留韩文原文；其余已翻译的对话按正常阅读模式显示。';frag.appendChild(note);originalOnlyShown=true;}
@@ -168,12 +180,13 @@ function renderStory(preserveScroll=false){
     frag.appendChild(figure);continue;
   }
   if(b.imageMissing){const notice=document.createElement('div');notice.className='omission-inline';notice.dataset.index=i;notice.textContent=b.imageSlot?`第3章原文图片 ${b.imageSlot.endsWith('-1')?'1/2':'2/2'}（Instagram 情节处，图片未离线保存）`:'[原文图片未离线保存]';frag.appendChild(notice);continue}
-   if(b.heading){const el=document.createElement('h2');el.className='story-inner-heading';el.dataset.index=i;el.textContent=mode==='ko'?b.ko:(mode==='en'||mode==='en-zh'?b.en||b.zh||b.ko:b.zh||b.ko);frag.appendChild(el);continue}
+   if(b.heading){const el=document.createElement('h2');el.className='story-inner-heading';el.dataset.index=i;el.textContent=mode==='ko'?b.ko:(mode==='en'||mode==='en-zh'?b.en||b.zh||b.ko:b.zh||b.ko);if(b.align)el.style.textAlign=b.align;frag.appendChild(el);continue}
   if(b.spacer){const el=document.createElement('div');el.className='scene-space';el.dataset.index=i;el.style.height=Math.min(100,14*b.spacer)+'px';frag.appendChild(el);continue}
   if(b.ko==='＊'||b.ko==='*'){const el=document.createElement('div');el.className='scene-break';el.textContent='＊';el.dataset.index=i;frag.appendChild(el);continue}
-  const canToggle=!b.koOnly&&Boolean(b.zh&&b.en)&&mode==='en-zh';
+  const koZhToggle=Boolean(story.koZhToggle&&mode==='ko-zh');
+  const canToggle=!b.koOnly&&Boolean(b.zh)&&((mode==='en-zh'&&Boolean(b.en))||koZhToggle);
   const visibleChinese=canToggle&&isChineseVisible(i);
-  const localLangs=b.koOnly?['ko']:mode==='en-zh'&&b.en?(visibleChinese?['en','zh']:['en']):langs;
+  const localLangs=b.koOnly?['ko']:koZhToggle?(visibleChinese?['ko','zh']:['ko']):mode==='en-zh'&&b.en?(visibleChinese?['en','zh']:['en']):langs;
   const localCompared=localLangs.length>1;
   const section=document.createElement('section');section.className='story-par '+(localCompared?'compared':'single')+(localLangs.length===3?' triple':'')+(query?' search-result':'')+(b.bubbleSide==='incoming'||b.bubbleSide==='outgoing'?' story-bubble story-bubble-'+b.bubbleSide:'');section.dataset.index=i;
   for(const lang of localLangs)section.appendChild(makeColumn(b[lang]||'',lang,i,localCompared&&lang!=='en'));
@@ -234,7 +247,7 @@ function renderStorySelect(){
   const title=document.createElement('strong');title.textContent=b.series?(String(b.part||'').startsWith('+')?'番外 '+b.part:'第'+(b.index??'ABCDE'.indexOf(b.part)+1)+'章 · '+b.part):b.zh;
   const sub=document.createElement('span');sub.className='book-original';sub.textContent=b.series?b.ko:b.ko;
   const meta=document.createElement('span');meta.className='book-meta';
-  meta.textContent=b.author+' · '+b.count+' 段 · '+(b.translation==='ko-only'?'韩文原文（中英文未译）':b.translation==='partial-ko-original'?'三语可读 · 部分段落保留韩文':b.translation==='complete'||b.series==='183 68 25'||id==='existence-weight'||id==='hanip'||id==='cover-eyes'?'三语已译':'按原文阅读');
+  meta.textContent=b.author+' · '+b.count+' 段 · '+(b.translation==='ko-only'?'韩文原文（中英文未译）':b.translation==='zh-complete'?'韩中已译 · 英文待补':b.translation==='partial-ko-original'?'三语可读 · 部分段落保留韩文':b.translation==='complete'||b.series==='183 68 25'||id==='existence-weight'||id==='hanip'||id==='cover-eyes'?'三语已译':'按原文阅读');
   left.append(title,sub,meta);const right=document.createElement('span');right.className='book-action';right.textContent=id===currentId?'继续阅读':'开始阅读';
   item.append(left,right);if(b.series)item.classList.add('series-chapter');item.addEventListener('click',()=>loadStory(id));shelf.appendChild(item);
  }
@@ -256,11 +269,11 @@ async function loadStory(id,go=true){try{
  const hasZh=readable.every(b=>b.koOnly||b.zh),hasEn=readable.every(b=>b.koOnly||b.en);
  // Migrate previous Chinese-first defaults once; subsequent explicit language choices are respected.
  const migrated=readStorage('english-first-migrated:'+id,false);
- const preferred=!migrated&&hasEn?'en-zh':readStorage('reading-mode:'+id,hasEn?'en-zh':hasZh?'zh':'ko');
+ const preferred=!migrated&&hasEn?'en-zh':readStorage('reading-mode:'+id,hasEn?'en-zh':data.koZhToggle&&hasZh?'ko-zh':hasZh?'zh':'ko');
  mode=(preferred==='en'&&!hasEn)||(preferred.includes('en')&&!hasEn)||(preferred.includes('zh')&&!hasZh)?(hasZh?'zh':'ko'):preferred;
  saveStorage('english-first-migrated:'+id,true);
  saveStorage('reading-mode:'+id,mode);
- showAllChinese=readStorage('show-all-chinese:'+id,false);
+ showAllChinese=readStorage('show-all-chinese:'+id,Boolean(data.koZhToggle));
  query='';$('#search-input').value='';
  lastReaderY=Number(readStorage('scroll:'+id,0))||0;renderStory();renderStorySelect();
   if(go){history.replaceState(null,'',location.pathname+'?story='+encodeURIComponent(id));showView('reader');}
@@ -311,6 +324,11 @@ function initListeners(){
  $$('[data-tab]').forEach(x=>x.addEventListener('click',()=>showView(x.dataset.tab)));
  $('#more-trigger').addEventListener('click',()=>togglePanel('more-panel','more-trigger'));
  $('#compare-trigger').addEventListener('click',()=>{
+  if(story?.koZhToggle&&mode==='ko-zh'){
+   showAllChinese=!showAllChinese;chineseOverrides.clear();
+   saveStorage('show-all-chinese:'+currentId,showAllChinese);
+   renderStory(true);return;
+  }
   const complete=story.blocks.filter(b=>b.ko&&!b.spacer&&!b.imageMissing&&b.ko!=='＊'&&b.ko!=='*');
   const hasZh=complete.every(b=>b.koOnly||b.zh),hasEn=complete.every(b=>b.koOnly||b.en);
   if(!hasZh||!hasEn){toast('本章暂未备齐英中译文');return}
