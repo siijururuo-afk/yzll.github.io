@@ -5,6 +5,8 @@ const BUILTINS={
  'alone-wrong-wolf-1':{path:'alone-wrong-wolf-1.json',zh:'独自错了的狼 · 第1章',ko:'혼자 틀린 이리 1',author:'作者未标注',count:140,series:'独自错了的狼',part:'1',index:1,total:5,translation:'zh-complete'},
  'alone-wrong-wolf-2':{path:'alone-wrong-wolf-2.json',zh:'独自错了的狼 · 第2章',ko:'혼자 틀린 이리 2',author:'作者未标注',count:145,series:'独自错了的狼',part:'2',index:2,total:5,translation:'zh-complete'},
  'alone-wrong-wolf-3':{path:'alone-wrong-wolf-3.json',zh:'独自错了的狼 · 第3章',ko:'혼자 틀린 이리 3',author:'作者未标注',count:99,series:'独自错了的狼',part:'3',index:3,total:5,translation:'zh-complete'},
+ 'alone-wrong-wolf-4':{path:'alone-wrong-wolf-4.json',zh:'独自错了的狼 · 第4章',ko:'혼자 틀린 이리 4',author:'作者未标注',count:111,series:'独自错了的狼',part:'4',index:4,total:5,translation:'zh-complete'},
+ 'alone-wrong-wolf-5':{path:'alone-wrong-wolf-5.json',zh:'独自错了的狼 · 第5章',ko:'혼자 틀린 이리 5',author:'作者未标注',count:103,series:'独自错了的狼',part:'5',index:5,total:5,translation:'zh-complete'},
  'good-1':{path:'good-1.json',zh:'好人会谈一场糟糕的恋爱 · 第1章',ko:'좋은 사람은 나쁜 연애를 하게 돼 1',author:'RQ',count:82,series:'好人会谈一场糟糕的恋爱',part:'1',index:1,total:9,translation:'complete'},
  'good-2':{path:'good-2.json',zh:'好人会谈一场糟糕的恋爱 · 第2章',ko:'좋은 사람은 나쁜 연애를 하게 돼 2',author:'RQ',count:115,series:'好人会谈一场糟糕的恋爱',part:'2',index:2,total:9,translation:'complete'},
  'good-3':{path:'good-3.json',zh:'好人会谈一场糟糕的恋爱 · 第3章',ko:'좋은 사람은 나쁜 연애를 하게 돼 3',author:'RQ',count:62,series:'好人会谈一场糟糕的恋爱',part:'3',index:3,total:9,translation:'complete'},
