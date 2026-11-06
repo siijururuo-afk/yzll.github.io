@@ -24,7 +24,10 @@
     "sourceEmptyElements": 83,
     "sourceImages": 0,
     "sourceEmbeddedMedia": 0,
-    "sourceIndexPreserved": true
+    "sourceIndexPreserved": true,
+    "sourceStrongElements": 1,
+    "sourceEmphasisElements": 2,
+    "renderNotes": "原文的 83 个空白节点与章节标题顺序已保留；第 44 节内联 Peel 为斜体"
   },
   "blocks": [
     {
@@ -1302,5 +1305,6 @@
       "sourceIndex": 224,
       "sourceTag": "p"
     }
-  ]
+  ],
+  "koZhToggle": true
 }
