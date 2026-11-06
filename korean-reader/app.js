@@ -16,6 +16,10 @@ const BUILTINS={
  'animato-4':{path:'animato-4.json.gz',zh:'泥潭·阿尼马托 · 第4章',ko:'시궁창 아니마토 4',author:'RQ',count:101,series:'泥潭·阿尼马托',part:'4',index:4,total:10,translation:'zh-complete'},
  'animato-5':{path:'animato-5.json.gz',zh:'泥潭·阿尼马托 · 第5章',ko:'시궁창 아니마토 5',author:'RQ',count:64,series:'泥潭·阿尼马托',part:'5',index:5,total:10,translation:'zh-complete'},
  'animato-6':{path:'animato-6.json.gz',zh:'泥潭·阿尼马托 · 第6章',ko:'시궁창 아니마토 6',author:'RQ',count:81,series:'泥潭·阿尼马托',part:'6',index:6,total:10,translation:'zh-complete'},
+ 'animato-7':{path:'animato-7.json.gz',zh:'泥潭·阿尼马托 · 第7章',ko:'시궁창 아니마토 7',author:'RQ',count:65,series:'泥潭·阿尼马托',part:'7',index:7,total:10,translation:'zh-complete'},
+ 'animato-8':{path:'animato-8.json.gz',zh:'泥潭·阿尼马托 · 第8章',ko:'시궁창 아니마토 8',author:'RQ',count:68,series:'泥潭·阿尼马托',part:'8',index:8,total:10,translation:'zh-complete'},
+ 'animato-9':{path:'animato-9.json.gz',zh:'泥潭·阿尼马托 · 第9章',ko:'시궁창 아니마토 9',author:'RQ',count:118,series:'泥潭·阿尼马托',part:'9',index:9,total:10,translation:'zh-complete'},
+ 'animato-10':{path:'animato-10.json.gz',zh:'泥潭·阿尼马托 · 第10章（完结）',ko:'시궁창 아니마토 10',author:'RQ',count:68,series:'泥潭·阿尼马托',part:'10',index:10,total:10,translation:'zh-complete'},
  'good-1':{path:'good-1.json',zh:'好人会谈一场糟糕的恋爱 · 第1章',ko:'좋은 사람은 나쁜 연애를 하게 돼 1',author:'RQ',count:82,series:'好人会谈一场糟糕的恋爱',part:'1',index:1,total:9,translation:'complete'},
  'good-2':{path:'good-2.json',zh:'好人会谈一场糟糕的恋爱 · 第2章',ko:'좋은 사람은 나쁜 연애를 하게 돼 2',author:'RQ',count:115,series:'好人会谈一场糟糕的恋爱',part:'2',index:2,total:9,translation:'complete'},
  'good-3':{path:'good-3.json',zh:'好人会谈一场糟糕的恋爱 · 第3章',ko:'좋은 사람은 나쁜 연애를 하게 돼 3',author:'RQ',count:62,series:'好人会谈一场糟糕的恋爱',part:'3',index:3,total:9,translation:'complete'},
@@ -126,6 +130,7 @@ function textParagraph(text,b,index){
  if(['left','center','right','justify'].includes(b.align))section.style.textAlign=b.align;
  const col=document.createElement('div');col.className='text-column translation';col.dataset.lang='zh';col.lang='zh-CN';
  const p=document.createElement('p');
+ if(b.italic)p.style.fontStyle='italic';
  if(b.sourceEmphasisText&&text.includes(b.sourceEmphasisText)){
   const pos=text.indexOf(b.sourceEmphasisText);p.append(document.createTextNode(text.slice(0,pos)));
   const em=document.createElement('em');em.textContent=b.sourceEmphasisText;p.append(em,document.createTextNode(text.slice(pos+b.sourceEmphasisText.length)));
@@ -152,7 +157,7 @@ function render(){
    frame.src='https://www.youtube-nocookie.com/embed/'+embed;frame.sandbox='allow-scripts allow-same-origin allow-presentation';frame.allow='fullscreen; picture-in-picture';frame.allowFullscreen=true;f.append(frame);frag.append(f);return;
   }
   if(b.imageMissing){const el=document.createElement('div');el.className='omission-inline';el.dataset.index=i;el.textContent='[原文图片未能从离线文件中恢复]';frag.append(el);return}
-  if(b.spacer){const el=document.createElement('div');el.className='scene-space';el.dataset.index=i;el.style.height=Math.min(100,14*b.spacer)+'px';frag.append(el);return}
+  if(b.spacer){const el=document.createElement('div');el.className='scene-space';el.dataset.index=i;el.style.height=(Number.isFinite(b.spacerHeight)?b.spacerHeight:Math.min(100,14*b.spacer))+'px';frag.append(el);return}
   if(b.heading){const h=document.createElement('h2');h.className='story-inner-heading';h.dataset.index=i;h.textContent=value||'（章节标题待译）';if(['left','center','right'].includes(b.align))h.style.textAlign=b.align;if(b.sourceEmphasis)h.style.fontStyle='italic';frag.append(h);return}
   if(b.ko==='＊'||b.ko==='*'||value==='＊'||value==='§'){const el=document.createElement('div');el.className='scene-break';el.dataset.index=i;el.textContent=value==='§'?'§':'＊';frag.append(el);return}
   if(!value){if(b.ko||b.koOnly){unfinished++;frag.append(textParagraph('（本段中文待译）',b,i))}return}
