@@ -12,6 +12,8 @@ const BUILTINS={
  'selfish-down':{path:'selfish-down.json.gz',zh:'SELF!SH · 下篇（完）',ko:'SELF!SH 下',author:'마오',count:158,series:'SELF!SH',part:'下',index:3,total:3,translation:'zh-complete'},
  'animato-1':{path:'animato-1.json.gz',zh:'泥潭·阿尼马托 · 第1章',ko:'시궁창 아니마토 1',author:'RQ',count:76,series:'泥潭·阿尼马托',part:'1',index:1,total:10,translation:'zh-complete'},
  'animato-2':{path:'animato-2.json.gz',zh:'泥潭·阿尼马托 · 第2章',ko:'시궁창 아니마토 2',author:'RQ',count:82,series:'泥潭·阿尼马托',part:'2',index:2,total:10,translation:'zh-complete'},
+ 'animato-3':{path:'animato-3.json.gz',zh:'泥潭·阿尼马托 · 第3章',ko:'시궁창 아니마토 3',author:'RQ',count:104,series:'泥潭·阿尼马托',part:'3',index:3,total:10,translation:'zh-complete'},
+ 'animato-4':{path:'animato-4.json.gz',zh:'泥潭·阿尼马托 · 第4章',ko:'시궁창 아니마토 4',author:'RQ',count:101,series:'泥潭·阿尼马托',part:'4',index:4,total:10,translation:'zh-complete'},
  'good-1':{path:'good-1.json',zh:'好人会谈一场糟糕的恋爱 · 第1章',ko:'좋은 사람은 나쁜 연애를 하게 돼 1',author:'RQ',count:82,series:'好人会谈一场糟糕的恋爱',part:'1',index:1,total:9,translation:'complete'},
  'good-2':{path:'good-2.json',zh:'好人会谈一场糟糕的恋爱 · 第2章',ko:'좋은 사람은 나쁜 연애를 하게 돼 2',author:'RQ',count:115,series:'好人会谈一场糟糕的恋爱',part:'2',index:2,total:9,translation:'complete'},
  'good-3':{path:'good-3.json',zh:'好人会谈一场糟糕的恋爱 · 第3章',ko:'좋은 사람은 나쁜 연애를 하게 돼 3',author:'RQ',count:62,series:'好人会谈一场糟糕的恋爱',part:'3',index:3,total:9,translation:'complete'},
