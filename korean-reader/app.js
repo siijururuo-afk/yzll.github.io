@@ -144,7 +144,7 @@ function setChineseParagraph(section,i,visible){
 function updateTopChineseControl(hasEn){
  const btn=$('#compare-trigger');
  const koZhToggle=Boolean(story?.koZhToggle&&mode==='ko-zh');
- const available=hasEn||koZhToggle;
+ const available=hasEn||Boolean(story?.koZhToggle);
  btn.disabled=!available;
  const currentToggleMode=mode==='en-zh'||koZhToggle;
  btn.textContent=currentToggleMode&&showAllChinese?'收起全部中文':'显示全部中文';
@@ -324,8 +324,12 @@ function initListeners(){
  $$('[data-tab]').forEach(x=>x.addEventListener('click',()=>showView(x.dataset.tab)));
  $('#more-trigger').addEventListener('click',()=>togglePanel('more-panel','more-trigger'));
  $('#compare-trigger').addEventListener('click',()=>{
-  if(story?.koZhToggle&&mode==='ko-zh'){
-   showAllChinese=!showAllChinese;chineseOverrides.clear();
+  if(story?.koZhToggle){
+   if(mode!=='ko-zh'){
+    mode='ko-zh';showAllChinese=true;
+    saveStorage('reading-mode:'+currentId,mode);
+   }else showAllChinese=!showAllChinese;
+   chineseOverrides.clear();
    saveStorage('show-all-chinese:'+currentId,showAllChinese);
    renderStory(true);return;
   }
