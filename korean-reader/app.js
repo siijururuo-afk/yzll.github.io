@@ -7,6 +7,9 @@ const BUILTINS={
  'alone-wrong-wolf-3':{path:'alone-wrong-wolf-3.json',zh:'独自错了的狼 · 第3章',ko:'혼자 틀린 이리 3',author:'作者未标注',count:99,series:'独自错了的狼',part:'3',index:3,total:5,translation:'zh-complete'},
  'alone-wrong-wolf-4':{path:'alone-wrong-wolf-4.json',zh:'独自错了的狼 · 第4章',ko:'혼자 틀린 이리 4',author:'作者未标注',count:111,series:'独自错了的狼',part:'4',index:4,total:5,translation:'zh-complete'},
  'alone-wrong-wolf-5':{path:'alone-wrong-wolf-5.json',zh:'独自错了的狼 · 第5章',ko:'혼자 틀린 이리 5',author:'作者未标注',count:103,series:'独自错了的狼',part:'5',index:5,total:5,translation:'zh-complete'},
+ 'selfish-up':{path:'selfish-up.json.gz',zh:'SELF!SH · 上篇',ko:'SELF!SH 上',author:'마오',count:64,series:'SELF!SH',part:'上',index:1,total:3,translation:'zh-complete'},
+ 'selfish-mid':{path:'selfish-mid.json.gz',zh:'SELF!SH · 中篇',ko:'SELF!SH 中',author:'마오',count:97,series:'SELF!SH',part:'中',index:2,total:3,translation:'zh-complete'},
+ 'selfish-down':{path:'selfish-down.json.gz',zh:'SELF!SH · 下篇（完）',ko:'SELF!SH 下',author:'마오',count:158,series:'SELF!SH',part:'下',index:3,total:3,translation:'zh-complete'},
  'good-1':{path:'good-1.json',zh:'好人会谈一场糟糕的恋爱 · 第1章',ko:'좋은 사람은 나쁜 연애를 하게 돼 1',author:'RQ',count:82,series:'好人会谈一场糟糕的恋爱',part:'1',index:1,total:9,translation:'complete'},
  'good-2':{path:'good-2.json',zh:'好人会谈一场糟糕的恋爱 · 第2章',ko:'좋은 사람은 나쁜 연애를 하게 돼 2',author:'RQ',count:115,series:'好人会谈一场糟糕的恋爱',part:'2',index:2,total:9,translation:'complete'},
  'good-3':{path:'good-3.json',zh:'好人会谈一场糟糕的恋爱 · 第3章',ko:'좋은 사람은 나쁜 연애를 하게 돼 3',author:'RQ',count:62,series:'好人会谈一场糟糕的恋爱',part:'3',index:3,total:9,translation:'complete'},
@@ -127,7 +130,7 @@ function render(){
  if(!current)return;const box=$('#paragraphs'),frag=document.createDocumentFragment();
  $('#article-title').textContent=current.title?.zh||current.title?.ko||entryInfo(currentId)?.zh||'未命名';
  $('#article-author').textContent=current.author||entryInfo(currentId)?.author||'作者未标注';
- box.classList.toggle('original-layout',Boolean(current.sourceAudit||current.koZhToggle));
+ box.classList.toggle('original-layout',Boolean(current.sourceAudit||current.koZhToggle) && current.sourceAudit?.indentMode!=='none');
  const blocks=current.blocks||[];let unfinished=0,printed=0;
  blocks.forEach((b,i)=>{
   const value=b.koOnly?'':(b.zh||'').trim();
@@ -145,7 +148,7 @@ function render(){
   if(b.imageMissing){const el=document.createElement('div');el.className='omission-inline';el.dataset.index=i;el.textContent='[原文图片未能从离线文件中恢复]';frag.append(el);return}
   if(b.spacer){const el=document.createElement('div');el.className='scene-space';el.dataset.index=i;el.style.height=Math.min(100,14*b.spacer)+'px';frag.append(el);return}
   if(b.heading){const h=document.createElement('h2');h.className='story-inner-heading';h.dataset.index=i;h.textContent=value||'（章节标题待译）';if(['left','center','right'].includes(b.align))h.style.textAlign=b.align;if(b.sourceEmphasis)h.style.fontStyle='italic';frag.append(h);return}
-  if(b.ko==='＊'||b.ko==='*'||value==='＊'){const el=document.createElement('div');el.className='scene-break';el.dataset.index=i;el.textContent='＊';frag.append(el);return}
+  if(b.ko==='＊'||b.ko==='*'||value==='＊'||value==='§'){const el=document.createElement('div');el.className='scene-break';el.dataset.index=i;el.textContent=value==='§'?'§':'＊';frag.append(el);return}
   if(!value){if(b.ko||b.koOnly){unfinished++;frag.append(textParagraph('（本段中文待译）',b,i))}return}
   printed++;frag.append(textParagraph(value,b,i));
  });
@@ -158,7 +161,7 @@ function render(){
 async function load(id){
  try{
   const b=BUILTINS[id];let data;
-  if(b){const response=await fetch('./stories/'+b.path+'?v=20261106-chinese-only');if(!response.ok)throw Error('HTTP '+response.status);data=await response.json()}
+  if(b){const response=await fetch('./stories/'+b.path+'?v=20261106-selfish-v1');if(!response.ok)throw Error('HTTP '+response.status);if(b.path.endsWith('.json.gz')){if(typeof DecompressionStream==='undefined')throw Error('当前浏览器不支持压缩章节，请更新浏览器');const stream=new Blob([await response.arrayBuffer()]).stream().pipeThrough(new DecompressionStream('gzip'));data=await new Response(stream).json()}else data=await response.json()}
   else data=get('story-'+id,null);
   if(!data||!Array.isArray(data.blocks))throw Error('文章数据不存在');
   const old=get('translations:'+id,{});
