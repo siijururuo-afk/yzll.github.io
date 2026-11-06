@@ -18,15 +18,45 @@
   },
   "sourceAudit": {
     "file": "혼자 틀린 이리 3 ~ 5.html",
-    "sourceElementCount": 158,
-    "sourceTextElements": 103,
-    "sourceEmptyElements": 55,
+    "sourceElementCount": 163,
+    "sourceTextElements": 105,
+    "sourceEmptyElements": 58,
     "sourceImages": 0,
     "sourceEmbeddedMedia": 0,
-    "sourceRange": "344-501",
-    "sourceIndexPreserved": true
+    "sourceRange": "341-501",
+    "sourceIndexPreserved": true,
+    "headingCount": 2
   },
   "blocks": [
+    {
+      "heading": true,
+      "zh": "独自错了的狼",
+      "sourceTag": "h4",
+      "sourceIndex": "heading-title",
+      "align": "right"
+    },
+    {
+      "heading": true,
+      "zh": "5",
+      "sourceTag": "h4",
+      "sourceIndex": "heading-number",
+      "align": "right"
+    },
+    {
+      "spacer": 2,
+      "sourceTag": "p",
+      "sourceIndex": 341
+    },
+    {
+      "spacer": 2,
+      "sourceTag": "p",
+      "sourceIndex": 342
+    },
+    {
+      "spacer": 2,
+      "sourceTag": "p",
+      "sourceIndex": 343
+    },
     {
       "zh": "宇硕记得世人是怎么看待金宇硕的。大多走两个极端：要么因为他出身富裕而羡慕他，要么因为他是私生子而轻视他。",
       "sourceIndex": 344
