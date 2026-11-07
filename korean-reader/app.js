@@ -12,6 +12,7 @@ const BUILTINS={
  'selfish-down':{path:'selfish-down.json.gz',zh:'SELF!SH · 下篇（完）',ko:'SELF!SH 下',author:'마오',count:158,series:'SELF!SH',part:'下',index:3,total:3,translation:'zh-complete'},
  'love-again-1':{path:'love-again-1.json.gz',zh:'十八岁，再爱一次 · 第1章',ko:'열여덟 러브 어게인 1',author:'作者未标注',count:190,series:'十八岁，再爱一次',part:'1',index:1,total:6,translation:'zh-complete'},
  'love-again-2':{path:'love-again-2.json.gz',zh:'十八岁，再爱一次 · 第2章',ko:'열여덟 러브 어게인 2',author:'作者未标注',count:185,series:'十八岁，再爱一次',part:'2',index:2,total:6,translation:'zh-complete'},
+ 'love-again-3':{path:'love-again-3.json.gz',zh:'十八岁，再爱一次 · 第3章',ko:'열여덟 러브 어게인 3',author:'作者未标注',count:164,series:'十八岁，再爱一次',part:'3',index:3,total:6,translation:'zh-complete'},
  'animato-1':{path:'animato-1.json.gz',zh:'泥潭·阿尼马托 · 第1章',ko:'시궁창 아니마토 1',author:'RQ',count:76,series:'泥潭·阿尼马托',part:'1',index:1,total:10,translation:'zh-complete'},
  'animato-2':{path:'animato-2.json.gz',zh:'泥潭·阿尼马托 · 第2章',ko:'시궁창 아니마토 2',author:'RQ',count:82,series:'泥潭·阿尼马托',part:'2',index:2,total:10,translation:'zh-complete'},
  'animato-3':{path:'animato-3.json.gz',zh:'泥潭·阿尼马托 · 第3章',ko:'시궁창 아니마토 3',author:'RQ',count:104,series:'泥潭·阿尼马托',part:'3',index:3,total:10,translation:'zh-complete'},
