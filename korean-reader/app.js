@@ -2,6 +2,10 @@
 (()=>{
 'use strict';
 const BUILTINS={
+ 'heart-eat-1':{path:'heart-eat-1.html',zh:'割下心脏吃掉 · 上篇',ko:'심장을 베어 먹고 (상)',author:'作者未标注',count:65,series:'割下心脏吃掉',part:'上',index:1,total:2,translation:'zh-complete'},
+ 'heart-eat-2':{path:'heart-eat-2.html',zh:'割下心脏吃掉 · 下篇',ko:'심장을 베어 먹고 (하)',author:'作者未标注',count:53,series:'割下心脏吃掉',part:'下',index:2,total:2,translation:'zh-complete'},
+ 'fist-rise-1':{path:'fist-rise-1.html',zh:'松开拳头站起来 · 上篇',ko:'주먹펴고 일어서 (상)',author:'作者未标注',count:57,series:'松开拳头站起来',part:'上',index:1,total:2,translation:'zh-complete'},
+ 'fist-rise-2':{path:'fist-rise-2.html',zh:'松开拳头站起来 · 下篇',ko:'주먹펴고 일어서 (하)',author:'作者未标注',count:49,series:'松开拳头站起来',part:'下',index:2,total:2,translation:'zh-complete'},
  'alone-wrong-wolf-1':{path:'alone-wrong-wolf-1.json',zh:'独自错了的狼 · 第1章',ko:'혼자 틀린 이리 1',author:'作者未标注',count:140,series:'独自错了的狼',part:'1',index:1,total:5,translation:'zh-complete'},
  'alone-wrong-wolf-2':{path:'alone-wrong-wolf-2.json',zh:'独自错了的狼 · 第2章',ko:'혼자 틀린 이리 2',author:'作者未标注',count:145,series:'独自错了的狼',part:'2',index:2,total:5,translation:'zh-complete'},
  'alone-wrong-wolf-3':{path:'alone-wrong-wolf-3.json',zh:'独自错了的狼 · 第3章',ko:'혼자 틀린 이리 3',author:'作者未标注',count:99,series:'独自错了的狼',part:'3',index:3,total:5,translation:'zh-complete'},
@@ -137,7 +141,10 @@ function textParagraph(text,b,index){
  const col=document.createElement('div');col.className='text-column translation';col.dataset.lang='zh';col.lang='zh-CN';
  const p=document.createElement('p');
  if(b.italic)p.style.fontStyle='italic';
- if(b.sourceEmphasisText&&text.includes(b.sourceEmphasisText)){
+ if(b.textIndent)p.style.textIndent=b.textIndent;
+ if(b.bold)p.style.fontWeight='700';
+ if(Array.isArray(b.runs)&&b.runs.length){for(const run of b.runs){if(!run.text)continue;let n=document.createTextNode(run.text);if(run.italic){const em=document.createElement('em');em.append(n);n=em}if(run.bold){const strong=document.createElement('strong');strong.append(n);n=strong}p.append(n)}}
+ else if(b.sourceEmphasisText&&text.includes(b.sourceEmphasisText)){
   const pos=text.indexOf(b.sourceEmphasisText);p.append(document.createTextNode(text.slice(0,pos)));
   const em=document.createElement('em');em.textContent=b.sourceEmphasisText;p.append(em,document.createTextNode(text.slice(pos+b.sourceEmphasisText.length)));
  }else p.textContent=text;
@@ -175,10 +182,37 @@ function render(){
  show($('#unfinished-note'),unfinished>0);
  chapterNav();
 }
+function importChineseHtmlStory(html,entry){
+ const doc=new DOMParser().parseFromString(html,'text/html');
+ const article=doc.querySelector('article');
+ if(!article)throw Error('中文章节 HTML 缺少 article');
+ const blocks=Array.from(article.children).map((node,i)=>{
+  if(node.tagName==='FIGURE'){
+   const img=node.querySelector('img[src]');if(img)return {image:img.getAttribute('src'),imageAlt:img.getAttribute('alt')||'原文插图',sourceIndex:i};
+   const frame=node.querySelector('iframe[src]');if(frame)return {embedUrl:frame.getAttribute('src'),sourceIndex:i};
+   return null;
+  }
+  if(node.tagName==='P'){
+   if(node.classList.contains('space'))return {spacer:1,spacerHeight:parseFloat(node.style.height)||32,sourceIndex:i};
+   const val=node.textContent.trim();
+   if(!val)return {spacer:1,spacerHeight:24,sourceIndex:i};
+   const runs=Array.from(node.childNodes).filter(x=>x.textContent).map(x=>({
+    text:x.textContent,bold:x.nodeType===1&&['STRONG','B'].includes(x.tagName),
+    italic:x.nodeType===1&&['EM','I'].includes(x.tagName)}));
+   return {zh:val,sourceIndex:i,align:node.style.textAlign||'left',textIndent:node.style.textIndent||'',
+    bold:node.classList.contains('bold'),italic:node.classList.contains('italic'),
+    runs:runs.some(x=>x.bold||x.italic)?runs:undefined};
+  }
+  return null;
+ }).filter(Boolean);
+ if(!blocks.length)throw Error('中文章节没有正文');
+ return {id:entry.path,title:{zh:entry.zh,ko:entry.ko},author:entry.author,
+  series:entry.series,translationStatus:'zh-complete',sourceAudit:{indentMode:'none',fromTranslatedHtml:true},blocks};
+}
 async function load(id){
  try{
   const b=BUILTINS[id];let data;
-  if(b){const response=await fetch('./stories/'+b.path+'?v=20261106-selfish-v1');if(!response.ok)throw Error('HTTP '+response.status);if(b.path.endsWith('.json.gz')){if(typeof DecompressionStream==='undefined')throw Error('当前浏览器不支持压缩章节，请更新浏览器');const stream=new Blob([await response.arrayBuffer()]).stream().pipeThrough(new DecompressionStream('gzip'));data=await new Response(stream).json()}else data=await response.json()}
+  if(b){const response=await fetch('./stories/'+b.path+'?v=20261112-heart-fist');if(!response.ok)throw Error('HTTP '+response.status);if(b.path.endsWith('.html'))data=importChineseHtmlStory(await response.text(),b);else if(b.path.endsWith('.json.gz')){if(typeof DecompressionStream==='undefined')throw Error('当前浏览器不支持压缩章节，请更新浏览器');const stream=new Blob([await response.arrayBuffer()]).stream().pipeThrough(new DecompressionStream('gzip'));data=await new Response(stream).json()}else data=await response.json()}
   else data=get('story-'+id,null);
   if(!data||!Array.isArray(data.blocks))throw Error('文章数据不存在');
   const old=get('translations:'+id,{});
