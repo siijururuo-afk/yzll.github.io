@@ -5,6 +5,8 @@ const BUILTINS={
  'fox-hunt-00':{path:'fox-hunt-00.json.gz',zh:'[承硕] 狐狸狩猎',ko:'[승석] 여우사냥 00',author:'오독',count:58,series:'[承硕] 狐狸狩猎',part:'00',index:0,total:3,translation:'zh-complete'},
  'fox-hunt-01':{path:'fox-hunt-01.json.gz',zh:'[承硕] 狐狸狩猎',ko:'[승석] 여우사냥 01',author:'오독',count:68,series:'[承硕] 狐狸狩猎',part:'01',index:1,total:3,translation:'zh-complete'},
  'fox-hunt-02':{path:'fox-hunt-02.json.gz',zh:'[承硕] 狐狸狩猎',ko:'[승석] 여우사냥 02',author:'오독',count:72,series:'[承硕] 狐狸狩猎',part:'02',index:2,total:3,translation:'zh-complete'},
+ 'rockstar-main':{path:'rockstar-main.html',zh:'[承硕] Rock Star Will Never Die',ko:'[승석] 락스타 윌 네버 다이',author:'포타슘',count:350,series:'[承硕] Rock Star Will Never Die',part:'正文',index:1,total:2,translation:'zh-complete'},
+ 'rockstar-extra':{path:'rockstar-extra.html',zh:'[承硕] Rock Star Will Never Die · 番外',ko:'[승석] 락스타 윌 네버 다이 외전',author:'포타슘',count:134,series:'[承硕] Rock Star Will Never Die',part:'番外',index:2,total:2,translation:'zh-complete'},
  'heart-eat-1':{path:'heart-eat-1.html',zh:'割下心脏吃掉 · 上篇',ko:'심장을 베어 먹고 (상)',author:'作者未标注',count:65,series:'割下心脏吃掉',part:'上',index:1,total:2,translation:'zh-complete'},
  'heart-eat-2':{path:'heart-eat-2.html',zh:'割下心脏吃掉 · 下篇',ko:'심장을 베어 먹고 (하)',author:'作者未标注',count:53,series:'割下心脏吃掉',part:'下',index:2,total:2,translation:'zh-complete'},
  'fist-rise-1':{path:'fist-rise-1.html',zh:'松开拳头站起来 · 上篇',ko:'주먹펴고 일어서 (상)',author:'作者未标注',count:57,series:'松开拳头站起来',part:'上',index:1,total:2,translation:'zh-complete'},
@@ -256,14 +258,14 @@ function importChineseHtmlStory(html,entry){
    return null;
   }
   if(node.tagName==='P'){
-   if(node.classList.contains('space'))return {spacer:1,spacerHeight:parseFloat(node.style.height)||32,sourceIndex:i};
+   if(node.classList.contains('space')||node.classList.contains('blank'))return {spacer:1,spacerHeight:parseFloat(node.style.minHeight)||parseFloat(node.style.height)||32,sourceIndex:i};
    const val=node.textContent.trim();
    if(!val)return {spacer:1,spacerHeight:24,sourceIndex:i};
    const runs=Array.from(node.childNodes).filter(x=>x.textContent).map(x=>({
     text:x.textContent,bold:x.nodeType===1&&['STRONG','B'].includes(x.tagName),
     italic:x.nodeType===1&&['EM','I'].includes(x.tagName)}));
    return {zh:val,sourceIndex:i,align:node.style.textAlign||'left',textIndent:node.style.textIndent||'',
-    bold:node.classList.contains('bold'),italic:node.classList.contains('italic'),
+    bold:node.classList.contains('bold')||node.style.fontWeight==='700',italic:node.classList.contains('italic')||node.style.fontStyle==='italic',
     runs:runs.some(x=>x.bold||x.italic)?runs:undefined};
   }
   return null;
@@ -278,7 +280,7 @@ async function load(id,{resume=false,replace=false}={}){
     clearTimeout(saveTimer);set('scroll:'+currentId,window.scrollY);
   }
   restoring=true;const b=BUILTINS[id];let data;
-  if(b){const response=await fetch('./stories/'+b.path+'?v=20261112-reader-v2');
+  if(b){const response=await fetch('./stories/'+b.path+'?v=20261112-rockstar-v1');
    if(!response.ok)throw Error('HTTP '+response.status);
    if(b.path.endsWith('.html'))data=importChineseHtmlStory(await response.text(),b);
    else if(b.path.endsWith('.json.gz')){
