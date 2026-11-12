@@ -98,40 +98,99 @@ const custom=()=>get('custom-ids',[]);
 let current=null, currentId=null, activeView='reader', font=get('simple-font-size',1), searchText='', restoring=false, lastY=0, saveTimer=null;
 const show=(el,yes)=>el.classList.toggle('hidden',!yes);
 function notify(message){const n=$('#toast');n.textContent=message;show(n,true);clearTimeout(notify.timer);notify.timer=setTimeout(()=>show(n,false),3500)}
+
+const chaptersByBook=new Map();
+function bookKey(entry,id){return entry.series||entry.zh||entry.ko||id}
+function bookTitle(entry,id){return entry.series||String(entry.zh||entry.ko||id).replace(/\s*·\s*(?:第\d+章|完结篇|上篇|中篇|下篇).*$/,'')}
+function partTitle(b){const p=String(b.part??'').trim();if(p==='')return b.zh||b.ko||'正文';if(p==='上')return '上篇';if(p==='中')return '中篇';if(p==='下')return '下篇';if(p==='完')return '完结篇';if(/^\d+$/.test(p))return p.padStart(2,'0');if(p.startsWith('+'))return '番外 '+p;return p}
+function rebuildBooks(){
+ chaptersByBook.clear();
+ for(const [id,b] of Object.entries(BUILTINS)){
+  const key=bookKey(b,id);if(!chaptersByBook.has(key))chaptersByBook.set(key,[]);
+  chaptersByBook.get(key).push([id,b]);
+ }
+ for(const list of chaptersByBook.values())list.sort((a,b)=>(a[1].index??999)-(b[1].index??999));
+}
+rebuildBooks();
+let activeBook=null;
+function updateRoute(query,replace=false){const url=location.pathname+query;(replace?history.replaceState:history.pushState).call(history,null,'',url)}
 function view(name){
- if(activeView==='reader'&&currentId){lastY=window.scrollY;set('scroll:'+currentId,lastY)}
- activeView=name;show($('#reader-view'),name==='reader');show($('#import-view'),name==='import');
- window.scrollTo(0,name==='reader'?lastY:0);
+ activeView=name;
+ show($('#reader-view'),name==='reader');
+ show($('#import-view'),name==='shelf');
+ show($('#series-view'),name==='series');
+ if(name!=='reader')window.scrollTo(0,0);
 }
 function entryInfo(id){if(BUILTINS[id])return BUILTINS[id];const found=custom().find(x=>x.id===id);return found?{zh:found.title,author:'本地导入',translation:'ko-only'}:null}
 function shelf(){
- const el=$('#book-list');el.replaceChildren();const seen=new Set();
- function add(id,b){
-  const btn=document.createElement('button');btn.type='button';btn.className='book-entry'+(currentId===id?' is-reading':'')+(b.series?' series-chapter':'');
+ const el=$('#book-list');el.replaceChildren();
+ for(const [key,chapters] of chaptersByBook){
+  const [firstId,first]=chapters[0];
+  const btn=document.createElement('button');btn.type='button';btn.className='book-entry';
   const info=document.createElement('span');info.className='book-info';
-  const name=document.createElement('strong');name.textContent=b.zh||b.ko||id;
+  const title=document.createElement('strong');title.textContent=bookTitle(first,firstId);
   const meta=document.createElement('span');meta.className='book-meta';
-  const incomplete=b.translation==='partial-ko-original'||b.translation==='ko-only'||b.translation==='partial-zh';
-  meta.textContent=(b.author||'作者未标注')+' · '+(b.count||'?')+' 段 · '+(incomplete?'部分中文待补':'中文可读');
-  info.append(name,meta);
-  const action=document.createElement('span');action.className='book-action';action.textContent=currentId===id?'继续阅读':'打开';
-  btn.append(info,action);btn.addEventListener('click',()=>load(id));el.appendChild(btn);
+  const partial=chapters.some(([,b])=>['partial-ko-original','ko-only','partial-zh'].includes(b.translation));
+  meta.textContent=(first.author||'作者未标注')+' · '+(chapters.length===1?'单篇':chapters.length+' 篇')+(partial?' · 部分待译':'');
+  const action=document.createElement('span');action.className='book-action';action.textContent='查看目录';
+  info.append(title,meta);btn.append(info,action);
+  btn.addEventListener('click',()=>openBook(key));
+  el.append(btn);
  }
- for(const [id,b] of Object.entries(BUILTINS)){
-  if(b.series&&!seen.has(b.series)){seen.add(b.series);const h=document.createElement('div');h.className='book-series-heading';h.textContent=b.series;el.appendChild(h)}
-  add(id,b);
+ for(const c of custom()){
+  const btn=document.createElement('button');btn.type='button';btn.className='book-entry';
+  const info=document.createElement('span');info.className='book-info';
+  const title=document.createElement('strong');title.textContent=c.title;
+  const meta=document.createElement('span');meta.className='book-meta';meta.textContent='本地导入 · 单篇';
+  info.append(title,meta);btn.append(info);
+  btn.addEventListener('click',()=>load(c.id,{resume:true}));el.append(btn);
  }
- if(custom().length){const h=document.createElement('div');h.className='book-series-heading';h.textContent='以前导入到浏览器的文章';el.appendChild(h);for(const c of custom())add(c.id,{zh:c.title,author:'本地导入',translation:'ko-only'})}
+}
+function goShelf(push=true){
+ if(activeView==='reader'&&currentId&&!restoring&&!searchText)set('scroll:'+currentId,window.scrollY);
+ shelf();view('shelf');activeBook=null;if(push)updateRoute('');
+}
+function openBook(key,push=true){
+ const chapters=chaptersByBook.get(key);if(!chapters)return goShelf(push);
+ if(activeView==='reader'&&currentId&&!restoring&&!searchText)set('scroll:'+currentId,window.scrollY);
+ activeBook=key;
+ const [,first]=chapters[0];
+ $('#series-title').textContent=bookTitle(first,chapters[0][0]);
+ $('#series-meta').textContent=(first.author||'作者未标注')+' · '+chapters.length+' 篇';
+ const list=$('#chapter-list');list.replaceChildren();
+ chapters.forEach(([id,b],i)=>{
+  const btn=document.createElement('button');btn.type='button';btn.className='book-entry';
+  const info=document.createElement('span');info.className='book-info';
+  const title=document.createElement('strong');title.textContent=partTitle(b);
+  const meta=document.createElement('span');meta.className='book-meta';
+  meta.textContent=(b.count||'?')+' 段 · '+(id===get('last-story',null)?'上次阅读 · ':'')+
+   (['partial-ko-original','ko-only','partial-zh'].includes(b.translation)?'部分待译':'中文');
+  const action=document.createElement('span');action.className='book-action';
+  action.textContent=id===get('last-story',null)?'继续阅读':'开始阅读';
+  info.append(title,meta);btn.append(info,action);
+  btn.addEventListener('click',()=>load(id,{resume:id===get('last-story',null)}));list.append(btn);
+ });
+ view('series');
+ if(push)updateRoute('?book='+encodeURIComponent(key));
 }
 function chapterNav(){
  const nav=$('#chapter-nav');nav.replaceChildren();const b=BUILTINS[currentId];
- if(!b||!b.series){show(nav,false);return}show(nav,true);
- const chapters=Object.entries(BUILTINS).filter(([,item])=>item.series===b.series).sort((x,y)=>(x[1].index||0)-(y[1].index||0));
- const index=chapters.findIndex(([id])=>id===currentId);
- const label=document.createElement('span');label.className='chapter-position';label.textContent=b.series+' · '+(index+1)+' / '+chapters.length;nav.appendChild(label);
+ if(!b){show(nav,false);return}
+ show(nav,true);
+ const key=bookKey(b,currentId),chapters=chaptersByBook.get(key)||[[currentId,b]];
+ const idx=chapters.findIndex(([id])=>id===currentId);
+ const label=document.createElement('span');label.className='chapter-position';
+ label.textContent=bookTitle(b,currentId)+' · '+partTitle(b);nav.append(label);
  const links=document.createElement('div');links.className='chapter-links';
- for(const step of [-1,1]){const item=chapters[index+step];if(!item)continue;const btn=document.createElement('button');btn.type='button';btn.textContent=step<0?'上一章':'下一章';btn.addEventListener('click',()=>load(item[0]));links.appendChild(btn)}
- nav.appendChild(links);
+ const back=document.createElement('button');back.type='button';back.textContent='章节目录';
+ back.addEventListener('click',()=>openBook(key));links.append(back);
+ for(const step of [-1,1]){
+  const item=chapters[idx+step];if(!item)continue;
+  const btn=document.createElement('button');btn.type='button';btn.textContent=step<0?'上一篇':'下一篇';
+  btn.addEventListener('click',()=>load(item[0],{resume:false}));
+  links.append(btn);
+ }
+ nav.append(links);
 }
 function textParagraph(text,b,index){
  const section=document.createElement('section');section.className='story-par single';
@@ -152,7 +211,8 @@ function textParagraph(text,b,index){
 }
 function render(){
  if(!current)return;const box=$('#paragraphs'),frag=document.createDocumentFragment();
- $('#article-title').textContent=current.title?.zh||current.title?.ko||entryInfo(currentId)?.zh||'未命名';
+ const entry=entryInfo(currentId)||{};$('#article-title').textContent=bookTitle(entry,currentId);
+ $('#chapter-subtitle').textContent=partTitle(entry);
  $('#article-author').textContent=current.author||entryInfo(currentId)?.author||'作者未标注';
  box.classList.toggle('original-layout',Boolean(current.sourceAudit||current.koZhToggle) && current.sourceAudit?.indentMode!=='none');
  const blocks=current.blocks||[];let unfinished=0,printed=0;
@@ -209,23 +269,40 @@ function importChineseHtmlStory(html,entry){
  return {id:entry.path,title:{zh:entry.zh,ko:entry.ko},author:entry.author,
   series:entry.series,translationStatus:'zh-complete',sourceAudit:{indentMode:'none',fromTranslatedHtml:true},blocks};
 }
-async function load(id){
+async function load(id,{resume=false,replace=false}={}){
  try{
-  const b=BUILTINS[id];let data;
-  if(b){const response=await fetch('./stories/'+b.path+'?v=20261112-heart-fist');if(!response.ok)throw Error('HTTP '+response.status);if(b.path.endsWith('.html'))data=importChineseHtmlStory(await response.text(),b);else if(b.path.endsWith('.json.gz')){if(typeof DecompressionStream==='undefined')throw Error('当前浏览器不支持压缩章节，请更新浏览器');const stream=new Blob([await response.arrayBuffer()]).stream().pipeThrough(new DecompressionStream('gzip'));data=await new Response(stream).json()}else data=await response.json()}
-  else data=get('story-'+id,null);
+  if(currentId && activeView==='reader' && !restoring && !searchText){
+    clearTimeout(saveTimer);set('scroll:'+currentId,window.scrollY);
+  }
+  restoring=true;const b=BUILTINS[id];let data;
+  if(b){const response=await fetch('./stories/'+b.path+'?v=20261112-reader-v2');
+   if(!response.ok)throw Error('HTTP '+response.status);
+   if(b.path.endsWith('.html'))data=importChineseHtmlStory(await response.text(),b);
+   else if(b.path.endsWith('.json.gz')){
+    if(typeof DecompressionStream==='undefined')throw Error('当前浏览器不支持压缩章节，请更新浏览器');
+    const stream=new Blob([await response.arrayBuffer()]).stream().pipeThrough(new DecompressionStream('gzip'));
+    data=await new Response(stream).json();
+   } else data=await response.json();
+  }else data=get('story-'+id,null);
   if(!data||!Array.isArray(data.blocks))throw Error('文章数据不存在');
   const old=get('translations:'+id,{});
-  Object.entries(old).forEach(([k,trans])=>{if(data.blocks[+k]&&trans?.zh&&!data.blocks[+k].zh)data.blocks[+k].zh=trans.zh});
-  restoring=true;current=data;currentId=id;searchText='';$('#search-input').value='';
-  set('last-story',id);lastY=Number(get('scroll:'+id,0))||0;
-  render();shelf();history.replaceState(null,'',location.pathname+'?story='+encodeURIComponent(id));
-  view('reader');
-  requestAnimationFrame(()=>{window.scrollTo(0,lastY);setTimeout(()=>{restoring=false},180)});
- }catch(e){notify('打开失败：'+e.message)}
+  Object.entries(old).forEach(([k,t])=>{if(data.blocks[+k]&&t?.zh&&!data.blocks[+k].zh)data.blocks[+k].zh=t.zh});
+  current=data;currentId=id;searchText='';$('#search-input').value='';
+  const y=resume?Number(get('scroll:'+id,0))||0:0;
+  set('last-story',id);lastY=y;
+  render();view('reader');
+  updateRoute('?story='+encodeURIComponent(id),replace);
+  window.scrollTo(0,y);
+  requestAnimationFrame(()=>{window.scrollTo(0,y);
+   requestAnimationFrame(()=>window.scrollTo(0,y));
+   setTimeout(()=>{window.scrollTo(0,y);restoring=false},100);
+  });
+ }catch(e){restoring=false;notify('打开失败：'+e.message);goShelf(false)}
 }
-$('#brand').addEventListener('click',()=>view('reader'));
-$('#shelf-trigger').addEventListener('click',()=>{shelf();view('import')});
+$('#brand').addEventListener('click',()=>goShelf());
+$('#shelf-trigger').addEventListener('click',()=>goShelf());
+$('#series-back').addEventListener('click',()=>goShelf());
+$('#reader-back').addEventListener('click',()=>{const b=BUILTINS[currentId];if(b)openBook(bookKey(b,currentId));else goShelf()});
 $('#type-trigger').addEventListener('click',()=>$('#type-panel').classList.toggle('hidden'));
 $('#font-minus').addEventListener('click',()=>resize(-.08));
 $('#font-plus').addEventListener('click',()=>resize(.08));
@@ -235,6 +312,13 @@ $('#search-input').addEventListener('input',e=>{searchText=e.target.value.trim()
 $('#search-clear').addEventListener('click',()=>{searchText='';$('#search-input').value='';render();show($('#search-panel'),false)});
 window.addEventListener('scroll',()=>{if(restoring||activeView!=='reader'||!currentId||searchText)return;clearTimeout(saveTimer);saveTimer=setTimeout(()=>{lastY=window.scrollY;set('scroll:'+currentId,lastY)},200)},{passive:true});
 document.documentElement.style.setProperty('--scale',font);
-const initial=new URLSearchParams(location.search).get('story')||get('last-story','alone-wrong-wolf-2');
-load(entryInfo(initial)?initial:'alone-wrong-wolf-2');
+function routeFromUrl(){
+ const params=new URLSearchParams(location.search);
+ const story=params.get('story'),book=params.get('book');
+ if(story&&entryInfo(story)){load(story,{resume:false,replace:true});return}
+ if(book&&chaptersByBook.has(book)){openBook(book,false);return}
+ goShelf(false);
+}
+window.addEventListener('popstate',routeFromUrl);
+routeFromUrl();
 })();

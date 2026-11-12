@@ -131,3 +131,24 @@
 .story-body.original-layout .story-par .text-column p{text-indent:1em}
 .story-body.original-layout .story-par.compared .text-column p{text-indent:1em}
 .story-body.original-layout .story-par .paragraph-translate{text-indent:0}
+
+/* 2026-11-12 reading-first bookshelf and chapter directories */
+#reader-view[hidden],#import-view[hidden],#series-view[hidden]{display:none}
+.reader-crumb{padding:26px 0 0}
+.reader-crumb button,.back-link{background:none;border:0;padding:8px 0;color:#888;font-size:13px}
+.reader-crumb button:hover,.back-link:hover{color:#222}
+.chapter-subtitle{font-size:13px;color:#919191;margin-top:-5px;margin-bottom:18px;letter-spacing:.06em}
+#series-view .section-heading .back-link{margin-bottom:32px}
+#series-view .section-heading h1{font-size:33px;line-height:1.45}
+#series-view .book-entry{padding:25px 0}
+#series-view .book-entry strong{font-size:17px;font-family:-apple-system,BlinkMacSystemFont,'PingFang SC',sans-serif;font-weight:500}
+#series-view .book-entry .book-meta{font-size:11px}
+#series-view .book-action{color:#999}
+#import-view .book-entry strong{font-size:20px}
+#import-view .book-action{color:#777}
+@media(max-width:560px){
+ .reader-crumb{padding-top:14px}
+ #series-view .section-heading h1{font-size:29px}
+ #import-view .book-entry strong{font-size:18px}
+ .chapter-subtitle{margin-bottom:10px}
+}
