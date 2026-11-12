@@ -2,6 +2,9 @@
 (()=>{
 'use strict';
 const BUILTINS={
+ 'fox-hunt-00':{path:'fox-hunt-00.json.gz',zh:'[承硕] 狐狸狩猎',ko:'[승석] 여우사냥 00',author:'오독',count:58,series:'[承硕] 狐狸狩猎',part:'00',index:0,total:3,translation:'zh-complete'},
+ 'fox-hunt-01':{path:'fox-hunt-01.json.gz',zh:'[承硕] 狐狸狩猎',ko:'[승석] 여우사냥 01',author:'오독',count:68,series:'[承硕] 狐狸狩猎',part:'01',index:1,total:3,translation:'zh-complete'},
+ 'fox-hunt-02':{path:'fox-hunt-02.json.gz',zh:'[承硕] 狐狸狩猎',ko:'[승석] 여우사냥 02',author:'오독',count:72,series:'[承硕] 狐狸狩猎',part:'02',index:2,total:3,translation:'zh-complete'},
  'heart-eat-1':{path:'heart-eat-1.html',zh:'割下心脏吃掉 · 上篇',ko:'심장을 베어 먹고 (상)',author:'作者未标注',count:65,series:'割下心脏吃掉',part:'上',index:1,total:2,translation:'zh-complete'},
  'heart-eat-2':{path:'heart-eat-2.html',zh:'割下心脏吃掉 · 下篇',ko:'심장을 베어 먹고 (하)',author:'作者未标注',count:53,series:'割下心脏吃掉',part:'下',index:2,total:2,translation:'zh-complete'},
  'fist-rise-1':{path:'fist-rise-1.html',zh:'松开拳头站起来 · 上篇',ko:'주먹펴고 일어서 (상)',author:'作者未标注',count:57,series:'松开拳头站起来',part:'上',index:1,total:2,translation:'zh-complete'},
