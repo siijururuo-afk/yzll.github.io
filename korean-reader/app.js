@@ -201,6 +201,7 @@ function textParagraph(text,b,index){
  const section=document.createElement('section');section.className='story-par single';
  if(b.bubbleSide==='incoming'||b.bubbleSide==='outgoing')section.className+=' story-bubble story-bubble-'+b.bubbleSide;
  section.dataset.index=index;
+ if(Number.isInteger(b.sourceIndex))section.dataset.sourceIndex=String(b.sourceIndex);
  if(['left','center','right','justify'].includes(b.align))section.style.textAlign=b.align;
  const col=document.createElement('div');col.className='text-column translation';col.dataset.lang='zh';col.lang='zh-CN';
  const p=document.createElement('p');
@@ -216,6 +217,9 @@ function textParagraph(text,b,index){
 }
 function render(){
  if(!current)return;const box=$('#paragraphs'),frag=document.createDocumentFragment();
+ const isAnimato=/^animato-(?:[1-9]|10)$/.test(currentId);
+ box.classList.toggle('animato-source-layout',isAnimato);
+ box.dataset.animatoChapter=isAnimato?currentId.slice(8):'';
  const entry=entryInfo(currentId)||{};$('#article-title').textContent=bookTitle(entry,currentId);
  $('#chapter-subtitle').textContent=partTitle(entry);
  $('#article-author').textContent=current.author||entryInfo(currentId)?.author||'作者未标注';

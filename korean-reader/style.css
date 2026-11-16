@@ -152,3 +152,64 @@
  #import-view .book-entry strong{font-size:18px}
  .chapter-subtitle{margin-bottom:10px}
 }
+
+/* 2026-11-16 — 시궁창 아니마토 / 泥潭·阿尼马托
+   Source Postype HTML audit: every <p> is 18px / 31.5px line-height,
+   min-height 30.6px, margin:18px 0 0 (first source <p>: margin 0).
+   Blank blocks already store 48.6px (30.6 + 18px), except first-source blank.
+   Avoid the global 1.95 line-height, 1.3em paragraph bottom margin,
+   and 25px/42px media margins that distort the original layout.
+*/
+.story-body.animato-source-layout{
+  font-size:calc(18px * var(--scale));
+  line-height:1.75;
+  letter-spacing:normal;
+}
+.story-body.animato-source-layout .story-par,
+.story-body.animato-source-layout .story-par.single{
+  display:flow-root;
+  margin:0!important;
+  padding:0;
+}
+.story-body.animato-source-layout .story-par .text-column p{
+  margin:18px 0 0!important;
+  padding:0;
+  min-height:30.6px;
+  line-height:1.75;
+  text-indent:0!important;
+  font-size:inherit;
+}
+.story-body.animato-source-layout .story-par[data-source-index="0"] .text-column p{
+  margin-top:0!important;
+}
+.story-body.animato-source-layout .scene-space{
+  width:100%;
+  margin:0!important;
+  padding:0;
+  flex-shrink:0;
+}
+.story-body.animato-source-layout .story-media{
+  margin:18px 0 0;
+  max-width:100%;
+  width:100%;
+}
+.story-body.animato-source-layout .story-media iframe{
+  display:block;
+  width:100%;
+  aspect-ratio:16/9;
+  height:auto;
+  border:0;
+}
+.story-body.animato-source-layout[data-animato-chapter="1"] .story-par[data-source-index="0"]{
+  text-align:right!important;
+  font-family:"Nanum Myeongjo","Noto Serif CJK SC","Songti SC",serif;
+}
+.story-body.animato-source-layout[data-animato-chapter="1"] .story-par[data-source-index="0"] p{
+  font-style:italic;
+}
+.story-body.animato-source-layout[data-animato-chapter="10"] .story-par[data-source-index="218"],
+.story-body.animato-source-layout[data-animato-chapter="10"] .story-par[data-source-index="219"]{
+  text-align:right!important;
+  font-family:"KoPub Batang","Noto Serif CJK SC","Songti SC",serif;
+  font-style:italic;
+}
