@@ -2,6 +2,8 @@
 (()=>{
 'use strict';
 const BUILTINS={
+ 'yama-up':{path:'yama-up.html',zh:'把那家伙的火气惹起来',ko:'그놈의 야마를 돌려라 上',author:'作者未标注',count:75,series:'把那家伙的火气惹起来',part:'上',index:1,total:2,translation:'zh-complete'},
+ 'yama-down':{path:'yama-down.html',zh:'把那家伙的火气惹起来',ko:'그놈의 야마를 돌려라 下',author:'作者未标注',count:102,series:'把那家伙的火气惹起来',part:'下',index:2,total:2,translation:'zh-complete'},
  'fox-hunt-00':{path:'fox-hunt-00.json.gz',zh:'[承硕] 狐狸狩猎',ko:'[승석] 여우사냥 00',author:'오독',count:58,series:'[承硕] 狐狸狩猎',part:'00',index:0,total:3,translation:'zh-complete'},
  'fox-hunt-01':{path:'fox-hunt-01.json.gz',zh:'[承硕] 狐狸狩猎',ko:'[승석] 여우사냥 01',author:'오독',count:68,series:'[承硕] 狐狸狩猎',part:'01',index:1,total:3,translation:'zh-complete'},
  'fox-hunt-02':{path:'fox-hunt-02.json.gz',zh:'[承硕] 狐狸狩猎',ko:'[승석] 여우사냥 02',author:'오독',count:72,series:'[承硕] 狐狸狩猎',part:'02',index:2,total:3,translation:'zh-complete'},
@@ -200,6 +202,8 @@ function chapterNav(){
 function textParagraph(text,b,index){
  const section=document.createElement('section');section.className='story-par single';
  if(b.bubbleSide==='incoming'||b.bubbleSide==='outgoing')section.className+=' story-bubble story-bubble-'+b.bubbleSide;
+ if(b.sourceMarginZero)section.classList.add('source-margin-zero');
+ if(b.sourceFontSize==='15px')section.classList.add('source-small');
  section.dataset.index=index;
  if(Number.isInteger(b.sourceIndex))section.dataset.sourceIndex=String(b.sourceIndex);
  if(['left','center','right','justify'].includes(b.align))section.style.textAlign=b.align;
@@ -219,6 +223,7 @@ function render(){
  if(!current)return;const box=$('#paragraphs'),frag=document.createDocumentFragment();
  const isAnimato=/^animato-(?:[1-9]|10)$/.test(currentId);
  box.classList.toggle('animato-source-layout',isAnimato);
+ box.classList.toggle('yama-source-layout',/^yama-(?:up|down)$/.test(currentId));
  box.dataset.animatoChapter=isAnimato?currentId.slice(8):'';
  const entry=entryInfo(currentId)||{};$('#article-title').textContent=bookTitle(entry,currentId);
  $('#chapter-subtitle').textContent=partTitle(entry);
@@ -269,6 +274,7 @@ function importChineseHtmlStory(html,entry){
     text:x.textContent,bold:x.nodeType===1&&['STRONG','B'].includes(x.tagName),
     italic:x.nodeType===1&&['EM','I'].includes(x.tagName)}));
    return {zh:val,sourceIndex:i,align:node.style.textAlign||'left',textIndent:node.style.textIndent||'',
+    sourceMarginZero:node.style.marginTop==='0px',sourceFontSize:node.style.fontSize||'',
     bold:node.classList.contains('bold')||node.style.fontWeight==='700',italic:node.classList.contains('italic')||node.style.fontStyle==='italic',
     runs:runs.some(x=>x.bold||x.italic)?runs:undefined};
   }

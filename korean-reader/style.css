@@ -213,3 +213,37 @@
   font-family:"KoPub Batang","Noto Serif CJK SC","Songti SC",serif;
   font-style:italic;
 }
+
+/* 2026-11-16 — 그놈의 야마를 돌려라: original Postype layout. 
+   Source: p 18px / 31.5px line-height, first margin 0, later margin 18px.
+   Blank paragraphs occupy 48.6px; inline italics and bold are retained.
+   The three centered lender-notice lines in the lower part are 15px. */
+.story-body.yama-source-layout{
+ font-family:"Songti SC","Noto Serif CJK SC","Source Han Serif SC",Georgia,serif;
+ font-size:calc(18px * var(--scale));
+ line-height:1.75;
+}
+.story-body.yama-source-layout .story-par,
+.story-body.yama-source-layout .story-par.single{
+ display:flow-root;
+ margin:0!important;
+ padding:0;
+}
+.story-body.yama-source-layout .story-par .text-column p{
+ margin:18px 0 0!important;
+ min-height:30.6px;
+ line-height:1.75;
+ font-size:calc(18px * var(--scale));
+}
+.story-body.yama-source-layout .story-par.source-margin-zero .text-column p{
+ margin-top:0!important;
+}
+.story-body.yama-source-layout .story-par.source-small .text-column p{
+ font-size:calc(15px * var(--scale));
+ min-height:25.5px;
+}
+.story-body.yama-source-layout .scene-space{
+ width:100%;
+ margin:0!important;
+ padding:0;
+}
