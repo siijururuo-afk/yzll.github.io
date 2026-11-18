@@ -2,6 +2,7 @@
 (()=>{
 'use strict';
 const BUILTINS={
+ "transfer-love-1":{layoutPage:"transfer-love/01.html",zh:"换乘恋爱（1）",ko:"환승연애(1)",author:"샛별",series:"换乘恋爱",part:"换乘恋爱（1）",count:236},
  'groomsman':{path:'groomsman.json',zh:'伴郎',ko:'들러리',author:'다이빈',count:103,part:'正文',translation:'zh-complete'},
  'yama-up':{path:'yama-up.html',zh:'把那家伙的火气惹起来',ko:'그놈의 야마를 돌려라 上',author:'作者未标注',count:75,series:'把那家伙的火气惹起来',part:'上',index:1,total:2,translation:'zh-complete'},
  'yama-down':{path:'yama-down.html',zh:'把那家伙的火气惹起来',ko:'그놈의 야마를 돌려라 下',author:'作者未标注',count:102,series:'把那家伙的火气惹起来',part:'下',index:2,total:2,translation:'zh-complete'},
@@ -287,6 +288,12 @@ function importChineseHtmlStory(html,entry){
   series:entry.series,translationStatus:'zh-complete',sourceAudit:{indentMode:'none',fromTranslatedHtml:true},blocks};
 }
 async function load(id,{resume=false,replace=false}={}){
+ const layoutPage=BUILTINS[id]?.layoutPage;
+ if(layoutPage){
+  set('last-story',id);
+  window.location[replace?'replace':'assign']('./stories/'+layoutPage);
+  return;
+ }
  try{
   if(currentId && activeView==='reader' && !restoring && !searchText){
     clearTimeout(saveTimer);set('scroll:'+currentId,window.scrollY);
