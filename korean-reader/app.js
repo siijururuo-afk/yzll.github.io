@@ -2,6 +2,7 @@
 (()=>{
 'use strict';
 const BUILTINS={
+ 'groomsman':{path:'groomsman.json',zh:'伴郎',ko:'들러리',author:'다이빈',count:103,part:'正文',translation:'zh-complete'},
  'yama-up':{path:'yama-up.html',zh:'把那家伙的火气惹起来',ko:'그놈의 야마를 돌려라 上',author:'作者未标注',count:75,series:'把那家伙的火气惹起来',part:'上',index:1,total:2,translation:'zh-complete'},
  'yama-down':{path:'yama-down.html',zh:'把那家伙的火气惹起来',ko:'그놈의 야마를 돌려라 下',author:'作者未标注',count:102,series:'把那家伙的火气惹起来',part:'下',index:2,total:2,translation:'zh-complete'},
  'fox-hunt-00':{path:'fox-hunt-00.json.gz',zh:'[承硕] 狐狸狩猎',ko:'[승석] 여우사냥 00',author:'오독',count:58,series:'[承硕] 狐狸狩猎',part:'00',index:0,total:3,translation:'zh-complete'},
@@ -224,6 +225,7 @@ function render(){
  const isAnimato=/^animato-(?:[1-9]|10)$/.test(currentId);
  box.classList.toggle('animato-source-layout',isAnimato);
  box.classList.toggle('yama-source-layout',/^yama-(?:up|down)$/.test(currentId));
+ box.classList.toggle('groomsman-source-layout',currentId==='groomsman');
  box.dataset.animatoChapter=isAnimato?currentId.slice(8):'';
  const entry=entryInfo(currentId)||{};$('#article-title').textContent=bookTitle(entry,currentId);
  $('#chapter-subtitle').textContent=partTitle(entry);
@@ -290,7 +292,7 @@ async function load(id,{resume=false,replace=false}={}){
     clearTimeout(saveTimer);set('scroll:'+currentId,window.scrollY);
   }
   restoring=true;const b=BUILTINS[id];let data;
-  if(b){const response=await fetch('./stories/'+b.path+'?v=20261112-rockstar-v1');
+  if(b){const response=await fetch('./stories/'+b.path+'?v=20261118-groomsman');
    if(!response.ok)throw Error('HTTP '+response.status);
    if(b.path.endsWith('.html'))data=importChineseHtmlStory(await response.text(),b);
    else if(b.path.endsWith('.json.gz')){
